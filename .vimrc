@@ -21,9 +21,16 @@ call vundle#begin()
   Plugin 'sjl/gundo.vim'
   Plugin 'junegunn/limelight.vim'
   Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'chriskempson/base16-vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " JJ to quit insert mode
 imap jj <ESC>
+
+" coloooors!!!
+set background=dark
+colorscheme base16-tomorrow
+let base16colorspace=256  " Access colors present in 256 colorspace
+set t_Co=256
