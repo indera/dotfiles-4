@@ -49,6 +49,11 @@ filetype plugin indent on    " required
     set shiftwidth=2
     set softtabstop=2
 
+  " no annoying backup!!!
+    set nobackup
+    set nowritebackup
+    set noswapfile
+
   " jj to quit insert mode
     imap jj <ESC>
 
