@@ -26,7 +26,6 @@ call vundle#begin()
 
   " interface
   Plugin 'kien/ctrlp.vim'
-  Plugin 'itchyny/lightline.vim'
   Plugin 'myusuf3/numbers.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'junegunn/limelight.vim'
