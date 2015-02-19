@@ -113,6 +113,8 @@ filetype plugin indent on    " required
 
   "" interface
     " ctrlp.vim
+      let g:ctrlp_map = ',t'
+
     " lightline.vim
     " numbers.vim
     " gundo.vim
@@ -126,10 +128,20 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
+      " prefix
       map <Leader><Leader> <Plug>(easymotion-prefix)
 
+      " search
       map  / <Plug>(easymotion-sn)
       omap / <Plug>(easymotion-tn)
       map  n <Plug>(easymotion-next)
       map  N <Plug>(easymotion-prev)
 
+      " movements
+      map <Leader><Leader>l <Plug>(easymotion-lineforward)
+      map <Leader><Leader>j <Plug>(easymotion-j)
+      map <Leader><Leader>k <Plug>(easymotion-k)
+      map <Leader><Leader>h <Plug>(easymotion-linebackward)
+
+      let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
+      let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
