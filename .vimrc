@@ -3,7 +3,7 @@ filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" it's needed
+  " it's needed
   Plugin 'gmarik/Vundle.vim'
 
   " languages
@@ -89,7 +89,6 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
   "" languages
     " vim-surround
     " vim-coffee-script
@@ -128,9 +127,6 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
-      " prefix
-      map <Leader><Leader> <Plug>(easymotion-prefix)
-
       " search
       map  / <Plug>(easymotion-sn)
       omap / <Plug>(easymotion-tn)
@@ -138,10 +134,10 @@ filetype plugin indent on    " required
       map  N <Plug>(easymotion-prev)
 
       " movements
-      map <Leader><Leader>l <Plug>(easymotion-lineforward)
-      map <Leader><Leader>j <Plug>(easymotion-j)
-      map <Leader><Leader>k <Plug>(easymotion-k)
-      map <Leader><Leader>h <Plug>(easymotion-linebackward)
+      map <Leader>l <Plug>(easymotion-lineforward)
+      map <Leader>j <Plug>(easymotion-j)
+      map <Leader>k <Plug>(easymotion-k)
+      map <Leader>h <Plug>(easymotion-linebackward)
 
       let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
