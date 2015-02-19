@@ -26,7 +26,6 @@ call vundle#begin()
 
   " interface
   Plugin 'kien/ctrlp.vim'
-  Plugin 'myusuf3/numbers.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'junegunn/limelight.vim'
   
@@ -81,6 +80,10 @@ filetype plugin indent on    " required
     imap <c-w> <nop>
     imap <c-w><c-w> <ESC><c-w><c-w>
     
+  " line numbers
+    set relativenumber
+    set number
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
