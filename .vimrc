@@ -86,6 +86,10 @@ filetype plugin indent on    " required
     set relativenumber
     set number
 
+  " vimrc options
+    nmap <Leader>rv :so $MYVIMRC<CR>
+    nmap <Leader>ev :e $MYVIMRC<CR>
+    
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
