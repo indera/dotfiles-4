@@ -3,8 +3,7 @@ filetype off                  " required
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-  " it's needed
+" it's needed
   Plugin 'gmarik/Vundle.vim'
 
   " languages
@@ -42,6 +41,9 @@ filetype plugin indent on    " required
 "" vim config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+  " leader
+    let mapleader = ","
+    
   " indentation
     set expandtab
     set shiftwidth=2
@@ -111,12 +113,10 @@ filetype plugin indent on    " required
 
   "" interface
     " ctrlp.vim
-      let g:ctrlp_map = ',t'
-
     " lightline.vim
     " numbers.vim
     " gundo.vim
-      nnoremap <F5> :GundoToggle<CR>
+      map <Leader>u :GundoToggle<CR>
       let g:gundo_close_on_revert = 1
 
     " limelight.vim
@@ -126,4 +126,10 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
+      map <Leader><Leader> <Plug>(easymotion-prefix)
+
+      map  / <Plug>(easymotion-sn)
+      omap / <Plug>(easymotion-tn)
+      map  n <Plug>(easymotion-next)
+      map  N <Plug>(easymotion-prev)
 
