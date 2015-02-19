@@ -49,11 +49,11 @@ filetype plugin indent on    " required
     set shiftwidth=2
     set softtabstop=2
 
-  " JJ to quit insert mode
+  " jj to quit insert mode
     imap jj <ESC>
 
-  "" Remove this horrible arrow keys :)
-  "" Thanks @jeank
+  " remove this horrible arrow keys :)
+  " thanks @jeank
     map <up> <nop>
     map <down> <nop>
     map <left> <nop>
@@ -63,7 +63,19 @@ filetype plugin indent on    " required
     imap <left> <nop>
     imap <right> <nop>
   
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " I always say :Q! intead of :q!
+    cab W! w!
+    cab W w
+    cab Wa wa
+    cab Wq wq
+    cab wQ wq
+    cab WQ wq
+    cab Q! q!
+    cab Q q
+    cab E e
+    cab E! e
+  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
