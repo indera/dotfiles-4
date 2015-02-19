@@ -110,6 +110,9 @@ filetype plugin indent on    " required
     " lightline.vim
     " numbers.vim
     " gundo.vim
+      nnoremap <F5> :GundoToggle<CR>
+      let g:gundo_close_on_revert = 1
+
     " limelight.vim
 
   "" commands
