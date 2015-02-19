@@ -27,6 +27,7 @@ call vundle#begin()
   Plugin 'kien/ctrlp.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'junegunn/limelight.vim'
+  Plugin 'itchyny/lightline.vim'
   
   " commands
   Plugin 'YankRing.vim'
