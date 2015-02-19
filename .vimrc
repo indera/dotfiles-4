@@ -78,6 +78,10 @@ filetype plugin indent on    " required
   " backspace everything!
     set backspace=indent,eol,start
   
+  " cycle windows on insert mode
+    imap <c-w> <nop>
+    imap <c-w><c-w> <ESC><c-w><c-w>
+    
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,5 +124,4 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
-
 
