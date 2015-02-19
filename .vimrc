@@ -74,6 +74,9 @@ filetype plugin indent on    " required
     cab Q q
     cab E e
     cab E! e
+    
+  " backspace everything!
+    set backspace=indent,eol,start
   
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
@@ -102,6 +105,8 @@ filetype plugin indent on    " required
 
   "" interface
     " ctrlp.vim
+      let g:ctrlp_map = ',t'
+
     " lightline.vim
     " numbers.vim
     " gundo.vim
