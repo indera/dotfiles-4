@@ -101,10 +101,10 @@ filetype plugin indent on    " required
   
   "" code display
     " base16-vim
+      set t_Co=256
+      let base16colorspace=256  " Access colors present in 256 colorspace
       set background=dark
       colorscheme base16-tomorrow
-      let base16colorspace=256  " Access colors present in 256 colorspace
-      set t_Co=256
 
   "" integrations
     " vim-fugitive
