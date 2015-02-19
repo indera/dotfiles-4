@@ -45,9 +45,17 @@ filetype plugin indent on    " required
     let mapleader = ","
     
   " indentation
-    set expandtab
+    set autoindent
+    set smartindent
+    set smarttab
     set shiftwidth=2
     set softtabstop=2
+    set tabstop=2
+    set expandtab
+    set nowrap
+
+  " status line
+    set laststatus=2  " Always display the status line
 
   " no annoying backup!!!
     set nobackup
