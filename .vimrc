@@ -28,7 +28,8 @@ call vundle#begin()
   Plugin 'sjl/gundo.vim'
   Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
-  
+  Plugin 'scrooloose/nerdtree'
+
   " commands
   Plugin 'YankRing.vim'
   Plugin 'kana/vim-textobj-user'
@@ -139,6 +140,8 @@ filetype plugin indent on    " required
       let g:gundo_close_on_revert = 1
 
     " limelight.vim
+    " nerdtree
+      nmap <Leader>o :NERDTreeToggle<CR>
 
   "" commands
     " YankRing.vim
