@@ -64,9 +64,6 @@ filetype plugin indent on    " required
     set nowritebackup
     set noswapfile
 
-  " jj to quit insert mode
-    imap jj <ESC>
-
   " esc must close instantlv
     set timeoutlen=1000 ttimeoutlen=0
 
