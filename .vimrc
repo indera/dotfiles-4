@@ -98,8 +98,7 @@ filetype plugin indent on    " required
     imap <c-w><c-w> <ESC><c-w><c-w>
     
   " line numbers
-    set relativenumber
-    set number
+    nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
   " vimrc options
     nmap <Leader>rv :so $MYVIMRC<CR>
