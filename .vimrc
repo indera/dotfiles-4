@@ -67,6 +67,17 @@ filetype plugin indent on    " required
   " esc must close instantlv
     set timeoutlen=1000 ttimeoutlen=0
 
+  " cursor line
+    set cul
+
+  " insert mode with ibeam and no cursor line
+    autocmd InsertEnter,InsertLeave * set cul!
+    if has("autocmd")
+      au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape ibeam"
+      au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
+      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
+    endif
+
   " remove this horrible arrow keys :)
   " thanks @jeank
     map <up> <nop>
