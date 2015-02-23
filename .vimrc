@@ -170,5 +170,16 @@ filetype plugin indent on    " required
       map <Leader>k <Plug>(easymotion-k)
       map <Leader>h <Plug>(easymotion-linebackward)
 
+      map <Leader>w <Plug>(easymotion-w)
+      map <Leader>W <Plug>(easymotion-W)
+      map <Leader>b <Plug>(easymotion-b)
+      map <Leader>B <Plug>(easymotion-B)
+
+      " search movements
+      map f <Plug>(easymotion-f)
+      map F <Plug>(easymotion-F)
+      map t <Plug>(easymotion-t)
+      map T <Plug>(easymotion-T)
+
       let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
