@@ -87,3 +87,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
 
 # escape timeout
 KEYTIMEOUT=1
+
+# delete after normal mode
+bindkey "^?" backward-delete-char
