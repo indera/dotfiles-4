@@ -105,13 +105,16 @@ filetype plugin indent on    " required
   " leader q to KILL!
     nmap <Leader>q :q<CR>
     nmap <Leader>Q :q!<CR>
+
+  " c-w n and p for tab navigation
+    nmap <c-w>n gt
+    nmap <c-w>p gT
     
   " backspace everything!
     set backspace=indent,eol,start
   
   " cycle windows on insert mode
-    imap <c-w> <nop>
-    imap <c-w><c-w> <ESC><c-w><c-w>
+    imap <c-w> <ESC><c-w>
     
   " line numbers
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
@@ -161,14 +164,15 @@ filetype plugin indent on    " required
     " dwm.vim
       let g:dwm_map_keys = 0
 
-      nmap <C-w>, <Plug>DWMRotateCounterclockwise
-      nmap <C-w>. <Plug>DWMRotateClockwise
+      nmap <c-w>, <Plug>DWMRotateCounterclockwise
+      nmap <c-w>. <Plug>DWMRotateClockwise
 
-      nmap <C-w>n <Plug>DWMNew
-      nmap <C-w><Space> <Plug>DWMFocus
+      nmap <c-w>c <Plug>DWMNew
+      nmap <c-w><Space> <Plug>DWMFocus
+      nmap <c-w><NUL> <Plug>DWMFocus
 
-      nmap <C-L> <Plug>DWMGrowMaster
-      nmap <C-H> <Plug>DWMShrinkMaster
+      nmap <c-L> <Plug>DWMGrowMaster
+      nmap <c-H> <Plug>DWMShrinkMaster
 
   "" commands
     " YankRing.vim
