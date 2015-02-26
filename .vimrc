@@ -100,7 +100,7 @@ filetype plugin indent on    " required
     cab Q! q!
     cab Q q
     cab E e
-    cab E! e
+    cab E! e!
 
   " leader q to KILL!
     nmap <Leader>q :q<CR>
@@ -108,7 +108,13 @@ filetype plugin indent on    " required
 
   " c-w n and p for tab navigation
     nmap <c-w>n gt
+    nmap <c-w><c-n> gt
     nmap <c-w>p gT
+    nmap <c-w><c-p> gT
+
+  " c-w c for create empty tab
+    nmap <c-w>c :tabe<CR>
+    nmap <c-w><c-c> :tabe<CR>
     
   " backspace everything!
     set backspace=indent,eol,start
@@ -165,9 +171,12 @@ filetype plugin indent on    " required
       let g:dwm_map_keys = 0
 
       nmap <c-w>, <Plug>DWMRotateCounterclockwise
+      nmap <c-w><c-,> <Plug>DWMRotateCounterclockwise
       nmap <c-w>. <Plug>DWMRotateClockwise
+      nmap <c-w><c-.> <Plug>DWMRotateClockwise
 
-      nmap <c-w>c <Plug>DWMNew
+      nmap <c-w>s <Plug>DWMNew
+      nmap <c-w><c-s> <Plug>DWMNew
       nmap <c-w><Space> <Plug>DWMFocus
       nmap <c-w><NUL> <Plug>DWMFocus
 
@@ -182,6 +191,8 @@ filetype plugin indent on    " required
       " search
       map  / <Plug>(easymotion-sn)
       omap / <Plug>(easymotion-tn)
+      map  ? <Plug>(easymotion-sn)
+      omap ? <Plug>(easymotion-tn)
       map  n <Plug>(easymotion-next)
       map  N <Plug>(easymotion-prev)
 
