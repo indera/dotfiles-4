@@ -90,3 +90,7 @@ KEYTIMEOUT=1
 
 # delete after normal mode
 bindkey "^?" backward-delete-char
+
+# disable ctrl-s for scroll locking
+stty -ixon -ixoff
+
