@@ -161,11 +161,11 @@ filetype plugin indent on    " required
     " dwm.vim
       let g:dwm_map_keys = 0
 
-      nmap <Leader>, <Plug>DWMRotateCounterclockwise
-      nmap <Leader>. <Plug>DWMRotateClockwise
+      nmap <C-w>, <Plug>DWMRotateCounterclockwise
+      nmap <C-w>. <Plug>DWMRotateClockwise
 
-      nmap <Leader><Space> <Plug>DWMNew
-      nmap <C-Space> <Plug>DWMFocus
+      nmap <C-w>n <Plug>DWMNew
+      nmap <C-w><Space> <Plug>DWMFocus
 
       nmap <C-L> <Plug>DWMGrowMaster
       nmap <C-H> <Plug>DWMShrinkMaster
