@@ -29,6 +29,7 @@ call vundle#begin()
   Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
+  Plugin 'spolu/dwm.vim'
 
   " commands
   Plugin 'YankRing.vim'
@@ -100,6 +101,10 @@ filetype plugin indent on    " required
     cab Q q
     cab E e
     cab E! e
+
+  " leader q to KILL!
+    nmap <Leader>q :q<CR>
+    nmap <Leader>Q :q!<CR>
     
   " backspace everything!
     set backspace=indent,eol,start
@@ -152,6 +157,18 @@ filetype plugin indent on    " required
     " limelight.vim
     " nerdtree
       nmap <Leader>o :NERDTreeToggle<CR>
+
+    " dwm.vim
+      let g:dwm_map_keys = 0
+
+      nmap <Leader>, <Plug>DWMRotateCounterclockwise
+      nmap <Leader>. <Plug>DWMRotateClockwise
+
+      nmap <Leader><Space> <Plug>DWMNew
+      nmap <C-Space> <Plug>DWMFocus
+
+      nmap <C-L> <Plug>DWMGrowMaster
+      nmap <C-H> <Plug>DWMShrinkMaster
 
   "" commands
     " YankRing.vim
