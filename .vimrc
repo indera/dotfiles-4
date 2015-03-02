@@ -30,6 +30,7 @@ call vundle#begin()
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'spolu/dwm.vim'
+  Plugin 'blueyed/vim-diminactive'
 
   " commands
   Plugin 'YankRing.vim'
@@ -68,8 +69,15 @@ filetype plugin indent on    " required
   " esc must close instantlv
     set timeoutlen=1000 ttimeoutlen=0
 
-  " cursor line
+  " show cursor line
     set cul
+
+  " enable/disable cursor line when enter/leave windows
+    augroup BgHighlight
+      autocmd!
+      autocmd WinEnter * set cul
+      autocmd WinLeave * set nocul
+    augroup END
 
   " insert mode with ibeam and no cursor line
     autocmd InsertEnter,InsertLeave * set cul!
@@ -182,6 +190,12 @@ filetype plugin indent on    " required
 
       nmap <c-L> <Plug>DWMGrowMaster
       nmap <c-H> <Plug>DWMShrinkMaster
+
+    " vim-diminactive
+      let g:diminactive_use_colorcolumn = 1
+      hi ColorColumn term=bold ctermfg=8
+      
+      let g:diminactive_use_syntax = 1
 
   "" commands
     " YankRing.vim
