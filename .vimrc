@@ -136,6 +136,9 @@ filetype plugin indent on    " required
   " vimrc options
     nmap <Leader>rv :so $MYVIMRC<CR>
     nmap <Leader>ev :e $MYVIMRC<CR>
+
+  " no mode status below status bar
+    set noshowmode
     
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
@@ -193,7 +196,7 @@ filetype plugin indent on    " required
 
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
-      hi ColorColumn term=bold ctermfg=8
+      hi ColorColumn term=bold ctermfg=8 ctermbg=0
       
       let g:diminactive_use_syntax = 1
 
