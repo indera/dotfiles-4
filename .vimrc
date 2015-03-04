@@ -177,6 +177,7 @@ filetype plugin indent on    " required
     " limelight.vim
     " nerdtree
       nmap <Leader>o :NERDTreeToggle<CR>
+      let NERDTreeQuitOnOpen = 1
 
     " dwm.vim
       let g:dwm_map_keys = 0
