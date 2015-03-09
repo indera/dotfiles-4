@@ -37,7 +37,7 @@ call vundle#begin()
   Plugin 'kana/vim-textobj-user'
   Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
-  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'tpope/vim-commentary'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -238,4 +238,4 @@ filetype plugin indent on    " required
 
       let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-    " nerdcommenter
+    " vim-commentary
