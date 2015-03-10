@@ -31,6 +31,7 @@ call vundle#begin()
   Plugin 'scrooloose/nerdtree'
   Plugin 'spolu/dwm.vim'
   Plugin 'blueyed/vim-diminactive'
+  Plugin 'mhinz/vim-startify'
 
   " commands
   Plugin 'YankRing.vim'
@@ -201,6 +202,10 @@ filetype plugin indent on    " required
       hi ColorColumn term=bold ctermfg=8 ctermbg=0
       
       let g:diminactive_use_syntax = 1
+
+    " vim-startify
+      let g:startify_custom_header = 
+            \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
   "" commands
     " YankRing.vim
