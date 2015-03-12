@@ -94,3 +94,5 @@ bindkey "^?" backward-delete-char
 # disable ctrl-s for scroll locking
 stty -ixon -ixoff
 
+# alias for list
+alias el="exa -l"
