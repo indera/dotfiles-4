@@ -63,6 +63,9 @@ filetype plugin indent on    " required
   " status line
     set laststatus=2  " Always display the status line
 
+  " tab line
+    set showtabline=2
+
   " no annoying backup!!!
     set nobackup
     set nowritebackup
@@ -184,7 +187,6 @@ filetype plugin indent on    " required
     " dwm.vim
       let g:dwm_map_keys = 0
 
-      nmap <c-w>o <Plug>DWMRotateClockwise
       nmap <c-w><c-o> <Plug>DWMRotateClockwise
 
       nmap <c-w>s <Plug>DWMNew
@@ -192,8 +194,8 @@ filetype plugin indent on    " required
       nmap <c-w><Space> <Plug>DWMFocus
       nmap <c-w><NUL> <Plug>DWMFocus
 
-      nmap <c-L> <Plug>DWMGrowMaster
-      nmap <c-H> <Plug>DWMShrinkMaster
+      nmap <c-l> <Plug>DWMGrowMaster
+      nmap <c-h> <Plug>DWMShrinkMaster
 
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
