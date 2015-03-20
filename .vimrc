@@ -66,6 +66,12 @@ filetype plugin indent on    " required
   " tab line
     set showtabline=2
 
+    function! GuiTabLabel()
+      return exists('t:mytablabel') ? t:mytablabel : ''
+    endfunction
+    set tabline=%{GuiTabLabel()}
+    set go+=e
+
   " no annoying backup!!!
     set nobackup
     set nowritebackup
@@ -118,12 +124,6 @@ filetype plugin indent on    " required
   " leader q to KILL!
     nmap <Leader>q :q<CR>
     nmap <Leader>Q :q!<CR>
-
-  " c-w n and p for tab navigation
-    nmap <c-w>n gt
-    nmap <c-w><c-n> gt
-    nmap <c-w>p gT
-    nmap <c-w><c-p> gT
 
   " c-w c for create empty tab
     nmap <c-w>c :tabe<CR>
