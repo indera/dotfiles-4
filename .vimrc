@@ -98,6 +98,9 @@ filetype plugin indent on    " required
       au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
     endif
 
+  " syntax!!
+    syntax on
+
   " remove this horrible arrow keys :)
   " thanks @jeank
     map <up> <nop>
@@ -243,4 +246,5 @@ filetype plugin indent on    " required
 
       let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+      
     " vim-commentary
