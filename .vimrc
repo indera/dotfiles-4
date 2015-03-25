@@ -91,12 +91,12 @@ filetype plugin indent on    " required
     augroup END
 
   " insert mode with ibeam and no cursor line
-    autocmd InsertEnter,InsertLeave * set cul!
-    if has("autocmd")
-      au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape ibeam"
-      au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
-      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
-    endif
+    " autocmd InsertEnter,InsertLeave * set cul!
+    " if has("autocmd")
+    "   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape ibeam"
+    "   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
+    "   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
+    " endif
 
   " syntax!!
     syntax on
