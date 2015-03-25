@@ -11,4 +11,6 @@ My new dotfiles
 4. Install [base16 for iTerm2](https://github.com/chriskempson/base16-iterm2)
 5. Install [Vundle.vim](https://github.com/gmarik/Vundle.vim)
 6. Install vim plugins
+7. Install fortune
+8. Install cowsay
 7. Install [base16 for vim](https://github.com/chriskempson/base16-vim)
