@@ -212,6 +212,8 @@ filetype plugin indent on    " required
 
   "" commands
     " YankRing.vim
+      let g:yankring_history_file = '.yankring-history'
+
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
