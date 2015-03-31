@@ -22,6 +22,7 @@ call vundle#begin()
   
   " integrations
   Plugin 'tpope/vim-fugitive'
+  Plugin 'rizzatti/dash.vim'
 
   " interface
   Plugin 'kien/ctrlp.vim'
