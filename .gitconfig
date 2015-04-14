@@ -12,6 +12,7 @@
 	remotes = remote -v
   d = diff
   dt = difftool
+  bump = !git ac -m \"Bumping the version file\"
   push-release = !git checkout production && git push && git checkout master && git push && git push --tags
 [push]
 	default = simple
