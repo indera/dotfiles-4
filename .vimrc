@@ -148,6 +148,9 @@ filetype plugin indent on    " required
 
   " no mode status below status bar
     set noshowmode
+
+  " repeat last command
+    nmap @@ q:k<CR>
     
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
