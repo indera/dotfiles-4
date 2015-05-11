@@ -154,6 +154,9 @@ filetype plugin indent on    " required
 
   " ignore useless files
     set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip
+
+  " toggle paste mode
+    nmap <silent> <Leader>p :exec &paste==1? "set nopaste" : "set paste"<CR>
     
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
