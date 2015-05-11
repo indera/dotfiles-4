@@ -151,6 +151,9 @@ filetype plugin indent on    " required
 
   " repeat last command
     nmap @@ q:k<CR>
+
+  " ignore useless files
+    set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip
     
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
