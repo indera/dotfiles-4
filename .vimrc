@@ -20,7 +20,7 @@ call vundle#begin()
   " code display
   Plugin 'chriskempson/base16-vim'
   Plugin 'ntpeters/vim-better-whitespace'
-  
+
   " integrations
   Plugin 'tpope/vim-fugitive'
   Plugin 'rizzatti/dash.vim'
@@ -51,7 +51,7 @@ filetype plugin indent on    " required
 
   " leader
     let mapleader = ","
-    
+
   " indentation
     set autoindent
     set smartindent
@@ -113,7 +113,7 @@ filetype plugin indent on    " required
     imap <down> <nop>
     imap <left> <nop>
     imap <right> <nop>
-  
+
   " I always say :Q! intead of :q!
     cab W! w!
     cab W w
@@ -133,13 +133,13 @@ filetype plugin indent on    " required
   " c-w c for create empty tab
     nmap <c-w>c :tabe<CR>
     nmap <c-w><c-c> :tabe<CR>
-    
+
   " backspace everything!
     set backspace=indent,eol,start
-  
+
   " cycle windows on insert mode
     imap <c-w> <ESC><c-w>
-    
+
   " line numbers
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
@@ -158,7 +158,10 @@ filetype plugin indent on    " required
 
   " toggle paste mode
     nmap <silent> <Leader>p :exec &paste==1? "set nopaste" : "set paste"<CR>
-    
+
+  " trailing whitespaces removed on save
+    autocmd BufWritePre * :StripWhitespace
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,7 +175,7 @@ filetype plugin indent on    " required
 
   "" completion
     " supertab
-  
+
   "" code display
     " base16-vim
       set t_Co=256
@@ -214,11 +217,11 @@ filetype plugin indent on    " required
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
       hi ColorColumn term=bold ctermfg=8 ctermbg=0
-      
+
       let g:diminactive_use_syntax = 1
 
     " vim-startify
-      let g:startify_custom_header = 
+      let g:startify_custom_header =
             \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
   "" commands
@@ -259,5 +262,5 @@ filetype plugin indent on    " required
 
       let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-      
+
     " vim-commentary
