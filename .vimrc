@@ -19,6 +19,7 @@ call vundle#begin()
 
   " code display
   Plugin 'chriskempson/base16-vim'
+  Plugin 'ntpeters/vim-better-whitespace'
   
   " integrations
   Plugin 'tpope/vim-fugitive'
