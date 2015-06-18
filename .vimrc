@@ -151,7 +151,7 @@ filetype plugin indent on    " required
     set noshowmode
 
   " repeat last command
-    nmap @@ q:k<CR>
+    " nmap @@ q:k<CR>
 
   " ignore useless files
     set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip
