@@ -62,6 +62,9 @@ filetype plugin indent on    " required
     set expandtab
     set nowrap
 
+  " autoreload opened files
+    set autoread
+
   " status line
     set laststatus=2  " Always display the status line
 
