@@ -97,7 +97,12 @@ stty -ixon -ixoff
 # alias for list
 alias el="exa -l"
 
+# tmux aliases
+alias t='tmux'
+alias tt='tmux attach -d -t base || tmux new -s base'
 
+# sorry cowie, you are just pooing my ansibles :/
+export ANSIBLE_NOCOWS=1
 
 # only init if installed.
 fasd_cache="$HOME/.fasd-init-bash"
@@ -115,6 +120,3 @@ alias f='fasd -f' # file
 alias z='fasd_cd -d' # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # interactive directory jump
 
-# tmux aliases
-alias t='tmux'
-alias tt='tmux attach -d -t base || tmux new -s base'
