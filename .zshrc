@@ -115,4 +115,6 @@ alias f='fasd -f' # file
 alias z='fasd_cd -d' # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # interactive directory jump
 
-alias t='tmux attach -d -t base || tmux new -s base'
+# tmux aliases
+alias t='tmux'
+alias tt='tmux attach -d -t base || tmux new -s base'
