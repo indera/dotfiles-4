@@ -225,7 +225,7 @@ filetype plugin indent on    " required
 
     " vim-startify
       let g:startify_custom_header =
-            \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+            \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
   "" commands
     " YankRing.vim
