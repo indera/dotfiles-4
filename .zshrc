@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-########## My options ########## 
+########## My options ##########
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -114,3 +114,5 @@ alias d='fasd -d' # directory
 alias f='fasd -f' # file
 alias z='fasd_cd -d' # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # interactive directory jump
+
+alias t='tmux attach -d -t base || tmux new -s base'
