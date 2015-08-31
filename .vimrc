@@ -98,9 +98,9 @@ filetype plugin indent on    " required
   " insert mode with ibeam and no cursor line
     " autocmd InsertEnter,InsertLeave * set cul!
     " if has("autocmd")
-    "   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape ibeam"
-    "   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
-    "   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-tomorrow-dark/cursor_shape block"
+    "   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape ibeam"
+    "   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape block"
+    "   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape block"
     " endif
 
   " syntax!!
@@ -184,7 +184,7 @@ filetype plugin indent on    " required
       set t_Co=256
       let base16colorspace=256  " Access colors present in 256 colorspace
       set background=dark
-      colorscheme base16-tomorrow
+      colorscheme base16-eighties
 
   "" integrations
     " vim-fugitive
