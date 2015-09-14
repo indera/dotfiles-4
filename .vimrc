@@ -219,7 +219,8 @@ filetype plugin indent on    " required
 
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
-      hi ColorColumn term=bold ctermfg=8 ctermbg=0
+      hi ColorColumn cterm=bold ctermbg=18 guibg=18
+      set colorcolumn=80
 
       let g:diminactive_use_syntax = 1
 
