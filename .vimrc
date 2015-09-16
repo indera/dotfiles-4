@@ -12,7 +12,7 @@ call vundle#begin()
   Plugin 'tpope/vim-rails'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'mattn/emmet-vim'
-  Plugin 'mustache/vim-mustache-handlebars'
+  " Plugin 'mustache/vim-mustache-handlebars'
 
   " completion
   Plugin 'ervandew/supertab'
@@ -22,13 +22,13 @@ call vundle#begin()
   Plugin 'ntpeters/vim-better-whitespace'
 
   " integrations
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'rizzatti/dash.vim'
+  " Plugin 'tpope/vim-fugitive'
+  " Plugin 'rizzatti/dash.vim'
 
   " interface
   Plugin 'kien/ctrlp.vim'
   Plugin 'sjl/gundo.vim'
-  Plugin 'junegunn/limelight.vim'
+  " Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'spolu/dwm.vim'
@@ -219,7 +219,7 @@ filetype plugin indent on    " required
 
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
-      hi ColorColumn cterm=bold ctermbg=18 guibg=18
+      hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
       set colorcolumn=80
 
       let g:diminactive_use_syntax = 1
