@@ -26,4 +26,10 @@
 [merge]
 	tool = vimdiff
 [difftool]
-        prompt = false
+  prompt = false
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+[gitsh]
+  defaultCommand = st
