@@ -8,6 +8,7 @@ call vundle#begin()
 
   " languages
   Plugin 'tpope/vim-surround'
+  Plugin 'pangloss/vim-javascript'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'tpope/vim-rails'
   Plugin 'vim-ruby/vim-ruby'
