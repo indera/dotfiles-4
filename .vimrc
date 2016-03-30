@@ -131,10 +131,6 @@ filetype plugin indent on    " required
     cab E e
     cab E! e!
 
-  " leader q to KILL!
-    nmap <Leader>q :q<CR>
-    nmap <Leader>Q :q!<CR>
-
   " c-w c for create empty tab
     nmap <c-w>c :tabe<CR>
     nmap <c-w><c-c> :tabe<CR>
