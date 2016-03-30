@@ -16,7 +16,7 @@ call vundle#begin()
   " Plugin 'mustache/vim-mustache-handlebars'
 
   " completion
-  Plugin 'ervandew/supertab'
+  " Plugin 'ervandew/supertab'
 
   " code display
   Plugin 'chriskempson/base16-vim'
@@ -26,6 +26,7 @@ call vundle#begin()
   " Plugin 'tpope/vim-fugitive'
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
+  Plugin 'thoughtbot/vim-rspec'
 
   " interface
   Plugin 'kien/ctrlp.vim'
@@ -33,15 +34,15 @@ call vundle#begin()
   " Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'spolu/dwm.vim'
+  " Plugin 'spolu/dwm.vim'
   Plugin 'blueyed/vim-diminactive'
-  Plugin 'mhinz/vim-startify'
+  " Plugin 'mhinz/vim-startify'
 
   " commands
   Plugin 'YankRing.vim'
-  Plugin 'kana/vim-textobj-user'
-  Plugin 'nelstrom/vim-textobj-rubyblock'
-  Plugin 'Lokaltog/vim-easymotion'
+  " Plugin 'kana/vim-textobj-user'
+  " Plugin 'nelstrom/vim-textobj-rubyblock'
+  " Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
 
 call vundle#end()            " required
@@ -203,17 +204,17 @@ filetype plugin indent on    " required
       let NERDTreeQuitOnOpen = 1
 
     " dwm.vim
-      let g:dwm_map_keys = 0
+      " let g:dwm_map_keys = 0
 
-      nmap <c-w><c-o> <Plug>DWMRotateClockwise
+      " nmap <c-w><c-o> <Plug>DWMRotateClockwise
 
-      nmap <c-w>s <Plug>DWMNew
-      nmap <c-w><c-s> <Plug>DWMNew
-      nmap <c-w><Space> <Plug>DWMFocus
-      nmap <c-w><NUL> <Plug>DWMFocus
+      " nmap <c-w>s <Plug>DWMNew
+      " nmap <c-w><c-s> <Plug>DWMNew
+      " nmap <c-w><Space> <Plug>DWMFocus
+      " nmap <c-w><NUL> <Plug>DWMFocus
 
-      nmap <c-l> <Plug>DWMGrowMaster
-      nmap <c-h> <Plug>DWMShrinkMaster
+      " nmap <c-l> <Plug>DWMGrowMaster
+      " nmap <c-h> <Plug>DWMShrinkMaster
 
     " vim-diminactive
       let g:diminactive_use_colorcolumn = 1
@@ -223,8 +224,8 @@ filetype plugin indent on    " required
       let g:diminactive_use_syntax = 1
 
     " vim-startify
-      let g:startify_custom_header =
-            \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
+      " let g:startify_custom_header =
+      "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
   "" commands
     " YankRing.vim
@@ -233,36 +234,36 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
-      " search
-      map  / <Plug>(easymotion-sn)
-      omap / <Plug>(easymotion-tn)
-      map  ? <Plug>(easymotion-sn)
-      omap ? <Plug>(easymotion-tn)
-      map  n <Plug>(easymotion-next)
-      map  N <Plug>(easymotion-prev)
+      " " search
+      " map  / <Plug>(easymotion-sn)
+      " omap / <Plug>(easymotion-tn)
+      " map  ? <Plug>(easymotion-sn)
+      " omap ? <Plug>(easymotion-tn)
+      " map  n <Plug>(easymotion-next)
+      " map  N <Plug>(easymotion-prev)
 
-      " movements
-      map <Leader>l <Plug>(easymotion-lineforward)
-      map <Leader>j <Plug>(easymotion-j)
-      map <Leader>k <Plug>(easymotion-k)
-      map <Leader>h <Plug>(easymotion-linebackward)
+      " " movements
+      " map <Leader>l <Plug>(easymotion-lineforward)
+      " map <Leader>j <Plug>(easymotion-j)
+      " map <Leader>k <Plug>(easymotion-k)
+      " map <Leader>h <Plug>(easymotion-linebackward)
 
-      map <Leader>w <Plug>(easymotion-w)
-      map <Leader>W <Plug>(easymotion-W)
-      map <Leader>b <Plug>(easymotion-b)
-      map <Leader>B <Plug>(easymotion-B)
+      " map <Leader>w <Plug>(easymotion-w)
+      " map <Leader>W <Plug>(easymotion-W)
+      " map <Leader>b <Plug>(easymotion-b)
+      " map <Leader>B <Plug>(easymotion-B)
 
-      " search movements
-      map f <Plug>(easymotion-f)
-      map F <Plug>(easymotion-F)
-      map t <Plug>(easymotion-t)
-      map T <Plug>(easymotion-T)
+      " " search movements
+      " map f <Plug>(easymotion-f)
+      " map F <Plug>(easymotion-F)
+      " map t <Plug>(easymotion-t)
+      " map T <Plug>(easymotion-T)
 
-      " a better search (forward and backward)
-      map s <Plug>(easymotion-s)
-      map S <Plug>(easymotion-s2)
+      " " a better search (forward and backward)
+      " map s <Plug>(easymotion-s)
+      " map S <Plug>(easymotion-s2)
 
-      let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
-      let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+      " let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
+      " let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
     " vim-commentary
