@@ -159,7 +159,7 @@ filetype plugin indent on    " required
     " nmap @@ q:k<CR>
 
   " ignore useless files
-    set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip
+    set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip,**/node_modules/*,**/resources/*
 
   " toggle paste mode
     nmap <silent> <Leader>p :exec &paste==1? "set nopaste" : "set paste"<CR>
