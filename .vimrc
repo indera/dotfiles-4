@@ -42,7 +42,7 @@ call vundle#begin()
   Plugin 'YankRing.vim'
   " Plugin 'kana/vim-textobj-user'
   " Plugin 'nelstrom/vim-textobj-rubyblock'
-  " Plugin 'Lokaltog/vim-easymotion'
+  Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
 
 call vundle#end()            " required
@@ -153,10 +153,7 @@ filetype plugin indent on    " required
     set noshowmode
 
   " repeat last command
-    " nmap @@ q:k<CR>
-
-  " ignore useless files
-    set wildignore+=**/tmp/*,**/test/dummy/*,*.so,*.swp,*.zip,**/node_modules/*,**/resources/*
+    nmap ;; q:k<CR>
 
   " toggle paste mode
     nmap <silent> <Leader>p :exec &paste==1? "set nopaste" : "set paste"<CR>
@@ -187,10 +184,20 @@ filetype plugin indent on    " required
 
   "" integrations
     " vim-fugitive
+    " dash.vim
+    " ag.vim
+    " vim-rspec
+      map <Leader>st :call RunCurrentSpecFile()<CR>
+      map <Leader>ss :call RunNearestSpec()<CR>
+      map <Leader>sl :call RunLastSpec()<CR>
+      map <Leader>sa :call RunAllSpecs()<CR>
 
   "" interface
     " ctrlp.vim
       let g:ctrlp_map = ',t'
+      " Use ag because it's lightning fast and respects .gitignore
+      let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+      let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
 
     " lightline.vim
     " numbers.vim
@@ -234,36 +241,36 @@ filetype plugin indent on    " required
     " vim-textobj-user
     " vim-textobj-rubyblock
     " vim-easymotion
-      " " search
-      " map  / <Plug>(easymotion-sn)
-      " omap / <Plug>(easymotion-tn)
-      " map  ? <Plug>(easymotion-sn)
-      " omap ? <Plug>(easymotion-tn)
-      " map  n <Plug>(easymotion-next)
-      " map  N <Plug>(easymotion-prev)
+      " search
+      map  / <Plug>(easymotion-sn)
+      omap / <Plug>(easymotion-tn)
+      map  ? <Plug>(easymotion-sn)
+      omap ? <Plug>(easymotion-tn)
+      map  n <Plug>(easymotion-next)
+      map  N <Plug>(easymotion-prev)
 
-      " " movements
-      " map <Leader>l <Plug>(easymotion-lineforward)
-      " map <Leader>j <Plug>(easymotion-j)
-      " map <Leader>k <Plug>(easymotion-k)
-      " map <Leader>h <Plug>(easymotion-linebackward)
+      " movements
+      map <Leader>l <Plug>(easymotion-lineforward)
+      map <Leader>j <Plug>(easymotion-j)
+      map <Leader>k <Plug>(easymotion-k)
+      map <Leader>h <Plug>(easymotion-linebackward)
 
-      " map <Leader>w <Plug>(easymotion-w)
-      " map <Leader>W <Plug>(easymotion-W)
-      " map <Leader>b <Plug>(easymotion-b)
-      " map <Leader>B <Plug>(easymotion-B)
+      map <Leader>w <Plug>(easymotion-w)
+      map <Leader>W <Plug>(easymotion-W)
+      map <Leader>b <Plug>(easymotion-b)
+      map <Leader>B <Plug>(easymotion-B)
 
-      " " search movements
-      " map f <Plug>(easymotion-f)
-      " map F <Plug>(easymotion-F)
-      " map t <Plug>(easymotion-t)
-      " map T <Plug>(easymotion-T)
+      " search movements
+      map f <Plug>(easymotion-f)
+      map F <Plug>(easymotion-F)
+      map t <Plug>(easymotion-t)
+      map T <Plug>(easymotion-T)
 
-      " " a better search (forward and backward)
-      " map s <Plug>(easymotion-s)
-      " map S <Plug>(easymotion-s2)
+      " a better search (forward and backward)
+      map s <Plug>(easymotion-s)
+      map S <Plug>(easymotion-s2)
 
-      " let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
-      " let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+      let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
+      let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
     " vim-commentary
