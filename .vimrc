@@ -14,6 +14,7 @@ call vundle#begin()
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'mattn/emmet-vim'
   " Plugin 'mustache/vim-mustache-handlebars'
+  Plugin 'scrooloose/syntastic'
 
   " completion
   " Plugin 'ervandew/supertab'
@@ -27,6 +28,7 @@ call vundle#begin()
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
   Plugin 'thoughtbot/vim-rspec'
+  Plugin 'tpope/vim-dispatch'
 
   " interface
   Plugin 'kien/ctrlp.vim'
@@ -44,6 +46,9 @@ call vundle#begin()
   " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
+
+  " others
+  Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -146,24 +151,32 @@ filetype plugin indent on    " required
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
   " vimrc options
-    nmap <silent> <Leader>rv :so $MYVIMRC<CR>
-    nmap <silent> <Leader>ev :e $MYVIMRC<CR>
+    nmap <Leader>vr :so $MYVIMRC<CR>
+    nmap <Leader>ve :e $MYVIMRC<CR>
 
   " no mode status below status bar
     set noshowmode
 
+  " AAAARGH! I was always falling on this shit
+    nmap <silent> q: <ESC>
+    nmap <silent> <Leader>: :<c-f>
   " repeat last command
-    nmap <silent> ;; q:k<CR>
+    nmap <silent> ;; <Leader>:k<CR>
 
   " integrations with clipboard
-    nmap <silent> <Leader>v :exec &paste==1? "set nopaste" : "set paste"<CR>
-    nmap <c-s-c> :.w !pbcopy<CR><CR>
-    vmap <c-s-c> :w !pbcopy<CR><CR>
-    nmap <c-s-v> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-    imap <c-s-v> <ESC>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    nmap <silent> <Leader>vpm :exec &paste==1? "set nopaste" : "set paste"<CR>
+    nmap <Leader><c-c> :.w !pbcopy<CR><CR>
+    vmap <Leader><c-c> :w !pbcopy<CR><CR>
+    nmap <Leader><c-v> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    imap <Leader><c-v> <ESC>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
-  " trailing whitespaces removed on save
+  " trailing whitespaces removing
+    nmap <Leader>dt :StripWhitespace<CR>
+    nmap <Leader>dtw :StripWhitespace<CR>
     autocmd BufWritePre * :StripWhitespace
+
+  " go to last opened file
+    map <Leader>< <c-^>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
@@ -172,9 +185,156 @@ filetype plugin indent on    " required
     " vim-surround
     " vim-coffee-script
     " vim-rails
+      nmap <Leader>rr :E
+      nmap <Leader>re :E
+      nmap <Leader>rs :S
+      nmap <Leader>rv :V
+      nmap <Leader>rt :T
+
+      nmap <Leader>rra :A<CR>
+      nmap <Leader>rea :AE<CR>
+      nmap <Leader>rsa :AS<CR>
+      nmap <Leader>rva :AV<CR>
+      nmap <Leader>rta :AT<CR>
+
+      nmap <Leader>rrr :R<CR>
+      nmap <Leader>rer :RE<CR>
+      nmap <Leader>rsr :RS<CR>
+      nmap <Leader>rvr :RV<CR>
+      nmap <Leader>rtr :RT<CR>
+
+      nmap <Leader>rrc :Econtroller<CR>
+      nmap <Leader>rec :Econtroller
+      nmap <Leader>rsc :Scontroller
+      nmap <Leader>rvc :Vcontroller
+      nmap <Leader>rtc :Tcontroller
+
+      nmap <Leader>rre :Eenvironment<CR>
+      nmap <Leader>ree :Eenvironment
+      nmap <Leader>rse :Senvironment
+      nmap <Leader>rve :Venvironment
+      nmap <Leader>rte :Tenvironment
+
+      nmap <Leader>rrf :Efixtures<CR>
+      nmap <Leader>ref :Efixtures
+      nmap <Leader>rsf :Sfixtures
+      nmap <Leader>rvf :Vfixtures
+      nmap <Leader>rtf :Tfixtures
+
+      nmap <Leader>rrtf :Efunctionaltest<CR>
+      nmap <Leader>retf :Efunctionaltest
+      nmap <Leader>rstf :Sfunctionaltest
+      nmap <Leader>rvtf :Vfunctionaltest
+      nmap <Leader>rttf :Tfunctionaltest
+
+      nmap <Leader>rrh :Ehelper<CR>
+      nmap <Leader>reh :Ehelper
+      nmap <Leader>rsh :Shelper
+      nmap <Leader>rvh :Vhelper
+      nmap <Leader>rth :Thelper
+
+      nmap <Leader>rri :Einitializer<CR>
+      nmap <Leader>rei :Einitializer
+      nmap <Leader>rsi :Sinitializer
+      nmap <Leader>rvi :Vinitializer
+      nmap <Leader>rti :Tinitializer
+
+      nmap <Leader>rrti :Eintegrationtest<CR>
+      nmap <Leader>reti :Eintegrationtest
+      nmap <Leader>rsti :Sintegrationtest
+      nmap <Leader>rvti :Vintegrationtest
+      nmap <Leader>rtti :Tintegrationtest
+
+      nmap <Leader>rrj :Ejavascript<CR>
+      nmap <Leader>rej :Ejavascript
+      nmap <Leader>rsj :Sjavascript
+      nmap <Leader>rvj :Vjavascript
+      nmap <Leader>rtj :Tjavascript
+
+      nmap <Leader>rrlt :Elayout<CR>
+      nmap <Leader>relt :Elayout
+      nmap <Leader>rslt :Slayout
+      nmap <Leader>rvlt :Vlayout
+      nmap <Leader>rtlt :Tlayout
+
+      nmap <Leader>rrl :Elocale<CR>
+      nmap <Leader>rel :Elocale
+      nmap <Leader>rsl :Slocale
+      nmap <Leader>rvl :Vlocale
+      nmap <Leader>rtl :Tlocale
+
+      nmap <Leader>rrml :Emailer<CR>
+      nmap <Leader>reml :Emailer
+      nmap <Leader>rsml :Smailer
+      nmap <Leader>rvml :Vmailer
+      nmap <Leader>rtml :Tmailer
+
+      nmap <Leader>rrmi :Emigration<CR>
+      nmap <Leader>remi :Emigration
+      nmap <Leader>rsmi :Smigration
+      nmap <Leader>rvmi :Vmigration
+      nmap <Leader>rtmi :Tmigration
+
+      nmap <Leader>rrm :Emodel<CR>
+      nmap <Leader>rem :Emodel
+      nmap <Leader>rsm :Smodel
+      nmap <Leader>rvm :Vmodel
+      nmap <Leader>rtm :Tmodel
+
+      nmap <Leader>rrsc :Eschema<CR>
+      nmap <Leader>resc :Eschema
+      nmap <Leader>rssc :Sschema
+      nmap <Leader>rvsc :Vschema
+      nmap <Leader>rtsc :Tschema
+
+      nmap <Leader>rrts :Espec<CR>
+      nmap <Leader>rets :Espec
+      nmap <Leader>rsts :Sspec
+      nmap <Leader>rvts :Vspec
+      nmap <Leader>rtts :Tspec
+
+      nmap <Leader>rrst :Estylesheet<CR>
+      nmap <Leader>rest :Estylesheet
+      nmap <Leader>rsst :Sstylesheet
+      nmap <Leader>rvst :Vstylesheet
+      nmap <Leader>rtst :Tstylesheet
+
+      nmap <Leader>rrtu :Eunittest<CR>
+      nmap <Leader>retu :Eunittest
+      nmap <Leader>rstu :Sunittest
+      nmap <Leader>rvtu :Vunittest
+      nmap <Leader>rttu :Tunittest
+
+      nmap <Leader>rrv :Eview<CR>
+      nmap <Leader>rev :Eview
+      nmap <Leader>rsv :Sview
+      nmap <Leader>rvv :Vview
+      nmap <Leader>rtv :Tview
+
+      nmap <Leader>rg :Rgenerate
+      nmap <Leader>rgd :Rdestroy
+      nmap <Leader>rssv :Rserver<CR>
+      nmap <Leader>sr :Rserver<CR>
+      nmap <Leader>rksv :! kill `cat tmp/pids/server.pid`<CR>
+      nmap <Leader>kr :! kill `cat tmp/pids/server.pid`<CR>
+      nmap <Leader>rp :Rpreview
+
+      map <Leader>rk :Rake
+      map <Leader>rx :Rextract
+
     " vim-ruby
     " emmet-vim
     " vim-mustache-handlebars
+    " syntastic
+      let g:syntastic_always_populate_loc_list = 1
+      let g:syntastic_auto_loc_list = 1
+      let g:syntastic_check_on_open = 1
+      let g:syntastic_check_on_wq = 0
+
+      map <Leader>si :SyntasticInfo<CR>
+      map <Leader>ss :SyntasticToggleMode<CR>
+      map <Leader>sc :SyntasticCheck<CR>
+      map <Leader>se :Errors<CR>
 
   "" completion
     " supertab
@@ -202,10 +362,15 @@ filetype plugin indent on    " required
     " dash.vim
     " ag.vim
     " vim-rspec
-      map <Leader>rt :call RunCurrentSpecFile()<CR>
-      map <Leader>rl :call RunNearestSpec()<CR>
-      map <Leader>rr :call RunLastSpec()<CR>
-      map <Leader>ra :call RunAllSpecs()<CR>
+      map <Leader>rtt :call RunCurrentSpecFile()<CR>
+      map <Leader>rtl :call RunNearestSpec()<CR>
+      map <Leader>rtr :call RunLastSpec()<CR>
+      map <Leader>rta :call RunAllSpecs()<CR>
+
+    " vim-dispatch
+      nmap <Leader>dd :Dispatch
+      nmap <Leader>ds :Start
+      nmap <Leader>df :Focus
 
   "" interface
     " ctrlp.vim
@@ -435,3 +600,7 @@ filetype plugin indent on    " required
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
     " vim-commentary
+
+  " others
+    " tagbar
+      nmap <Leader>m :TagbarToggle<CR>
