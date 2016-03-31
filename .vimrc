@@ -23,7 +23,7 @@ call vundle#begin()
   Plugin 'ntpeters/vim-better-whitespace'
 
   " integrations
-  " Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-fugitive'
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
   Plugin 'thoughtbot/vim-rspec'
@@ -146,17 +146,21 @@ filetype plugin indent on    " required
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
   " vimrc options
-    nmap <Leader>rv :so $MYVIMRC<CR>
-    nmap <Leader>ev :e $MYVIMRC<CR>
+    nmap <silent> <Leader>rv :so $MYVIMRC<CR>
+    nmap <silent> <Leader>ev :e $MYVIMRC<CR>
 
   " no mode status below status bar
     set noshowmode
 
   " repeat last command
-    nmap ;; q:k<CR>
+    nmap <silent> ;; q:k<CR>
 
-  " toggle paste mode
-    nmap <silent> <Leader>p :exec &paste==1? "set nopaste" : "set paste"<CR>
+  " integrations with clipboard
+    nmap <silent> <Leader>v :exec &paste==1? "set nopaste" : "set paste"<CR>
+    nmap <c-s-c> :.w !pbcopy<CR><CR>
+    vmap <c-s-c> :w !pbcopy<CR><CR>
+    nmap <c-s-v> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    imap <c-s-v> <ESC>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
   " trailing whitespaces removed on save
     autocmd BufWritePre * :StripWhitespace
@@ -184,22 +188,175 @@ filetype plugin indent on    " required
 
   "" integrations
     " vim-fugitive
+      map <Leader>gg :Git!
+      map <Leader>gs :Gstatus<CR>
+      map <Leader>gc :Gcommit<CR>
+      map <Leader>gm :Gmerge master
+      map <Leader>gpl :Gpull<CR>
+      map <Leader>gps :Gpush<CR>
+      map <Leader>gl :Glog<CR>
+      map <Leader>gw :Gw<CR>
+      map <Leader>gd :Gdiff<CR>
+      map <Leader>gb :Gblame<CR>
+
     " dash.vim
     " ag.vim
     " vim-rspec
-      map <Leader>st :call RunCurrentSpecFile()<CR>
-      map <Leader>ss :call RunNearestSpec()<CR>
-      map <Leader>sl :call RunLastSpec()<CR>
-      map <Leader>sa :call RunAllSpecs()<CR>
+      map <Leader>rt :call RunCurrentSpecFile()<CR>
+      map <Leader>rl :call RunNearestSpec()<CR>
+      map <Leader>rr :call RunLastSpec()<CR>
+      map <Leader>ra :call RunAllSpecs()<CR>
 
   "" interface
     " ctrlp.vim
-      let g:ctrlp_map = ',t'
+      let g:ctrlp_map = '<c-p>'
       " Use ag because it's lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
       let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
+      let g:ctrlp_prompt_mappings = {
+            \   'PrtSelectMove("j")':   ['<c-j>'],
+            \   'PrtSelectMove("k")':   ['<c-k>'],
+            \   'PrtHistory(-1)':       ['<down>'],
+            \   'PrtHistory(1)':        ['<up>'],
+            \   'ToggleType(1)':        ['<c-l>'],
+            \   'ToggleType(-1)':       ['<c-h>'],
+            \   'PrtCurLeft()':         ['<left>', '<c-^>'],
+            \   'PrtCurRight()':        ['<right>'],
+            \   'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', '<c-p>'],
+            \ }
 
     " lightline.vim
+      let g:lightline = {
+            \ 'active': {
+            \   'left': [
+            \     ['mode', 'paste'], ['fugitive', 'filename'], ['ctrlpmark']
+            \   ], 'right': [
+            \     ['syntastic', 'lineinfo'], ['percent'],
+            \     ['fileformat', 'fileencoding', 'filetype']
+            \   ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'filename': 'LightLineFilename',
+            \   'fileformat': 'LightLineFileformat',
+            \   'filetype': 'LightLineFiletype',
+            \   'fileencoding': 'LightLineFileencoding',
+            \   'mode': 'LightLineMode',
+            \   'ctrlpmark': 'CtrlPMark',
+            \ },
+            \ 'component_expand': {
+            \   'syntastic': 'SyntasticStatuslineFlag',
+            \ },
+            \ 'component_type': {
+            \   'syntastic': 'error',
+            \ },
+            \ 'subseparator': { 'left': '|', 'right': '|' }
+            \ }
+
+      function! LightLineModified()
+        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+      endfunction
+
+      function! LightLineReadonly()
+        return &ft !~? 'help' && &readonly ? 'RO' : ''
+      endfunction
+
+      function! LightLineFilename()
+        let fname = expand('%:t')
+        return fname == 'ControlP' ? g:lightline.ctrlp_item :
+              \ fname == '__Tagbar__' ? g:lightline.fname :
+              \ fname =~ '__Gundo\|NERD_tree\|YankRing' ? '' :
+              \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+              \ &ft == 'unite' ? unite#get_status_string() :
+              \ &ft == 'vimshell' ? vimshell#get_status_string() :
+              \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+              \ ('' != fname ? fname : '[No Name]') .
+              \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+      endfunction
+
+      function! LightLineFugitive()
+        try
+          if expand('%:t') !~? 'Tagbar\|Gundo\|NERD\|YankRing' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+            let mark = ''  " edit here for cool mark
+            let _ = fugitive#head()
+            return strlen(_) ? mark._ : ''
+          endif
+        catch
+        endtry
+        return ''
+      endfunction
+
+      function! LightLineFileformat()
+        return winwidth(0) > 70 ? &fileformat : ''
+      endfunction
+
+      function! LightLineFiletype()
+        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+      endfunction
+
+      function! LightLineFileencoding()
+        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+      endfunction
+
+      function! LightLineMode()
+        let fname = expand('%:t')
+        return fname == '__Tagbar__' ? 'Tagbar' :
+              \ fname == 'ControlP' ? 'CtrlP' :
+              \ fname == '__Gundo__' ? 'Gundo' :
+              \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+              \ fname =~ 'NERD_tree' ? 'NERDTree' :
+              \ fname =~ 'YankRing' ? 'YankRing' :
+              \ &ft == 'unite' ? 'Unite' :
+              \ &ft == 'vimfiler' ? 'VimFiler' :
+              \ &ft == 'vimshell' ? 'VimShell' :
+              \ winwidth(0) > 60 ? lightline#mode() : ''
+      endfunction
+
+      function! CtrlPMark()
+        if expand('%:t') =~ 'ControlP'
+          call lightline#link('iR'[g:lightline.ctrlp_regex])
+          return lightline#concatenate([g:lightline.ctrlp_next, g:lightline.ctrlp_prev], 0)
+        else
+          return ''
+        endif
+      endfunction
+
+      let g:ctrlp_status_func = {
+        \ 'main': 'CtrlPStatusFunc_1',
+        \ 'prog': 'CtrlPStatusFunc_2',
+        \ }
+
+      function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+        let g:lightline.ctrlp_regex = a:regex
+        let g:lightline.ctrlp_prev = a:prev
+        let g:lightline.ctrlp_item = a:item
+        let g:lightline.ctrlp_next = a:next
+        return lightline#statusline(0)
+      endfunction
+
+      function! CtrlPStatusFunc_2(str)
+        return lightline#statusline(0)
+      endfunction
+
+      let g:tagbar_status_func = 'TagbarStatusFunc'
+
+      function! TagbarStatusFunc(current, sort, fname, ...) abort
+          let g:lightline.fname = a:fname
+        return lightline#statusline(0)
+      endfunction
+
+      augroup AutoSyntastic
+        autocmd!
+        autocmd BufWritePost *.c,*.cpp call s:syntastic()
+      augroup END
+      function! s:syntastic()
+        SyntasticCheck
+        call lightline#update()
+      endfunction
+
+      let g:unite_force_overwrite_statusline = 0
+      let g:vimfiler_force_overwrite_statusline = 0
+      let g:vimshell_force_overwrite_statusline = 0
     " numbers.vim
     " gundo.vim
       map <Leader>u :GundoToggle<CR>
@@ -237,6 +394,10 @@ filetype plugin indent on    " required
   "" commands
     " YankRing.vim
       let g:yankring_history_file = '.yankring-history'
+      let g:yankring_replace_n_pkey = ''
+      let g:yankring_replace_n_nkey = ''
+
+      map <Leader>p :YRShow<CR>
 
     " vim-textobj-user
     " vim-textobj-rubyblock
