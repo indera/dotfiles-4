@@ -181,6 +181,8 @@ filetype plugin indent on    " required
   " go to last opened file
     nmap <Leader>< <c-^>
 
+  " changing the vim shell
+    set shell=/bin/zsh
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
