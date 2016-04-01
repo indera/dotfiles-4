@@ -124,8 +124,8 @@ alias zz='fasd_cd -d -i' # interactive directory jump
 export RUBYMOTION_ANDROID_SDK=/Users/kelvinst/.rubymotion-android/sdk
 export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
 
-# to get the binstubs on ./bin
-export PATH="./bin:$PATH"
-
 # were needed to rvm work properly with dispatch.vim
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
+
+# to get the binstubs on ./bin
+export PATH="./bin:$PATH"
