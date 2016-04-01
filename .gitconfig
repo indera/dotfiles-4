@@ -32,4 +32,5 @@
   smudge = git-lfs smudge %f
   required = true
 [gitsh]
+  gitCommand = hub
   defaultCommand = st

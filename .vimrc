@@ -6,6 +6,20 @@ call vundle#begin()
   " it's needed
   Plugin 'gmarik/Vundle.vim'
 
+  " interface
+  Plugin 'kien/ctrlp.vim'
+  Plugin 'sjl/gundo.vim'
+  " Plugin 'junegunn/limelight.vim'
+  Plugin 'itchyny/lightline.vim'
+  Plugin 'scrooloose/nerdtree'
+  " Plugin 'spolu/dwm.vim'
+  Plugin 'blueyed/vim-diminactive'
+  " Plugin 'mhinz/vim-startify'
+  Plugin 'shougo/unite.vim'
+  Plugin 'sgur/unite-qf'
+  " remember to update this if you're changing the colorscheme
+  Plugin 'kelvinst/ShowMarks'
+
   " languages
   Plugin 'tpope/vim-surround'
   Plugin 'pangloss/vim-javascript'
@@ -27,18 +41,8 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
-  Plugin 'thoughtbot/vim-rspec'
+  " Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
-
-  " interface
-  Plugin 'kien/ctrlp.vim'
-  Plugin 'sjl/gundo.vim'
-  " Plugin 'junegunn/limelight.vim'
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'scrooloose/nerdtree'
-  " Plugin 'spolu/dwm.vim'
-  Plugin 'blueyed/vim-diminactive'
-  " Plugin 'mhinz/vim-startify'
 
   " commands
   Plugin 'YankRing.vim'
@@ -46,6 +50,10 @@ call vundle#begin()
   " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
+  " need to be manually compiled
+  " $ cd ~/.vim/bundle/vimproc.vim
+  " $ make -f make_unix.mak
+  " Plugin 'shougo/vimproc.vim'
 
   " others
   Plugin 'majutsushi/tagbar'
@@ -79,11 +87,11 @@ filetype plugin indent on    " required
   " tab line
     set showtabline=2
 
-    function! GuiTabLabel()
-      return exists('t:mytablabel') ? t:mytablabel : ''
-    endfunction
-    set tabline=%{GuiTabLabel()}
-    set go+=e
+    " function! GuiTabLabel()
+    "   return exists('t:mytablabel') ? t:mytablabel : ''
+    " endfunction
+    " set tabline=%{GuiTabLabel()}
+    " set go+=e
 
   " no annoying backup!!!
     set nobackup
@@ -150,10 +158,6 @@ filetype plugin indent on    " required
   " line numbers
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
-  " vimrc options
-    nmap <Leader>vr :so $MYVIMRC<CR>
-    nmap <Leader>ve :e $MYVIMRC<CR>
-
   " no mode status below status bar
     set noshowmode
 
@@ -171,210 +175,21 @@ filetype plugin indent on    " required
     imap <Leader><c-v> <ESC>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
   " trailing whitespaces removing
-    nmap <Leader>dt :StripWhitespace<CR>
-    nmap <Leader>dtw :StripWhitespace<CR>
     autocmd BufWritePre * :StripWhitespace
 
   " go to last opened file
-    map <Leader>< <c-^>
+    nmap <Leader>< <c-^>
+
+  " vim config options
+    nmap <Leader>vr :so $MYVIMRC<CR>
+    nmap <Leader>ve :vsplit $MYVIMRC<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "" languages
-    " vim-surround
-    " vim-coffee-script
-    " vim-rails
-      nmap <Leader>rr :E
-      nmap <Leader>re :E
-      nmap <Leader>rs :S
-      nmap <Leader>rv :V
-      nmap <Leader>rt :T
-
-      nmap <Leader>rra :A<CR>
-      nmap <Leader>rea :AE<CR>
-      nmap <Leader>rsa :AS<CR>
-      nmap <Leader>rva :AV<CR>
-      nmap <Leader>rta :AT<CR>
-
-      nmap <Leader>rrr :R<CR>
-      nmap <Leader>rer :RE<CR>
-      nmap <Leader>rsr :RS<CR>
-      nmap <Leader>rvr :RV<CR>
-      nmap <Leader>rtr :RT<CR>
-
-      nmap <Leader>rrc :Econtroller<CR>
-      nmap <Leader>rec :Econtroller
-      nmap <Leader>rsc :Scontroller
-      nmap <Leader>rvc :Vcontroller
-      nmap <Leader>rtc :Tcontroller
-
-      nmap <Leader>rre :Eenvironment<CR>
-      nmap <Leader>ree :Eenvironment
-      nmap <Leader>rse :Senvironment
-      nmap <Leader>rve :Venvironment
-      nmap <Leader>rte :Tenvironment
-
-      nmap <Leader>rrf :Efixtures<CR>
-      nmap <Leader>ref :Efixtures
-      nmap <Leader>rsf :Sfixtures
-      nmap <Leader>rvf :Vfixtures
-      nmap <Leader>rtf :Tfixtures
-
-      nmap <Leader>rrtf :Efunctionaltest<CR>
-      nmap <Leader>retf :Efunctionaltest
-      nmap <Leader>rstf :Sfunctionaltest
-      nmap <Leader>rvtf :Vfunctionaltest
-      nmap <Leader>rttf :Tfunctionaltest
-
-      nmap <Leader>rrh :Ehelper<CR>
-      nmap <Leader>reh :Ehelper
-      nmap <Leader>rsh :Shelper
-      nmap <Leader>rvh :Vhelper
-      nmap <Leader>rth :Thelper
-
-      nmap <Leader>rri :Einitializer<CR>
-      nmap <Leader>rei :Einitializer
-      nmap <Leader>rsi :Sinitializer
-      nmap <Leader>rvi :Vinitializer
-      nmap <Leader>rti :Tinitializer
-
-      nmap <Leader>rrti :Eintegrationtest<CR>
-      nmap <Leader>reti :Eintegrationtest
-      nmap <Leader>rsti :Sintegrationtest
-      nmap <Leader>rvti :Vintegrationtest
-      nmap <Leader>rtti :Tintegrationtest
-
-      nmap <Leader>rrj :Ejavascript<CR>
-      nmap <Leader>rej :Ejavascript
-      nmap <Leader>rsj :Sjavascript
-      nmap <Leader>rvj :Vjavascript
-      nmap <Leader>rtj :Tjavascript
-
-      nmap <Leader>rrlt :Elayout<CR>
-      nmap <Leader>relt :Elayout
-      nmap <Leader>rslt :Slayout
-      nmap <Leader>rvlt :Vlayout
-      nmap <Leader>rtlt :Tlayout
-
-      nmap <Leader>rrl :Elocale<CR>
-      nmap <Leader>rel :Elocale
-      nmap <Leader>rsl :Slocale
-      nmap <Leader>rvl :Vlocale
-      nmap <Leader>rtl :Tlocale
-
-      nmap <Leader>rrml :Emailer<CR>
-      nmap <Leader>reml :Emailer
-      nmap <Leader>rsml :Smailer
-      nmap <Leader>rvml :Vmailer
-      nmap <Leader>rtml :Tmailer
-
-      nmap <Leader>rrmi :Emigration<CR>
-      nmap <Leader>remi :Emigration
-      nmap <Leader>rsmi :Smigration
-      nmap <Leader>rvmi :Vmigration
-      nmap <Leader>rtmi :Tmigration
-
-      nmap <Leader>rrm :Emodel<CR>
-      nmap <Leader>rem :Emodel
-      nmap <Leader>rsm :Smodel
-      nmap <Leader>rvm :Vmodel
-      nmap <Leader>rtm :Tmodel
-
-      nmap <Leader>rrsc :Eschema<CR>
-      nmap <Leader>resc :Eschema
-      nmap <Leader>rssc :Sschema
-      nmap <Leader>rvsc :Vschema
-      nmap <Leader>rtsc :Tschema
-
-      nmap <Leader>rrts :Espec<CR>
-      nmap <Leader>rets :Espec
-      nmap <Leader>rsts :Sspec
-      nmap <Leader>rvts :Vspec
-      nmap <Leader>rtts :Tspec
-
-      nmap <Leader>rrst :Estylesheet<CR>
-      nmap <Leader>rest :Estylesheet
-      nmap <Leader>rsst :Sstylesheet
-      nmap <Leader>rvst :Vstylesheet
-      nmap <Leader>rtst :Tstylesheet
-
-      nmap <Leader>rrtu :Eunittest<CR>
-      nmap <Leader>retu :Eunittest
-      nmap <Leader>rstu :Sunittest
-      nmap <Leader>rvtu :Vunittest
-      nmap <Leader>rttu :Tunittest
-
-      nmap <Leader>rrv :Eview<CR>
-      nmap <Leader>rev :Eview
-      nmap <Leader>rsv :Sview
-      nmap <Leader>rvv :Vview
-      nmap <Leader>rtv :Tview
-
-      nmap <Leader>rg :Rgenerate
-      nmap <Leader>rgd :Rdestroy
-      nmap <Leader>rssv :Rserver<CR>
-      nmap <Leader>sr :Rserver<CR>
-      nmap <Leader>rksv :! kill `cat tmp/pids/server.pid`<CR>
-      nmap <Leader>kr :! kill `cat tmp/pids/server.pid`<CR>
-      nmap <Leader>rp :Rpreview
-
-      map <Leader>rk :Rake
-      map <Leader>rx :Rextract
-
-    " vim-ruby
-    " emmet-vim
-    " vim-mustache-handlebars
-    " syntastic
-      let g:syntastic_always_populate_loc_list = 1
-      let g:syntastic_auto_loc_list = 1
-      let g:syntastic_check_on_open = 1
-      let g:syntastic_check_on_wq = 0
-
-      map <Leader>si :SyntasticInfo<CR>
-      map <Leader>ss :SyntasticToggleMode<CR>
-      map <Leader>sc :SyntasticCheck<CR>
-      map <Leader>se :Errors<CR>
-
-  "" completion
-    " supertab
-
-  "" code display
-    " base16-vim
-      set t_Co=256
-      let base16colorspace=256  " Access colors present in 256 colorspace
-      set background=dark
-      colorscheme base16-eighties
-
-  "" integrations
-    " vim-fugitive
-      map <Leader>gg :Git!
-      map <Leader>gs :Gstatus<CR>
-      map <Leader>gc :Gcommit<CR>
-      map <Leader>gm :Gmerge master
-      map <Leader>gpl :Gpull<CR>
-      map <Leader>gps :Gpush<CR>
-      map <Leader>gl :Glog<CR>
-      map <Leader>gw :Gw<CR>
-      map <Leader>gd :Gdiff<CR>
-      map <Leader>gb :Gblame<CR>
-
-    " dash.vim
-    " ag.vim
-    " vim-rspec
-      map <Leader>rtt :call RunCurrentSpecFile()<CR>
-      map <Leader>rtl :call RunNearestSpec()<CR>
-      map <Leader>rtr :call RunLastSpec()<CR>
-      map <Leader>rta :call RunAllSpecs()<CR>
-
-    " vim-dispatch
-      nmap <Leader>dd :Dispatch
-      nmap <Leader>ds :Start
-      nmap <Leader>df :Focus
-
   "" interface
     " ctrlp.vim
-      let g:ctrlp_map = '<c-p>'
+      let g:ctrlp_map = '<c-@>f'
       " Use ag because it's lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
       let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
@@ -389,6 +204,9 @@ filetype plugin indent on    " required
             \   'PrtCurRight()':        ['<right>'],
             \   'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', '<c-p>'],
             \ }
+
+      nmap <Leader>t <c-@>f
+      imap <c-@>f <ESC><c-@>f
 
     " lightline.vim
       let g:lightline = {
@@ -556,13 +374,269 @@ filetype plugin indent on    " required
       " let g:startify_custom_header =
       "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
+    " vim-unite
+      let g:unite_source_menu_menus = {}
+      let g:unite_source_menu_menus.shortcuts = {
+            \  'description': '<c-@>s',
+            \}
+
+      let g:unite_source_menu_menus.shortcuts.command_candidates = [
+            \   ['▷ Reload .vimrc    (Shortcut)                            ,vr',
+            \     'normal ,vr'],
+            \   ['▷ Edit .vimrc      (Shortcut)                            ,ve',
+            \     'normal ,ve'],
+            \ ]
+
+      nmap <c-@><c-@> :Unite -ignorecase source<CR>
+      nmap <c-@>b :Unite -ignorecase buffer<CR>
+      nmap <c-@>: :Unite -ignorecase command<CR>
+      nmap <c-@><Leader> :Unite -ignorecase menu<CR>
+
+      nmap <c-@>t :Unite -ignorecase tab<CR>
+
+      nmap <c-@>s :Unite -silent -ignorecase menu:shortcuts<CR>
+
+    " unite-qf
+    " ShowMarks
+      let g:showmarks_enable=0
+      let g:showmarks_hlline_lower = 1
+      let g:showmarks_hlline_upper = 1
+
+  "" languages
+    " vim-surround
+    " vim-coffee-script
+    " vim-rails
+      " extract this to a vim plugin that depends of rails-vim
+      nmap <Leader>rg :Emodel
+      nmap <Leader>rga :A<CR>
+      nmap <Leader>rgr :R<CR>
+      nmap <Leader>rgc :Econtroller
+      nmap <Leader>rge :Eenvironment
+      nmap <Leader>rgf :Efixtures
+      nmap <Leader>rgh :Ehelper
+      nmap <Leader>rgi :Einitializer
+      nmap <Leader>rgj :Ejavascript
+      nmap <Leader>rgl :Elocale
+      nmap <Leader>rgm :Emodel
+      nmap <Leader>rgml :Emailer
+      nmap <Leader>rgmo :Emodel
+      nmap <Leader>rgs :Estylesheet
+      nmap <Leader>rgv :Eview
+      nmap <Leader>rgvy :Elayout
+      nmap <Leader>rgvw :Eview
+      nmap <Leader>rgd :Eschema
+      nmap <Leader>rgdm :Emigration
+      nmap <Leader>rgds :Eschema
+      nmap <Leader>rgtc :Efunctionaltest
+      nmap <Leader>rgti :Eintegrationtest
+      nmap <Leader>rgts :Espec
+      nmap <Leader>rgtu :Eunittest
+
+      nmap <Leader>ru :R
+      nmap <Leader>rup :exec "Rpreview " input("path: ")<CR>
+      nmap <Leader>rus :Rserver<CR>
+      nmap <Leader>ruk :! kill `cat tmp/pids/server.pid`<CR>
+      nmap <Leader>rug :Rgenerate
+      nmap <Leader>rud :Rdestroy
+
+      nmap <Leader>rur :Rake
+      vmap <Leader>rur :Rake
+      nmap <Leader>rux :Rextract
+      vmap <Leader>rux :Rextract
+
+      nmap <c-@>r :Unite -silent -ignorecase menu:rails<CR>
+
+      let g:unite_source_menu_menus.rails = {
+            \  'description': '<c-@>r',
+            \}
+
+      let g:unite_source_menu_menus.rails.command_candidates = [
+            \   ['▷ Preview          (Rails)                              ,rup',
+            \     'normal ,rup'],
+            \   ['▷ Start Server     (Rails)                              ,rus',
+            \     'normal ,rus'],
+            \   ['▷ Kill Server      (Rails)                              ,ruk',
+            \     'normal ,ruk'],
+            \   ['▷ Generate         (Rails)                              ,rug',
+            \     'normal ,rug'],
+            \   ['▷ Destroy          (Rails)                              ,rud',
+            \     'normal ,rud'],
+            \   ['▷ Rake             (Rails)                              ,rur',
+            \     'normal ,rur'],
+            \   ['▷ Extract          (Rails)                              ,rux',
+            \     'normal ,rux'],
+            \   ['============================================================',
+            \     ''],
+            \   ['▷ Run Current Spec (Rails)                              ,rtt',
+            \     'normal ,rtt'],
+            \   ['▷ Run Line Spec    (Rails)                              ,rtl',
+            \     'normal ,rtl'],
+            \   ['▷ Run All Specs    (Rails)                              ,rta',
+            \     'normal ,rta'],
+            \   ['============================================================',
+            \     ''],
+            \   ['▷ Alternate        (Rails)                              ,rga',
+            \     'normal ,rga'],
+            \   ['▷ Relative         (Rails)                              ,rgr',
+            \     'normal ,rgr'],
+            \   ['▷ Controller       (Rails)                              ,rgc',
+            \     'normal ,rgc'],
+            \   ['▷ Environment      (Rails)                              ,rge',
+            \     'normal ,rge'],
+            \   ['▷ Factories        (Rails)                              ,rgf',
+            \     'normal ,rgf'],
+            \   ['▷ Helper           (Rails)                              ,rgh',
+            \     'normal ,rgh'],
+            \   ['▷ Initializer      (Rails)                              ,rgi',
+            \     'normal ,rgi'],
+            \   ['▷ Javascript       (Rails)                              ,rgj',
+            \     'normal ,rgj'],
+            \   ['▷ Layout           (Rails)                             ,rglt',
+            \     'normal ,rglt'],
+            \   ['▷ Locale           (Rails)                              ,rgl',
+            \     'normal ,rgl'],
+            \   ['▷ Mailer           (Rails)                             ,rgml',
+            \     'normal ,rgml'],
+            \   ['▷ Model            (Rails)                    ,rg ,rgm ,rgmo',
+            \     'normal ,rgmo'],
+            \   ['▷ Migration        (Rails)                             ,rgdm',
+            \     'normal ,rgdm'],
+            \   ['▷ Schema           (Rails)                        ,rgd ,rgds',
+            \     'normal ,rgds'],
+            \   ['▷ Stylesheet       (Rails)                              ,rgs',
+            \     'normal ,rgs'],
+            \   ['▷ View             (Rails)                        ,rgv ,rgvw',
+            \     'normal ,rgvw'],
+            \   ['============================================================',
+            \     ''],
+            \   ['▷ Spec             (Rails)                             ,rgts',
+            \     'normal ,rgts'],
+            \   ['▷ Controller Spec  (Rails)                             ,rgtc',
+            \     'normal ,rgtc'],
+            \   ['▷ Integration Spec (Rails)                             ,rgti',
+            \     'normal ,rgti'],
+            \   ['▷ Unit Spec        (Rails)                             ,rgtu',
+            \     'normal ,rgtu'],
+            \]
+
+    " vim-ruby
+    " emmet-vim
+    " vim-mustache-handlebars
+    " syntastic
+      let g:syntastic_always_populate_loc_list = 1
+      let g:syntastic_auto_loc_list = 1
+      let g:syntastic_check_on_open = 1
+      let g:syntastic_check_on_wq = 0
+
+      nmap <Leader>si :SyntasticInfo<CR>
+      nmap <Leader>ss :SyntasticToggleMode<CR>
+      nmap <Leader>sc :SyntasticCheck<CR>
+      nmap <Leader>se :Errors<CR>
+
+  "" completion
+    " supertab
+
+  "" code display
+    " base16-vim
+      set t_Co=256
+      let base16colorspace=256  " Access colors present in 256 colorspace
+      set background=dark
+      " remember to update https://github.com/kelvinst/ShowMarks
+      colorscheme base16-eighties
+
+  "" integrations
+    " vim-fugitive
+      nmap <Leader>gs :Gstatus<CR>
+      nmap <Leader>gd :Gdiff
+      nmap <Leader>gc :Gcommit<CR>
+      nmap <Leader>gl :exe "silent Glog \| Unite qf"<CR>
+      nmap <Leader>gb :Gblame<CR>
+      vmap <Leader>gb :Gblame<CR>
+      nmap <Leader>ga :Gwrite
+      nmap <Leader>go :Gread
+      nmap <Leader>gr :Gremove
+      nmap <Leader>gm :exe "Gmove " input("to: ")<CR>
+      nmap <Leader>gp :Gpush
+      nmap <Leader>gP :Gpull
+      nmap <Leader>gg :Start gitsh<CR>
+      nmap <Leader>gw :Start github<CR>
+
+      nmap <c-@>g :Unite -silent -ignorecase menu:git<CR>
+
+      let g:unite_source_menu_menus.git = {
+            \  'description': '<c-@>g',
+            \}
+
+      let g:unite_source_menu_menus.git.command_candidates = [
+            \   ['▷ git status       (Fugitive)                            ,gs',
+            \     'normal ,gs'],
+            \   ['▷ git diff         (Fugitive)                            ,gd',
+            \     'normal ,gd'],
+            \   ['▷ git commit       (Fugitive)                            ,gc',
+            \     'normal ,gc'],
+            \   ['▷ git log          (Fugitive)                            ,gl',
+            \     'normal ,gl'],
+            \   ['▷ git blame        (Fugitive)                            ,gb',
+            \     'normal ,gb'],
+            \   ['▷ git stage        (Fugitive)                            ,ga',
+            \     'normal ,ga'],
+            \   ['▷ git checkout     (Fugitive)                            ,go',
+            \     'normal ,go'],
+            \   ['▷ git rm           (Fugitive)                            ,gr',
+            \     'normal ,gr'],
+            \   ['▷ git mv           (Fugitive)                            ,gm',
+            \     'normal ,gm'],
+            \   ['▷ git push         (Fugitive)                            ,gp',
+            \     'normal ,gp'],
+            \   ['▷ git pull         (Fugitive)                            ,gP',
+            \     'normal ,gP'],
+            \   ['▷ git ssh          (Fugitive)                            ,gg',
+            \     'normal ,gg'],
+            \   ['▷ github window    (Fugitive)                            ,gw',
+            \     'normal ,gw'],
+            \   ['▷ git cd           (Fugitive)',
+            \     'Gcd'],
+            \]
+
+    " dash.vim
+    " ag.vim
+    " vim-rspec
+      " nmap <Leader>rtt :call RunCurrentSpecFile()<CR>
+      " nmap <Leader>rtn :call RunNearestSpec()<CR>
+      " nmap <Leader>rtl :call RunLastSpec()<CR>
+      " nmap <Leader>rta :call RunAllSpecs()<CR>
+
+    " vim-dispatch
+      nmap <Leader>dd :Dispatch
+      nmap <Leader>df :Focus
+      nmap <Leader>dm :Make
+      nmap <Leader>ds :Start
+      nmap <Leader>dc :Copen
+
+      nmap <Leader>rtt :Start rspec %<CR>
+      nmap <Leader>rtl :exe "Start rspec %:".line('.')<CR>
+      nmap <Leader>rta :Start rspec<CR>
+
+      nmap <c-@>d :Unite -silent -ignorecase menu:dispatch<CR>
+
+      let g:unite_source_menu_menus.dispatch = {
+            \  'description': '<c-@>d',
+            \}
+
+      let g:unite_source_menu_menus.dispatch.command_candidates = [
+            \   ['▷ :Dispatch        (Dispatch)                            ,dd',
+            \     'normal ,dd'],
+            \   ['▷ :Start           (Dispatch)                            ,ds',
+            \     'normal ,ds'],
+            \   ['▷ :Focus           (Dispatch)                            ,df',
+            \     'normal ,df'],
+            \]
+
   "" commands
     " YankRing.vim
       let g:yankring_history_file = '.yankring-history'
-      let g:yankring_replace_n_pkey = ''
-      let g:yankring_replace_n_nkey = ''
 
-      map <Leader>p :YRShow<CR>
+      nmap <Leader>p :YRShow<CR>
 
     " vim-textobj-user
     " vim-textobj-rubyblock
@@ -576,15 +650,15 @@ filetype plugin indent on    " required
       map  N <Plug>(easymotion-prev)
 
       " movements
-      map <Leader>l <Plug>(easymotion-lineforward)
-      map <Leader>j <Plug>(easymotion-j)
-      map <Leader>k <Plug>(easymotion-k)
-      map <Leader>h <Plug>(easymotion-linebackward)
+      nmap <Leader>l <Plug>(easymotion-lineforward)
+      nmap <Leader>j <Plug>(easymotion-j)
+      nmap <Leader>k <Plug>(easymotion-k)
+      nmap <Leader>h <Plug>(easymotion-linebackward)
 
-      map <Leader>w <Plug>(easymotion-w)
-      map <Leader>W <Plug>(easymotion-W)
-      map <Leader>b <Plug>(easymotion-b)
-      map <Leader>B <Plug>(easymotion-B)
+      nmap <Leader>w <Plug>(easymotion-w)
+      nmap <Leader>W <Plug>(easymotion-W)
+      nmap <Leader>b <Plug>(easymotion-b)
+      nmap <Leader>B <Plug>(easymotion-B)
 
       " search movements
       map f <Plug>(easymotion-f)
@@ -600,7 +674,8 @@ filetype plugin indent on    " required
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
     " vim-commentary
+    " vimproc
 
   " others
     " tagbar
-      nmap <Leader>m :TagbarToggle<CR>
+      nmap <Leader>mb :TagbarToggle<CR>
