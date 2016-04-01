@@ -43,6 +43,8 @@ call vundle#begin()
   Plugin 'rking/ag.vim'
   " Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'tpope/vim-heroku'
 
   " commands
   Plugin 'YankRing.vim'
@@ -156,6 +158,7 @@ filetype plugin indent on    " required
     imap <c-w> <ESC><c-w>
 
   " line numbers
+    set number
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
   " no mode status below status bar
@@ -168,21 +171,15 @@ filetype plugin indent on    " required
     nmap <silent> ;; <Leader>:k<CR>
 
   " integrations with clipboard
-    nmap <silent> <Leader>vpm :exec &paste==1? "set nopaste" : "set paste"<CR>
-    nmap <Leader><c-c> :.w !pbcopy<CR><CR>
-    vmap <Leader><c-c> :w !pbcopy<CR><CR>
-    nmap <Leader><c-v> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-    imap <Leader><c-v> <ESC>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    nmap <silent> <Leader>vpm :exec set paste!<CR>
+    vmap <c-c> :w !pbcopy<CR><CR>
+    imap <c-v> <ESC>k:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
   " trailing whitespaces removing
     autocmd BufWritePre * :StripWhitespace
 
   " go to last opened file
     nmap <Leader>< <c-^>
-
-  " vim config options
-    nmap <Leader>vr :so $MYVIMRC<CR>
-    nmap <Leader>ve :vsplit $MYVIMRC<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
@@ -381,10 +378,14 @@ filetype plugin indent on    " required
             \}
 
       let g:unite_source_menu_menus.shortcuts.command_candidates = [
-            \   ['▷ Reload .vimrc    (Shortcut)                            ,vr',
-            \     'normal ,vr'],
-            \   ['▷ Edit .vimrc      (Shortcut)                            ,ve',
-            \     'normal ,ve'],
+            \   ['▷ Reload .vimrc    (Shortcut)                               ',
+            \     'so $MYVIMRC'],
+            \   ['▷ Edit .vimrc      (Shortcut)                               ',
+            \     'vsplit $MYVIMRC'],
+            \   ['▷ Edit .zshrc      (Shortcut)                               ',
+            \     'vsplit ~/.zshrc'],
+            \   ['▷ Edit .gitconfig  (Shortcut)                               ',
+            \     'vsplit ~/.gitconfig'],
             \ ]
 
       nmap <c-@><c-@> :Unite -ignorecase source<CR>
@@ -632,6 +633,15 @@ filetype plugin indent on    " required
             \     'normal ,df'],
             \]
 
+    " vim-gitgutter
+      nmap ]h <Plug>GitGutterNextHunk
+      nmap [h <Plug>GitGutterPrevHunk
+
+    " vim-heroku
+      " Install this tools and read the readme
+      " heroku plugins:install https://github.com/tpope/heroku-remote.git
+      " heroku plugins:install https://github.com/tpope/heroku-binstubs.git
+
   "" commands
     " YankRing.vim
       let g:yankring_history_file = '.yankring-history'
@@ -649,16 +659,17 @@ filetype plugin indent on    " required
       map  n <Plug>(easymotion-next)
       map  N <Plug>(easymotion-prev)
 
-      " movements
-      nmap <Leader>l <Plug>(easymotion-lineforward)
-      nmap <Leader>j <Plug>(easymotion-j)
-      nmap <Leader>k <Plug>(easymotion-k)
-      nmap <Leader>h <Plug>(easymotion-linebackward)
+      " Too many conflicts
+      " " movements
+      " nmap <c-l> <Plug>(easymotion-lineforward)
+      " nmap <c-j> <Plug>(easymotion-j)
+      " nmap <c-k> <Plug>(easymotion-k)
+      " nmap <c-h> <Plug>(easymotion-linebackward)
 
-      nmap <Leader>w <Plug>(easymotion-w)
-      nmap <Leader>W <Plug>(easymotion-W)
-      nmap <Leader>b <Plug>(easymotion-b)
-      nmap <Leader>B <Plug>(easymotion-B)
+      " nmap <c-w> <Plug>(easymotion-w)
+      " nmap <c-s-w> <Plug>(easymotion-W)
+      " nmap <c-b> <Plug>(easymotion-b)
+      " nmap <c-s-b> <Plug>(easymotion-B)
 
       " search movements
       map f <Plug>(easymotion-f)

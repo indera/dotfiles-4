@@ -123,3 +123,5 @@ alias zz='fasd_cd -d -i' # interactive directory jump
 # Android SDK for rubymotion
 export RUBYMOTION_ANDROID_SDK=/Users/kelvinst/.rubymotion-android/sdk
 export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
+
+export PATH="./bin:$PATH"
