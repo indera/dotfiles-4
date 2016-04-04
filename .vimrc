@@ -450,18 +450,12 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("shortcuts", "Shortcuts", "<c-@>s", {
             \   'reload_vimrc': {
             \     'description': 'Reload .vimrc',
-            \     'keymap': {
-            \       'keys': ',vr',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',vr', 'with_cr': 1},
             \     'command': 'so $MYVIMRC',
             \   },
             \   'edit_vimrc': {
             \     'description': 'Edit .vimrc',
-            \     'keymap': {
-            \       'keys': ',ve',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',ve', 'with_cr': 0},
             \     'command': 'vsplit $MYVIMRC',
             \   },
             \   'edit_zshrc': {
@@ -495,26 +489,17 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("rails", "Rails", "<c-@>r", {
             \   'utilities': {
             \     'description': 'Utilities',
-            \     'keymap': {
-            \       'keys': ',ru',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',ru', 'with_cr': 1},
             \     'command': 'Unite -silent -ignorecase menu:rails_utils',
             \   },
             \   'goto': {
             \     'description': 'Go To',
-            \     'keymap': {
-            \       'keys': ',rg',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rg', 'with_cr': 1},
             \     'command': 'Unite -silent -ignorecase menu:rails_goto',
             \   },
             \   'tests': {
             \     'description': 'Tests',
-            \     'keymap': {
-            \       'keys': ',rt',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rt', 'with_cr': 1},
             \     'command': 'Unite -silent -ignorecase menu:rails_tests',
             \   },
             \ })
@@ -522,58 +507,37 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("rails_utils", "Rails Utilities", ",ru", {
             \   'preview': {
             \     'description': 'Preview',
-            \     'keymap': {
-            \       'keys': ',rup',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rup', 'with_cr': 1},
             \     'command': 'exec "Rpreview " input("path: ")',
             \   },
             \   'start_server': {
             \     'description': 'Start Server',
-            \     'keymap': {
-            \       'keys': ',rus',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rus', 'with_cr': 1},
             \     'command': 'Rserver',
             \   },
             \   'kill_server': {
             \     'description': 'Kill Server',
-            \     'keymap': {
-            \       'keys': ',ruk',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',ruk', 'with_cr': 1},
             \     'command': '! kill `cat tmp/pids/server.pid`',
             \   },
             \   'generate': {
             \     'description': 'Generate',
-            \     'keymap': {
-            \       'keys': ',rug',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rug', 'with_cr': 0},
             \     'command': 'Rgenerate',
             \   },
             \   'destroy': {
             \     'description': 'Destroy',
-            \     'keymap': {
-            \       'keys': ',rud',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rud', 'with_cr': 0},
             \     'command': 'Rdestroy',
             \   },
             \   'rake': {
             \     'description': 'Rake',
-            \     'keymap': {
-            \       'keys': ',rur',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rur', 'with_cr': 0},
             \     'command': 'Rake',
             \   },
             \   'extract': {
             \     'description': 'Extract',
-            \     'keymap': {
-            \       'keys': ',rux',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rux', 'with_cr': 0},
             \     'command': 'Rextract',
             \   },
             \ })
@@ -581,162 +545,102 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("rails_goto", "Rails Go To", ",rg", {
             \   'alternate': {
             \     'description': 'Alternate',
-            \     'keymap': {
-            \       'keys': ',rga',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rga', 'with_cr': 1},
             \     'command': 'A'
             \   },
             \   'relative': {
             \     'description': 'Relative',
-            \     'keymap': {
-            \       'keys': ',rgr',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rgr', 'with_cr': 1},
             \     'command': 'R'
             \   },
             \   'controller': {
             \     'description': 'Controller',
-            \     'keymap': {
-            \       'keys': ',rgc',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgc', 'with_cr': 0},
             \     'command': 'Econtroller'
             \   },
             \   'environment': {
             \     'description': 'Environment',
-            \     'keymap': {
-            \       'keys': ',rge',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rge', 'with_cr': 0},
             \     'command': 'Eenvironment'
             \   },
             \   'factories': {
             \     'description': 'Factories',
-            \     'keymap': {
-            \       'keys': ',rgf',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgf', 'with_cr': 0},
             \     'command': 'Efixtures'
             \   },
             \   'helper': {
             \     'description': 'Helper',
-            \     'keymap': {
-            \       'keys': ',rgh',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgh', 'with_cr': 0},
             \     'command': 'Ehelper'
             \   },
             \   'initializer': {
             \     'description': 'Initializer',
-            \     'keymap': {
-            \       'keys': ',rgi',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgi', 'with_cr': 0},
             \     'command': 'Einitializer'
             \   },
             \   'javascript': {
             \     'description': 'Javascript',
-            \     'keymap': {
-            \       'keys': ',rgj',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgj', 'with_cr': 0},
             \     'command': 'Ejavascript'
             \   },
             \   'layout': {
             \     'description': 'Layout',
-            \     'keymap': {
-            \       'keys': ',rglt',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rglt', 'with_cr': 0},
             \     'command': 'Elayout'
             \   },
             \   'locale': {
             \     'description': 'Locale',
-            \     'keymap': {
-            \       'keys': ',rgl',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgl', 'with_cr': 0},
             \     'command': 'Elocale'
             \   },
             \   'mailer': {
             \     'description': 'Mailer',
-            \     'keymap': {
-            \       'keys': ',rgml',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgml', 'with_cr': 0},
             \     'command': 'Emailer'
             \   },
             \   'model': {
             \     'description': 'Model',
-            \     'keymap': {
-            \       'keys': ',rgmo',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgmo', 'with_cr': 0},
             \     'command': 'Emodel'
             \   },
             \   'migration': {
             \     'description': 'Migration',
-            \     'keymap': {
-            \       'keys': ',rgdm',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgdm', 'with_cr': 0},
             \     'command': 'Emigration'
             \   },
             \   'schema': {
             \     'description': 'Schema',
-            \     'keymap': {
-            \       'keys': ',rgds',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgds', 'with_cr': 0},
             \     'command': 'Eschema'
             \   },
             \   'stylesheet': {
             \     'description': 'Stylesheet',
-            \     'keymap': {
-            \       'keys': ',rgs',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgs', 'with_cr': 0},
             \     'command': 'Estylesheet'
             \   },
             \   'view': {
             \     'description': 'View',
-            \     'keymap': {
-            \       'keys': ',rgvw',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgvw', 'with_cr': 0},
             \     'command': 'Eview'
             \   },
             \   'spec': {
             \     'description': 'Spec',
-            \     'keymap': {
-            \       'keys': ',rgts',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgts', 'with_cr': 0},
             \     'command': 'Efunctionaltest'
             \   },
             \   'controller_spec': {
             \     'description': 'Controller Spec',
-            \     'keymap': {
-            \       'keys': ',rgtc',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgtc', 'with_cr': 0},
             \     'command': 'Eintegrationtest'
             \   },
             \   'integration_spec': {
             \     'description': 'Integration Spec',
-            \     'keymap': {
-            \       'keys': ',rgti',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgti', 'with_cr': 0},
             \     'command': 'Espec'
             \   },
             \   'unit_spec': {
             \     'description': 'Unit Spec',
-            \     'keymap': {
-            \       'keys': ',rgtu',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',rgtu', 'with_cr': 0},
             \     'command': 'Eunittest'
             \   },
             \ })
@@ -768,111 +672,70 @@ filetype plugin indent on    " required
 
   "" integrations
     " vim-fugitive
-      nmap <c-@>g :Unite -silent -ignorecase menu:git<CR>
-
       call s:Define_unite_menu("git", "Git", "<c-@>g", {
             \   'git_status': {
             \     'description': 'git status',
-            \     'keymap': {
-            \       'keys': ',gs',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gs', 'with_cr': 1},
             \     'command': 'Gstatus'
             \   },
             \   'git_diff': {
             \     'description': 'git diff',
-            \     'keymap': {
-            \       'keys': ',gd',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',gd', 'with_cr': 0},
             \     'command': 'Gdiff'
             \   },
             \   'git_commit': {
             \     'description': 'git commit',
-            \     'keymap': {
-            \       'keys': ',gc',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gc', 'with_cr': 1},
             \     'command': 'Gcommit'
             \   },
             \   'git_log': {
             \     'description': 'git log',
-            \     'keymap': {
-            \       'keys': ',gl',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gl', 'with_cr': 1},
             \     'command': 'exe "silent Glog \| Unite qf"'
             \   },
             \   'git_blame': {
             \     'description': 'git blame',
-            \     'keymap': {
-            \       'keys': ',gb',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gb', 'with_cr': 1},
             \     'command': 'Gblame'
             \   },
             \   'git_stage': {
             \     'description': 'git stage',
-            \     'keymap': {
-            \       'keys': ',ga',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',ga', 'with_cr': 0},
             \     'command': 'Gwrite'
             \   },
             \   'git_checkout': {
             \     'description': 'git checkout',
-            \     'keymap': {
-            \       'keys': ',go',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',go', 'with_cr': 0},
             \     'command': 'Gread'
             \   },
             \   'git_rm': {
             \     'description': 'git rm',
-            \     'keymap': {
-            \       'keys': ',gr',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',gr', 'with_cr': 0},
             \     'command': 'Gremove'
             \   },
             \   'git_mv': {
             \     'description': 'git mv',
-            \     'keymap': {
-            \       'keys': ',gm',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gm', 'with_cr': 1},
             \     'command': 'exe "Gmove " input("to: ")'
             \   },
             \   'git_push': {
             \     'description': 'git push',
-            \     'keymap': {
-            \       'keys': ',gp',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',gp', 'with_cr': 0},
             \     'command': 'Gpush'
             \   },
             \   'git_pull': {
             \     'description': 'git pull',
-            \     'keymap': {
-            \       'keys': ',gP',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',gP', 'with_cr': 0},
             \     'command': 'Gpull'
             \   },
             \   'git_ssh': {
             \     'description': 'git ssh',
-            \     'keymap': {
-            \       'keys': ',gg',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gg', 'with_cr': 1},
             \     'command': 'Start gitsh'
             \   },
             \   'github_window': {
             \     'description':  'github window',
-            \     'keymap': {
-            \       'keys': ',gw',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',gw', 'with_cr': 1},
             \     'command': 'Start github'
             \   },
             \ })
@@ -887,26 +750,17 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("rails_tests", "Rails Tests", ",rt", {
             \   'run_current_spec': {
             \     'description': 'Run Current Spec',
-            \     'keymap': {
-            \       'keys': ',rtt',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rtt', 'with_cr': 1},
             \     'command': 'Dispatch rspec %'
             \   },
             \   'run_current_line_spec': {
             \     'description': 'Run Current Line Spec',
-            \     'keymap': {
-            \       'keys': ',rtl',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rtl', 'with_cr': 1},
             \     'command': "exe \"Dispatch rspec %:\".line('.').\" -fd\""
             \   },
             \   'run_all_specs': {
             \     'description': 'Run Current Line Spec',
-            \     'keymap': {
-            \       'keys': ',rtl',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',rtl', 'with_cr': 1},
             \     'command': 'Start rspec'
             \   },
             \ })
@@ -915,42 +769,27 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("dispatch", "Dispatch", "<c-@>d", {
             \   'dispatch': {
             \     'description': 'Dispatch',
-            \     'keymap': {
-            \       'keys': ',dd',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',dd', 'with_cr': 0},
             \     'command': 'Dispatch'
             \   },
             \   'focus': {
             \     'description': 'Focus',
-            \     'keymap': {
-            \       'keys': ',df',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',df', 'with_cr': 0},
             \     'command': 'Focus'
             \   },
             \   'make': {
             \     'description': 'Make',
-            \     'keymap': {
-            \       'keys': ',dm',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',dm', 'with_cr': 0},
             \     'command': 'Make'
             \   },
             \   'start': {
             \     'description': 'Start',
-            \     'keymap': {
-            \       'keys': ',ds',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',ds', 'with_cr': 0},
             \     'command': 'Start'
             \   },
             \   'copen': {
             \     'description': 'Copen',
-            \     'keymap': {
-            \       'keys': ',dc',
-            \       'with_cr': 0
-            \     },
+            \     'keymap': {'keys': ',dc', 'with_cr': 0},
             \     'command': 'Copen'
             \   },
             \ })
@@ -966,26 +805,17 @@ filetype plugin indent on    " required
       call s:Define_unite_menu("heroku", "Heroku", "<c-@>h", {
             \   'console': {
             \     'description': 'Console',
-            \     'keymap': {
-            \       'keys': ',hc',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',hc', 'with_cr': 1},
             \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rails c"'
             \   },
             \   'logs': {
             \     'description': 'Logs',
-            \     'keymap': {
-            \       'keys': ',hl',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',hl', 'with_cr': 1},
             \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." logs --tail"'
             \   },
             \   'migrate': {
             \     'description': 'Logs',
-            \     'keymap': {
-            \       'keys': ',hm',
-            \       'with_cr': 1
-            \     },
+            \     'keymap': {'keys': ',hm', 'with_cr': 1},
             \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rake db:migrate"'
             \   },
             \ })
