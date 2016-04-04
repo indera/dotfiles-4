@@ -44,7 +44,7 @@ call vundle#begin()
   " Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
-  Plugin 'tpope/vim-heroku'
+  " Plugin 'tpope/vim-heroku'
 
   " commands
   Plugin 'YankRing.vim'
@@ -374,30 +374,110 @@ filetype plugin indent on    " required
       "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
     " vim-unite
-      let g:unite_source_menu_menus = {}
-      let g:unite_source_menu_menus.shortcuts = {
-            \  'description': '<c-@>s',
-            \}
+      let g:unite_source_menu_menus = {
+            \   'menus': {
+            \     'description': '▷ This menu                                                               <c-@>,'
+            \   }
+            \ }
 
-      let g:unite_source_menu_menus.shortcuts.command_candidates = [
-            \   ['▷ Reload .vimrc    (Shortcut)                               ',
-            \     'so $MYVIMRC'],
-            \   ['▷ Edit .vimrc      (Shortcut)                               ',
-            \     'vsplit $MYVIMRC'],
-            \   ['▷ Edit .zshrc      (Shortcut)                               ',
-            \     'vsplit ~/.zshrc'],
-            \   ['▷ Edit .gitconfig  (Shortcut)                               ',
-            \     'vsplit ~/.gitconfig'],
-            \ ]
+      nmap <c-@><Leader> :Unite -silent -ignorecase menu:menus<CR>
+
+      function! s:Redefine_unite_menu_menus() abort
+        let g:unite_source_menu_menus.menus.candidates = g:unite_source_menu_menus
+
+        function! g:unite_source_menu_menus.menus.map(key, value)
+          return {
+                \   'word': a:value['description'],
+                \   'kind': 'command',
+                \   'action__command': 'Unite -silent -ignorecase menu:'.a:key
+                \ }
+        endfunction
+      endfunction
+
+      function! s:Define_unite_menu(name, description, keymap, candidates) abort
+        function! Map_candidates(key, value) abort
+          let keys = ''
+          if has_key(a:value, 'keymap')
+            let keys = a:value['keymap']['keys']
+          endif
+
+          let item_description = printf('▷ %-40s %37s', a:value['description'],
+                \ keys)
+
+          return {
+                \   'word': item_description,
+                \   'kind': 'command',
+                \   'action__command': a:value['command']
+                \ }
+        endfunction
+
+        function! Define_keymappings(name, keymap, candidates) abort
+          exec 'nmap '.a:keymap.' :Unite -silent -ignorecase menu:'.a:name.'<CR>'
+
+          for key in keys(a:candidates)
+            let candidate = a:candidates[key]
+
+            if has_key(candidate, 'keymap')
+              let cmd = candidate['command']
+              let keymap = candidate['keymap']
+              let keys = keymap['keys']
+
+              let keymap_cmd = 'nmap '.keys.' :'.cmd
+              if has_key(keymap, 'with_cr') && keymap['with_cr'] == 1
+                let keymap_cmd = keymap_cmd.'<CR>'
+              endif
+              exec keymap_cmd
+            endif
+          endfor
+        endfunction
+
+        let menu_description = printf('▷ %-40s %37s', a:description, a:keymap)
+        let g:unite_source_menu_menus = extend(g:unite_source_menu_menus, {
+              \   a:name : {
+              \     'description': menu_description,
+              \     'candidates': a:candidates,
+              \     'map': function("Map_candidates"),
+              \   }
+              \ })
+
+        " This will recalculate the menus menu every new menu added
+        call s:Redefine_unite_menu_menus()
+
+        call Define_keymappings(a:name, a:keymap, a:candidates)
+        return 1
+      endfunction
+
+      call s:Define_unite_menu("shortcuts", "Shortcuts", "<c-@>s", {
+            \   'reload_vimrc': {
+            \     'description': 'Reload .vimrc',
+            \     'keymap': {
+            \       'keys': ',vr',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'so $MYVIMRC',
+            \   },
+            \   'edit_vimrc': {
+            \     'description': 'Edit .vimrc',
+            \     'keymap': {
+            \       'keys': ',ve',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'vsplit $MYVIMRC',
+            \   },
+            \   'edit_zshrc': {
+            \     'description': 'Edit .zshrc',
+            \     'command': 'vsplit ~/.zshrc',
+            \   },
+            \   'edit_gitconfig': {
+            \     'description': 'Edit .gitconfig',
+            \     'command': 'vsplit ~/.gitconfig',
+            \   },
+            \ })
 
       nmap <c-@><c-@> :Unite -ignorecase source<CR>
       nmap <c-@>b :Unite -ignorecase buffer<CR>
       nmap <c-@>: :Unite -ignorecase command<CR>
-      nmap <c-@><Leader> :Unite -ignorecase menu<CR>
-
       nmap <c-@>t :Unite -ignorecase tab<CR>
-
-      nmap <c-@>s :Unite -silent -ignorecase menu:shortcuts<CR>
 
     " unite-qf
     " ShowMarks
@@ -410,117 +490,256 @@ filetype plugin indent on    " required
     " vim-coffee-script
     " vim-rails
       " extract this to a vim plugin that depends of rails-vim
-      nmap <Leader>rg :Emodel
-      nmap <Leader>rga :A<CR>
-      nmap <Leader>rgr :R<CR>
-      nmap <Leader>rgc :Econtroller
-      nmap <Leader>rge :Eenvironment
-      nmap <Leader>rgf :Efixtures
-      nmap <Leader>rgh :Ehelper
-      nmap <Leader>rgi :Einitializer
-      nmap <Leader>rgj :Ejavascript
-      nmap <Leader>rgl :Elocale
-      nmap <Leader>rgm :Emodel
-      nmap <Leader>rgml :Emailer
-      nmap <Leader>rgmo :Emodel
-      nmap <Leader>rgs :Estylesheet
-      nmap <Leader>rgv :Eview
-      nmap <Leader>rgvy :Elayout
-      nmap <Leader>rgvw :Eview
-      nmap <Leader>rgd :Eschema
-      nmap <Leader>rgdm :Emigration
-      nmap <Leader>rgds :Eschema
-      nmap <Leader>rgtc :Efunctionaltest
-      nmap <Leader>rgti :Eintegrationtest
-      nmap <Leader>rgts :Espec
-      nmap <Leader>rgtu :Eunittest
-
-      nmap <Leader>ru :R
-      nmap <Leader>rup :exec "Rpreview " input("path: ")<CR>
-      nmap <Leader>rus :Rserver<CR>
-      nmap <Leader>ruk :! kill `cat tmp/pids/server.pid`<CR>
-      nmap <Leader>rug :Rgenerate
-      nmap <Leader>rud :Rdestroy
-
-      nmap <Leader>rur :Rake
-      vmap <Leader>rur :Rake
-      nmap <Leader>rux :Rextract
-      vmap <Leader>rux :Rextract
-
       nmap <c-@>r :Unite -silent -ignorecase menu:rails<CR>
 
-      let g:unite_source_menu_menus.rails = {
-            \  'description': '<c-@>r',
-            \}
+      call s:Define_unite_menu("rails", "Rails", "<c-@>r", {
+            \   'utilities': {
+            \     'description': 'Utilities',
+            \     'keymap': {
+            \       'keys': ',ru',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Unite -silent -ignorecase menu:rails_utils',
+            \   },
+            \   'goto': {
+            \     'description': 'Go To',
+            \     'keymap': {
+            \       'keys': ',rg',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Unite -silent -ignorecase menu:rails_goto',
+            \   },
+            \   'tests': {
+            \     'description': 'Tests',
+            \     'keymap': {
+            \       'keys': ',rt',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Unite -silent -ignorecase menu:rails_tests',
+            \   },
+            \ })
 
-      let g:unite_source_menu_menus.rails.command_candidates = [
-            \   ['▷ Preview          (Rails)                              ,rup',
-            \     'normal ,rup'],
-            \   ['▷ Start Server     (Rails)                              ,rus',
-            \     'normal ,rus'],
-            \   ['▷ Kill Server      (Rails)                              ,ruk',
-            \     'normal ,ruk'],
-            \   ['▷ Generate         (Rails)                              ,rug',
-            \     'normal ,rug'],
-            \   ['▷ Destroy          (Rails)                              ,rud',
-            \     'normal ,rud'],
-            \   ['▷ Rake             (Rails)                              ,rur',
-            \     'normal ,rur'],
-            \   ['▷ Extract          (Rails)                              ,rux',
-            \     'normal ,rux'],
-            \   ['============================================================',
-            \     ''],
-            \   ['▷ Run Current Spec (Rails)                              ,rtt',
-            \     'normal ,rtt'],
-            \   ['▷ Run Line Spec    (Rails)                              ,rtl',
-            \     'normal ,rtl'],
-            \   ['▷ Run All Specs    (Rails)                              ,rta',
-            \     'normal ,rta'],
-            \   ['============================================================',
-            \     ''],
-            \   ['▷ Alternate        (Rails)                              ,rga',
-            \     'normal ,rga'],
-            \   ['▷ Relative         (Rails)                              ,rgr',
-            \     'normal ,rgr'],
-            \   ['▷ Controller       (Rails)                              ,rgc',
-            \     'normal ,rgc'],
-            \   ['▷ Environment      (Rails)                              ,rge',
-            \     'normal ,rge'],
-            \   ['▷ Factories        (Rails)                              ,rgf',
-            \     'normal ,rgf'],
-            \   ['▷ Helper           (Rails)                              ,rgh',
-            \     'normal ,rgh'],
-            \   ['▷ Initializer      (Rails)                              ,rgi',
-            \     'normal ,rgi'],
-            \   ['▷ Javascript       (Rails)                              ,rgj',
-            \     'normal ,rgj'],
-            \   ['▷ Layout           (Rails)                             ,rglt',
-            \     'normal ,rglt'],
-            \   ['▷ Locale           (Rails)                              ,rgl',
-            \     'normal ,rgl'],
-            \   ['▷ Mailer           (Rails)                             ,rgml',
-            \     'normal ,rgml'],
-            \   ['▷ Model            (Rails)                    ,rg ,rgm ,rgmo',
-            \     'normal ,rgmo'],
-            \   ['▷ Migration        (Rails)                             ,rgdm',
-            \     'normal ,rgdm'],
-            \   ['▷ Schema           (Rails)                        ,rgd ,rgds',
-            \     'normal ,rgds'],
-            \   ['▷ Stylesheet       (Rails)                              ,rgs',
-            \     'normal ,rgs'],
-            \   ['▷ View             (Rails)                        ,rgv ,rgvw',
-            \     'normal ,rgvw'],
-            \   ['============================================================',
-            \     ''],
-            \   ['▷ Spec             (Rails)                             ,rgts',
-            \     'normal ,rgts'],
-            \   ['▷ Controller Spec  (Rails)                             ,rgtc',
-            \     'normal ,rgtc'],
-            \   ['▷ Integration Spec (Rails)                             ,rgti',
-            \     'normal ,rgti'],
-            \   ['▷ Unit Spec        (Rails)                             ,rgtu',
-            \     'normal ,rgtu'],
-            \]
+      call s:Define_unite_menu("rails_utils", "Rails Utilities", ",ru", {
+            \   'preview': {
+            \     'description': 'Preview',
+            \     'keymap': {
+            \       'keys': ',rup',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exec "Rpreview " input("path: ")',
+            \   },
+            \   'start_server': {
+            \     'description': 'Start Server',
+            \     'keymap': {
+            \       'keys': ',rus',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Rserver',
+            \   },
+            \   'kill_server': {
+            \     'description': 'Kill Server',
+            \     'keymap': {
+            \       'keys': ',ruk',
+            \       'with_cr': 1
+            \     },
+            \     'command': '! kill `cat tmp/pids/server.pid`',
+            \   },
+            \   'generate': {
+            \     'description': 'Generate',
+            \     'keymap': {
+            \       'keys': ',rug',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Rgenerate',
+            \   },
+            \   'destroy': {
+            \     'description': 'Destroy',
+            \     'keymap': {
+            \       'keys': ',rud',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Rdestroy',
+            \   },
+            \   'rake': {
+            \     'description': 'Rake',
+            \     'keymap': {
+            \       'keys': ',rur',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Rake',
+            \   },
+            \   'extract': {
+            \     'description': 'Extract',
+            \     'keymap': {
+            \       'keys': ',rux',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Rextract',
+            \   },
+            \ })
+
+      call s:Define_unite_menu("rails_goto", "Rails Go To", ",rg", {
+            \   'alternate': {
+            \     'description': 'Alternate',
+            \     'keymap': {
+            \       'keys': ',rga',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'A'
+            \   },
+            \   'relative': {
+            \     'description': 'Relative',
+            \     'keymap': {
+            \       'keys': ',rgr',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'R'
+            \   },
+            \   'controller': {
+            \     'description': 'Controller',
+            \     'keymap': {
+            \       'keys': ',rgc',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Econtroller'
+            \   },
+            \   'environment': {
+            \     'description': 'Environment',
+            \     'keymap': {
+            \       'keys': ',rge',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Eenvironment'
+            \   },
+            \   'factories': {
+            \     'description': 'Factories',
+            \     'keymap': {
+            \       'keys': ',rgf',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Efixtures'
+            \   },
+            \   'helper': {
+            \     'description': 'Helper',
+            \     'keymap': {
+            \       'keys': ',rgh',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Ehelper'
+            \   },
+            \   'initializer': {
+            \     'description': 'Initializer',
+            \     'keymap': {
+            \       'keys': ',rgi',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Einitializer'
+            \   },
+            \   'javascript': {
+            \     'description': 'Javascript',
+            \     'keymap': {
+            \       'keys': ',rgj',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Ejavascript'
+            \   },
+            \   'layout': {
+            \     'description': 'Layout',
+            \     'keymap': {
+            \       'keys': ',rglt',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Elayout'
+            \   },
+            \   'locale': {
+            \     'description': 'Locale',
+            \     'keymap': {
+            \       'keys': ',rgl',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Elocale'
+            \   },
+            \   'mailer': {
+            \     'description': 'Mailer',
+            \     'keymap': {
+            \       'keys': ',rgml',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Emailer'
+            \   },
+            \   'model': {
+            \     'description': 'Model',
+            \     'keymap': {
+            \       'keys': ',rgmo',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Emodel'
+            \   },
+            \   'migration': {
+            \     'description': 'Migration',
+            \     'keymap': {
+            \       'keys': ',rgdm',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Emigration'
+            \   },
+            \   'schema': {
+            \     'description': 'Schema',
+            \     'keymap': {
+            \       'keys': ',rgds',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Eschema'
+            \   },
+            \   'stylesheet': {
+            \     'description': 'Stylesheet',
+            \     'keymap': {
+            \       'keys': ',rgs',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Estylesheet'
+            \   },
+            \   'view': {
+            \     'description': 'View',
+            \     'keymap': {
+            \       'keys': ',rgvw',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Eview'
+            \   },
+            \   'spec': {
+            \     'description': 'Spec',
+            \     'keymap': {
+            \       'keys': ',rgts',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Efunctionaltest'
+            \   },
+            \   'controller_spec': {
+            \     'description': 'Controller Spec',
+            \     'keymap': {
+            \       'keys': ',rgtc',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Eintegrationtest'
+            \   },
+            \   'integration_spec': {
+            \     'description': 'Integration Spec',
+            \     'keymap': {
+            \       'keys': ',rgti',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Espec'
+            \   },
+            \   'unit_spec': {
+            \     'description': 'Unit Spec',
+            \     'keymap': {
+            \       'keys': ',rgtu',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Eunittest'
+            \   },
+            \ })
 
     " vim-ruby
     " emmet-vim
@@ -549,57 +768,114 @@ filetype plugin indent on    " required
 
   "" integrations
     " vim-fugitive
-      nmap <Leader>gs :Gstatus<CR>
-      nmap <Leader>gd :Gdiff
-      nmap <Leader>gc :Gcommit<CR>
-      nmap <Leader>gl :exe "silent Glog \| Unite qf"<CR>
-      nmap <Leader>gb :Gblame<CR>
-      vmap <Leader>gb :Gblame<CR>
-      nmap <Leader>ga :Gwrite
-      nmap <Leader>go :Gread
-      nmap <Leader>gr :Gremove
-      nmap <Leader>gm :exe "Gmove " input("to: ")<CR>
-      nmap <Leader>gp :Gpush
-      nmap <Leader>gP :Gpull
-      nmap <Leader>gg :Start gitsh<CR>
-      nmap <Leader>gw :Start github<CR>
-
       nmap <c-@>g :Unite -silent -ignorecase menu:git<CR>
 
-      let g:unite_source_menu_menus.git = {
-            \  'description': '<c-@>g',
-            \}
-
-      let g:unite_source_menu_menus.git.command_candidates = [
-            \   ['▷ git status       (Fugitive)                            ,gs',
-            \     'normal ,gs'],
-            \   ['▷ git diff         (Fugitive)                            ,gd',
-            \     'normal ,gd'],
-            \   ['▷ git commit       (Fugitive)                            ,gc',
-            \     'normal ,gc'],
-            \   ['▷ git log          (Fugitive)                            ,gl',
-            \     'normal ,gl'],
-            \   ['▷ git blame        (Fugitive)                            ,gb',
-            \     'normal ,gb'],
-            \   ['▷ git stage        (Fugitive)                            ,ga',
-            \     'normal ,ga'],
-            \   ['▷ git checkout     (Fugitive)                            ,go',
-            \     'normal ,go'],
-            \   ['▷ git rm           (Fugitive)                            ,gr',
-            \     'normal ,gr'],
-            \   ['▷ git mv           (Fugitive)                            ,gm',
-            \     'normal ,gm'],
-            \   ['▷ git push         (Fugitive)                            ,gp',
-            \     'normal ,gp'],
-            \   ['▷ git pull         (Fugitive)                            ,gP',
-            \     'normal ,gP'],
-            \   ['▷ git ssh          (Fugitive)                            ,gg',
-            \     'normal ,gg'],
-            \   ['▷ github window    (Fugitive)                            ,gw',
-            \     'normal ,gw'],
-            \   ['▷ git cd           (Fugitive)',
-            \     'Gcd'],
-            \]
+      call s:Define_unite_menu("git", "Git", "<c-@>g", {
+            \   'git_status': {
+            \     'description': 'git status',
+            \     'keymap': {
+            \       'keys': ',gs',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Gstatus'
+            \   },
+            \   'git_diff': {
+            \     'description': 'git diff',
+            \     'keymap': {
+            \       'keys': ',gd',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gdiff'
+            \   },
+            \   'git_commit': {
+            \     'description': 'git commit',
+            \     'keymap': {
+            \       'keys': ',gc',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Gcommit'
+            \   },
+            \   'git_log': {
+            \     'description': 'git log',
+            \     'keymap': {
+            \       'keys': ',gl',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exe "silent Glog \| Unite qf"'
+            \   },
+            \   'git_blame': {
+            \     'description': 'git blame',
+            \     'keymap': {
+            \       'keys': ',gb',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Gblame'
+            \   },
+            \   'git_stage': {
+            \     'description': 'git stage',
+            \     'keymap': {
+            \       'keys': ',ga',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gwrite'
+            \   },
+            \   'git_checkout': {
+            \     'description': 'git checkout',
+            \     'keymap': {
+            \       'keys': ',go',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gread'
+            \   },
+            \   'git_rm': {
+            \     'description': 'git rm',
+            \     'keymap': {
+            \       'keys': ',gr',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gremove'
+            \   },
+            \   'git_mv': {
+            \     'description': 'git mv',
+            \     'keymap': {
+            \       'keys': ',gm',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exe "Gmove " input("to: ")'
+            \   },
+            \   'git_push': {
+            \     'description': 'git push',
+            \     'keymap': {
+            \       'keys': ',gp',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gpush'
+            \   },
+            \   'git_pull': {
+            \     'description': 'git pull',
+            \     'keymap': {
+            \       'keys': ',gP',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Gpull'
+            \   },
+            \   'git_ssh': {
+            \     'description': 'git ssh',
+            \     'keymap': {
+            \       'keys': ',gg',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Start gitsh'
+            \   },
+            \   'github_window': {
+            \     'description':  'github window',
+            \     'keymap': {
+            \       'keys': ',gw',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Start github'
+            \   },
+            \ })
 
     " dash.vim
     " ag.vim
@@ -608,32 +884,76 @@ filetype plugin indent on    " required
       " nmap <Leader>rtn :call RunNearestSpec()<CR>
       " nmap <Leader>rtl :call RunLastSpec()<CR>
       " nmap <Leader>rta :call RunAllSpecs()<CR>
+      call s:Define_unite_menu("rails_tests", "Rails Tests", ",rt", {
+            \   'run_current_spec': {
+            \     'description': 'Run Current Spec',
+            \     'keymap': {
+            \       'keys': ',rtt',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Dispatch rspec %'
+            \   },
+            \   'run_current_line_spec': {
+            \     'description': 'Run Current Line Spec',
+            \     'keymap': {
+            \       'keys': ',rtl',
+            \       'with_cr': 1
+            \     },
+            \     'command': "exe \"Dispatch rspec %:\".line('.').\" -fd\""
+            \   },
+            \   'run_all_specs': {
+            \     'description': 'Run Current Line Spec',
+            \     'keymap': {
+            \       'keys': ',rtl',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'Start rspec'
+            \   },
+            \ })
 
     " vim-dispatch
-      nmap <Leader>dd :Dispatch
-      nmap <Leader>df :Focus
-      nmap <Leader>dm :Make
-      nmap <Leader>ds :Start
-      nmap <Leader>dc :Copen
-
-      nmap <Leader>rtt :Start rspec %<CR>
-      nmap <Leader>rtl :exe "Start rspec %:".line('.')<CR>
-      nmap <Leader>rta :Start rspec<CR>
-
-      nmap <c-@>d :Unite -silent -ignorecase menu:dispatch<CR>
-
-      let g:unite_source_menu_menus.dispatch = {
-            \  'description': '<c-@>d',
-            \}
-
-      let g:unite_source_menu_menus.dispatch.command_candidates = [
-            \   ['▷ :Dispatch        (Dispatch)                            ,dd',
-            \     'normal ,dd'],
-            \   ['▷ :Start           (Dispatch)                            ,ds',
-            \     'normal ,ds'],
-            \   ['▷ :Focus           (Dispatch)                            ,df',
-            \     'normal ,df'],
-            \]
+      call s:Define_unite_menu("dispatch", "Dispatch", "<c-@>d", {
+            \   'dispatch': {
+            \     'description': 'Dispatch',
+            \     'keymap': {
+            \       'keys': ',dd',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Dispatch'
+            \   },
+            \   'focus': {
+            \     'description': 'Focus',
+            \     'keymap': {
+            \       'keys': ',df',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Focus'
+            \   },
+            \   'make': {
+            \     'description': 'Make',
+            \     'keymap': {
+            \       'keys': ',dm',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Make'
+            \   },
+            \   'start': {
+            \     'description': 'Start',
+            \     'keymap': {
+            \       'keys': ',ds',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Start'
+            \   },
+            \   'copen': {
+            \     'description': 'Copen',
+            \     'keymap': {
+            \       'keys': ',dc',
+            \       'with_cr': 0
+            \     },
+            \     'command': 'Copen'
+            \   },
+            \ })
 
     " vim-gitgutter
       nmap ]h <Plug>GitGutterNextHunk
@@ -643,6 +963,36 @@ filetype plugin indent on    " required
       " Install this tools and read the readme
       " heroku plugins:install https://github.com/tpope/heroku-remote.git
       " heroku plugins:install https://github.com/tpope/heroku-binstubs.git
+      call s:Define_unite_menu("heroku", "Heroku", "<c-@>h", {
+            \   'console': {
+            \     'description': 'Console',
+            \     'keymap': {
+            \       'keys': ',hc',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rails c"'
+            \   },
+            \   'logs': {
+            \     'description': 'Logs',
+            \     'keymap': {
+            \       'keys': ',hl',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." logs --tail"'
+            \   },
+            \   'migrate': {
+            \     'description': 'Logs',
+            \     'keymap': {
+            \       'keys': ',hm',
+            \       'with_cr': 1
+            \     },
+            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rake db:migrate"'
+            \   },
+            \ })
+
+      function! s:Complete_remote(A,L,P)
+        return system("git remote")
+      endfunction!
 
   "" commands
     " YankRing.vim
