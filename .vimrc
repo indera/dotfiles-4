@@ -19,6 +19,7 @@ call vundle#begin()
   Plugin 'sgur/unite-qf'
   " remember to update this if you're changing the colorscheme
   Plugin 'kelvinst/ShowMarks'
+  Plugin 'kelvinst/unite-menus'
 
   " languages
   Plugin 'tpope/vim-surround'
@@ -372,80 +373,7 @@ filetype plugin indent on    " required
       "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
     " vim-unite
-      let g:unite_source_menu_menus = {
-            \   'menus': {
-            \     'description': '▷ This menu                                                            <Leader>m'
-            \   }
-            \ }
-
-      nmap <Leader>m :Unite -silent -ignorecase menu:menus<CR>
-
-      function! s:Redefine_unite_menu_menus() abort
-        let g:unite_source_menu_menus.menus.candidates = g:unite_source_menu_menus
-
-        function! g:unite_source_menu_menus.menus.map(key, value)
-          return {
-                \   'word': a:value['description'],
-                \   'kind': 'command',
-                \   'action__command': 'Unite -silent -ignorecase menu:'.a:key
-                \ }
-        endfunction
-      endfunction
-
-      function! s:Define_unite_menu(name, description, keymap, candidates) abort
-        function! Map_candidates(key, value) abort
-          let keys = ''
-          if has_key(a:value, 'keymap')
-            let keys = a:value['keymap']['keys']
-          endif
-
-          let item_description = printf('▷ %-40s %37s', a:value['description'],
-                \ keys)
-
-          return {
-                \   'word': item_description,
-                \   'kind': 'command',
-                \   'action__command': a:value['command']
-                \ }
-        endfunction
-
-        function! Define_keymappings(name, keymap, candidates) abort
-          exec 'nmap '.a:keymap.' :Unite -silent -ignorecase menu:'.a:name.'<CR>'
-
-          for key in keys(a:candidates)
-            let candidate = a:candidates[key]
-
-            if has_key(candidate, 'keymap')
-              let cmd = candidate['command']
-              let keymap = candidate['keymap']
-              let keys = keymap['keys']
-
-              let keymap_cmd = 'nmap '.keys.' :'.cmd
-              if has_key(keymap, 'with_cr') && keymap['with_cr'] == 1
-                let keymap_cmd = keymap_cmd.'<CR>'
-              endif
-              exec keymap_cmd
-            endif
-          endfor
-        endfunction
-
-        let menu_description = printf('▷ %-40s %37s', a:description, a:keymap)
-        let g:unite_source_menu_menus = extend(g:unite_source_menu_menus, {
-              \   a:name : {
-              \     'description': menu_description,
-              \     'candidates': a:candidates,
-              \     'map': function("Map_candidates"),
-              \   }
-              \ })
-
-        " This will recalculate the menus menu every new menu added
-        call s:Redefine_unite_menu_menus()
-
-        call Define_keymappings(a:name, a:keymap, a:candidates)
-        return 1
-      endfunction
-
-      call s:Define_unite_menu("shortcuts", "Shortcuts", "<Leader>s", {
+      call unite_menus#Define("shortcuts", "Shortcuts", "<Leader>s", {
             \   'reload_vimrc': {
             \     'description': 'Reload .vimrc',
             \     'keymap': {'keys': '<Leader>vr', 'with_cr': 1},
@@ -482,7 +410,7 @@ filetype plugin indent on    " required
     " vim-coffee-script
     " vim-rails
       " extract this to a vim plugin that depends of rails-vim
-      call s:Define_unite_menu("rails", "Rails", "<Leader>r", {
+      call unite_menus#Define("rails", "Rails", "<Leader>r", {
             \   'utilities': {
             \     'description': 'Utilities',
             \     'keymap': {'keys': '<Leader>ru', 'with_cr': 1},
@@ -500,7 +428,7 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-      call s:Define_unite_menu("rails_utils", "Rails Utilities", "<Leader>ru", {
+      call unite_menus#Define("rails_utils", "Rails Utilities", "<Leader>ru", {
             \   'preview': {
             \     'description': 'Preview',
             \     'keymap': {'keys': '<Leader>rup', 'with_cr': 1},
@@ -538,7 +466,7 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-      call s:Define_unite_menu("rails_goto", "Rails Go To", "<Leader>rg", {
+      call unite_menus#Define("rails_goto", "Rails Go To", "<Leader>rg", {
             \   'alternate': {
             \     'description': 'Alternate',
             \     'keymap': {'keys': '<Leader>rga', 'with_cr': 1},
@@ -668,7 +596,7 @@ filetype plugin indent on    " required
 
   "" integrations
     " vim-fugitive
-      call s:Define_unite_menu("git", "Git", "<Leader>g", {
+      call unite_menus#Define("git", "Git", "<Leader>g", {
             \   'git_status': {
             \     'description': 'git status',
             \     'keymap': {'keys': '<Leader>gs', 'with_cr': 1},
@@ -743,7 +671,7 @@ filetype plugin indent on    " required
       " nmap <Leader>rtn :call RunNearestSpec()<CR>
       " nmap <Leader>rtl :call RunLastSpec()<CR>
       " nmap <Leader>rta :call RunAllSpecs()<CR>
-      call s:Define_unite_menu("rails_tests", "Rails Tests", "<Leader>rt", {
+      call unite_menus#Define("rails_tests", "Rails Tests", "<Leader>rt", {
             \   'run_current_spec': {
             \     'description': 'Run Current Spec',
             \     'keymap': {'keys': '<Leader>rtt', 'with_cr': 1},
@@ -762,7 +690,7 @@ filetype plugin indent on    " required
             \ })
 
     " vim-dispatch
-      call s:Define_unite_menu("dispatch", "Dispatch", "<Leader>d", {
+      call unite_menus#Define("dispatch", "Dispatch", "<Leader>d", {
             \   'dispatch': {
             \     'description': 'Dispatch',
             \     'keymap': {'keys': '<Leader>dd', 'with_cr': 0},
@@ -798,27 +726,27 @@ filetype plugin indent on    " required
       " Install this tools and read the readme
       " heroku plugins:install https://github.com/tpope/heroku-remote.git
       " heroku plugins:install https://github.com/tpope/heroku-binstubs.git
-      call s:Define_unite_menu("heroku", "Heroku", "<Leader>h", {
+      function! Complete_remote(A,L,P)
+        return system("git remote")
+      endfunction!
+
+      call unite_menus#Define("heroku", "Heroku", "<Leader>h", {
             \   'console': {
             \     'description': 'Console',
             \     'keymap': {'keys': '<Leader>hc', 'with_cr': 1},
-            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rails c"'
+            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rails c"'
             \   },
             \   'logs': {
             \     'description': 'Logs',
             \     'keymap': {'keys': '<Leader>hl', 'with_cr': 1},
-            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." logs --tail"'
+            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." logs --tail"'
             \   },
             \   'migrate': {
             \     'description': 'Logs',
             \     'keymap': {'keys': '<Leader>hm', 'with_cr': 1},
-            \     'command': 'exe "Start ".input("env: ", "", "custom,s:Complete_remotes")." run rake db:migrate"'
+            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rake db:migrate"'
             \   },
             \ })
-
-      function! s:Complete_remote(A,L,P)
-        return system("git remote")
-      endfunction!
 
   "" commands
     " YankRing.vim
