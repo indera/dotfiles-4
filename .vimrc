@@ -726,6 +726,16 @@ filetype plugin indent on    " required
             \     'keymap': {'keys': '<Leader>gw', 'with_cr': 1},
             \     'command': 'Start github'
             \   },
+            \   'goto_prev_hunk': {
+            \     'description':  'Go To Prev Hunk',
+            \     'keymap': {'keys': '[g', 'with_cr': 1},
+            \     'command': 'GitGutterPrevHunk'
+            \   },
+            \   'goto_next_hunk': {
+            \     'description':  'Go To Next Hunk',
+            \     'keymap': {'keys': ']g', 'with_cr': 1},
+            \     'command': 'GitGutterNextHunk'
+            \   },
             \ })
 
     " dash.vim
@@ -783,8 +793,7 @@ filetype plugin indent on    " required
             \ })
 
     " vim-gitgutter
-      nmap ]h <Plug>GitGutterNextHunk
-      nmap [h <Plug>GitGutterPrevHunk
+      " see vim-fugitive
 
     " vim-heroku
       " Install this tools and read the readme
