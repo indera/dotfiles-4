@@ -401,9 +401,43 @@ filetype plugin indent on    " required
 
     " unite-qf
     " ShowMarks
-      let g:showmarks_enable=0
+      let g:showmarks_enable=1
+      let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       let g:showmarks_hlline_lower = 1
       let g:showmarks_hlline_upper = 1
+
+      call unite_menus#Define("marks", "Marks", "<Leader>m", {
+            \   'toggle': {
+            \     'description': 'Toggle Mark Bar',
+            \     'keymap': {'keys': '<Leader>mt', 'with_cr': 1},
+            \     'command': 'ShowMarksToggle',
+            \   },
+            \   'place': {
+            \     'description': 'Place Mark',
+            \     'keymap': {'keys': '<Leader>mm', 'with_cr': 1},
+            \     'command': 'ShowMarksPlaceMark',
+            \   },
+            \   'hide': {
+            \     'description': 'Hide Mark',
+            \     'keymap': {'keys': '<Leader>mh', 'with_cr': 1},
+            \     'command': 'ShowMarksClearMark',
+            \   },
+            \   'clear': {
+            \     'description': 'Clear Marks',
+            \     'keymap': {'keys': '<Leader>mc', 'with_cr': 1},
+            \     'command': 'ShowMarksClearAll',
+            \   },
+            \   'goto_previous_mark': {
+            \     'description': 'Go To Previous Mark',
+            \     'keymap': {'keys': "[m", 'with_cr': 1},
+            \     'command': "normal! ['",
+            \   },
+            \   'goto_next_mark': {
+            \     'description': 'Go To Next Mark',
+            \     'keymap': {'keys': "]m", 'with_cr': 1},
+            \     'command': "normal! ]'",
+            \   },
+            \ })
 
   "" languages
     " vim-surround
