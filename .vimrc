@@ -28,7 +28,7 @@ call vundle#begin()
   Plugin 'tpope/vim-rails'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'mattn/emmet-vim'
-  " Plugin 'mustache/vim-mustache-handlebars'
+  Plugin 'mustache/vim-mustache-handlebars'
   Plugin 'scrooloose/syntastic'
 
   " completion
@@ -178,7 +178,7 @@ filetype plugin indent on    " required
     imap <c-v> <ESC>k:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
   " trailing whitespaces removing
-    " autocmd BufWritePre * :StripWhitespace
+    autocmd BufWritePre * :StripWhitespace
 
   " go to last opened file
     nmap <Leader>< <c-^>
@@ -576,6 +576,10 @@ filetype plugin indent on    " required
       let g:syntastic_auto_loc_list = 1
       let g:syntastic_check_on_wq = 0
 
+      let g:syntastic_filetype_map = {
+            \   "html.handlebars": "handlebars"
+            \ }
+
       call unite_menus#Define("syntastic", "Syntastic", "<Leader>c", {
             \   'syntastic_info': {
             \     'description': 'Info',
@@ -596,6 +600,16 @@ filetype plugin indent on    " required
             \     'description': 'Errors',
             \     'keymap': {'keys': '<Leader>ce', 'with_cr': 1},
             \     'command': 'Errors'
+            \   },
+            \   'syntastic_prev_error': {
+            \     'description': 'Go To Prev Error',
+            \     'keymap': {'keys': '[c', 'with_cr': 1},
+            \     'command': 'lprevious'
+            \   },
+            \   'syntastic_next_error': {
+            \     'description': 'Go To Next Error',
+            \     'keymap': {'keys': ']c', 'with_cr': 1},
+            \     'command': 'lnext'
             \   },
             \ })
 
