@@ -178,7 +178,7 @@ filetype plugin indent on    " required
     imap <c-v> <ESC>k:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
   " trailing whitespaces removing
-    autocmd BufWritePre * :StripWhitespace
+    " autocmd BufWritePre * :StripWhitespace
 
   " go to last opened file
     nmap <Leader>< <c-^>
@@ -573,15 +573,31 @@ filetype plugin indent on    " required
     " emmet-vim
     " vim-mustache-handlebars
     " syntastic
-      let g:syntastic_always_populate_loc_list = 1
       let g:syntastic_auto_loc_list = 1
-      let g:syntastic_check_on_open = 1
       let g:syntastic_check_on_wq = 0
 
-      nmap <Leader>si :SyntasticInfo<CR>
-      nmap <Leader>ss :SyntasticToggleMode<CR>
-      nmap <Leader>sc :SyntasticCheck<CR>
-      nmap <Leader>se :Errors<CR>
+      call unite_menus#Define("syntastic", "Syntastic", "<Leader>c", {
+            \   'syntastic_info': {
+            \     'description': 'Info',
+            \     'keymap': {'keys': '<Leader>ci', 'with_cr': 1},
+            \     'command': 'SyntasticInfo'
+            \   },
+            \   'syntastic_toggle': {
+            \     'description': 'Toggle',
+            \     'keymap': {'keys': '<Leader>ct', 'with_cr': 1},
+            \     'command': 'SyntasticToggleMode'
+            \   },
+            \   'syntastic_check': {
+            \     'description': 'Check',
+            \     'keymap': {'keys': '<Leader>cc', 'with_cr': 1},
+            \     'command': 'SyntasticCheck'
+            \   },
+            \   'syntastic_errors': {
+            \     'description': 'Errors',
+            \     'keymap': {'keys': '<Leader>ce', 'with_cr': 1},
+            \     'command': 'Errors'
+            \   },
+            \ })
 
   "" completion
     " supertab
@@ -731,18 +747,18 @@ filetype plugin indent on    " required
       endfunction!
 
       call unite_menus#Define("heroku", "Heroku", "<Leader>h", {
-            \   'console': {
-            \     'description': 'Console',
-            \     'keymap': {'keys': '<Leader>hc', 'with_cr': 1},
-            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rails c"'
-            \   },
             \   'logs': {
             \     'description': 'Logs',
             \     'keymap': {'keys': '<Leader>hl', 'with_cr': 1},
             \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." logs --tail"'
             \   },
+            \   'console': {
+            \     'description': 'Console',
+            \     'keymap': {'keys': '<Leader>hc', 'with_cr': 1},
+            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rails c"'
+            \   },
             \   'migrate': {
-            \     'description': 'Logs',
+            \     'description': 'Migrate',
             \     'keymap': {'keys': '<Leader>hm', 'with_cr': 1},
             \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rake db:migrate"'
             \   },
