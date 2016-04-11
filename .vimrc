@@ -13,7 +13,7 @@ call vundle#begin()
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
   " Plugin 'spolu/dwm.vim'
-  Plugin 'blueyed/vim-diminactive'
+  Plugin 'kelvinst/vim-diminactive'
   " Plugin 'mhinz/vim-startify'
   Plugin 'shougo/unite.vim'
   Plugin 'sgur/unite-qf'
@@ -149,9 +149,26 @@ filetype plugin indent on    " required
     cab E e
     cab E! e!
 
-  " c-w c for create empty tab
+  " window manipulation
+    " c-w c for create empty tab
     nmap <c-w>c :tabe<CR>
     nmap <c-w><c-c> :tabe<CR>
+
+    " easier window movements
+    nnoremap <c-j> <c-w><c-j>
+    nnoremap <c-k> <c-w><c-k>
+    nnoremap <c-l> <c-w><c-l>
+    nnoremap <c-h> <c-w><c-h>
+
+    " clearer split creation
+    nnoremap <c-w>s :new<CR>
+    nnoremap <c-w><c-s> :new<CR>
+    nnoremap <c-w>v :vnew<CR>
+    nnoremap <c-w><c-v> :vnew<CR>
+
+    " more natural split opening
+    set splitbelow
+    set splitright
 
   " backspace everything!
     set backspace=indent,eol,start
@@ -173,7 +190,6 @@ filetype plugin indent on    " required
     nmap <silent> ;; :<c-f>k<CR>
 
   " integrations with clipboard
-    nmap <silent> <Leader>vpm :exec set paste!<CR>
     vmap <c-c> :w !pbcopy<CR><CR>
     imap <c-v> <ESC>k:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 
@@ -366,7 +382,9 @@ filetype plugin indent on    " required
       hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
       set colorcolumn=81
 
-      let g:diminactive_use_syntax = 1
+      " let g:diminactive_use_syntax = 1
+      let g:diminactive_buftype_blacklist = ['nofile', 'nowrite', 'acwrite']
+      let g:diminactive_filetype_blacklist = []
 
     " vim-startify
       " let g:startify_custom_header =
