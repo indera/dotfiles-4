@@ -741,10 +741,6 @@ filetype plugin indent on    " required
     " dash.vim
     " ag.vim
     " vim-rspec
-      " nmap <Leader>rtt :call RunCurrentSpecFile()<CR>
-      " nmap <Leader>rtn :call RunNearestSpec()<CR>
-      " nmap <Leader>rtl :call RunLastSpec()<CR>
-      " nmap <Leader>rta :call RunAllSpecs()<CR>
       call unite_menus#Define("rails_tests", "Rails Tests", "<Leader>rt", {
             \   'run_current_spec': {
             \     'description': 'Run Current Spec',
@@ -757,8 +753,8 @@ filetype plugin indent on    " required
             \     'command': "exe \"Dispatch rspec %:\".line('.').\" -fd\""
             \   },
             \   'run_all_specs': {
-            \     'description': 'Run Current Line Spec',
-            \     'keymap': {'keys': '<Leader>rtl', 'with_cr': 1},
+            \     'description': 'Run All Specs',
+            \     'keymap': {'keys': '<Leader>rta', 'with_cr': 1},
             \     'command': 'Start rspec'
             \   },
             \ })
