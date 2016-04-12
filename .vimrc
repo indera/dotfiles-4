@@ -13,7 +13,7 @@ call vundle#begin()
   Plugin 'itchyny/lightline.vim'
   Plugin 'scrooloose/nerdtree'
   " Plugin 'spolu/dwm.vim'
-  Plugin 'kelvinst/vim-diminactive'
+  Plugin 'blueyed/vim-diminactive'
   " Plugin 'mhinz/vim-startify'
   Plugin 'shougo/unite.vim'
   Plugin 'sgur/unite-qf'
