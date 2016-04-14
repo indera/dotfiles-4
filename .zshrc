@@ -98,8 +98,27 @@ stty -ixon -ixoff
 alias el="exa -l"
 
 # tmux aliases
-alias t='tmux'
-alias tt='tmux attach -d -t base || tmux new -s base'
+alias t='tmuxinator'
+mux() {
+  tmuxinator local &> /dev/null
+
+  if [ $? -eq 1 ]
+  then
+    dir_name=${PWD##*/}
+    handled_name=${dir_name/\./}
+    project_name=${1:-$handled_name}
+
+    tmuxinator start $project_name &> /dev/null
+
+    if [ $? -eq 1 ]
+    then
+      echo "Could not find file ~/.tmuxinator/$project_name.yml, creating it"
+      tmuxinator new $project_name
+      echo "Now it's done, just call your last command and you'll be good to go"
+    fi
+  fi
+}
+alias tt='mux'
 
 # sorry cowie, you are just pooing my ansibles :/
 export ANSIBLE_NOCOWS=1
@@ -129,3 +148,9 @@ export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
 
 # to get the binstubs on ./bin
 export PATH="./bin:$PATH"
+
+# completion for tmuxinator
+source ~/.tmuxinator/completion.zsh
+
+# vim as the default editor
+export EDITOR="vim"
