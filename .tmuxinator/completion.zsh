@@ -18,18 +18,17 @@ _tmuxinator() {
 }
 
 _tmuxinator_start() {
-  local commands projects
+  local projects
   projects=(${(f)"$(tmuxinator completions start)"})
 
   if (( CURRENT == 2 )); then
-    _describe -t projects "tmuxinator projects" projects
     _arguments '*:projects:($projects)'
   fi
 
   return
 }
 
-compdef _tmuxinator tmuxinator t
+compdef _tmuxinator tmuxinator mux t
 compdef _tmuxinator_start tt
 
 # Local Variables:

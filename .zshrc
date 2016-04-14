@@ -98,27 +98,36 @@ stty -ixon -ixoff
 alias el="exa -l"
 
 # tmux aliases
-alias t='tmuxinator'
-mux() {
-  tmuxinator local &> /dev/null
+if ! type "tmuxinator" > /dev/null; then
+  alias t='tmuxinator'
+else
+  alias t='tmux'
+fi
 
-  if [ $? -eq 1 ]
-  then
-    dir_name=${PWD##*/}
-    handled_name=${dir_name/\./}
-    project_name=${1:-$handled_name}
+my_mux() {
+  dir_name=${PWD##*/}
+  handled_name=${dir_name/\./}
+  project_name=${1:-$handled_name}
 
-    tmuxinator start $project_name &> /dev/null
+  if ! type "tmuxinator" > /dev/null; then
+    tmuxinator local &> /dev/null
 
-    if [ $? -eq 1 ]
-    then
-      echo "Could not find file ~/.tmuxinator/$project_name.yml, creating it"
-      tmuxinator new $project_name
-      echo "Now it's done, just call your last command and you'll be good to go"
+    if [ $? -eq 1 ]; then
+      tmuxinator start $project_name &> /dev/null
+
+      if [ $? -eq 1 ]; then
+        echo "Could not find file ~/.tmuxinator/$project_name.yml, creating it"
+        tmuxinator new $project_name
+        echo "Now it's done, just call your last command and you'll be good to go"
+      fi
     fi
+  else
+    echo "tmuxinator not found :("
+    echo "Install it for a better tmux sessions experience, fallbacking to tmux"
+    tmux attach -d -t $project_name || tmux new -s $project_name
   fi
 }
-alias tt='mux'
+alias tt='my_mux'
 
 # sorry cowie, you are just pooing my ansibles :/
 export ANSIBLE_NOCOWS=1
