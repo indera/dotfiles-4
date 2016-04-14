@@ -109,7 +109,12 @@ my_mux() {
   handled_name=${dir_name/\./}
   project_name=${1:-$handled_name}
 
-  if ! type "tmuxinator" > /dev/null; then
+  type "tmuxinator" &> /dev/null
+  if [ $? -eq 1 ]; then
+    echo "tmuxinator not found :("
+    echo "Install it for a better tmux sessions experience, fallbacking to tmux"
+    tmux attach -d -t $project_name || tmux new -s $project_name
+  else
     tmuxinator local &> /dev/null
 
     if [ $? -eq 1 ]; then
@@ -121,10 +126,6 @@ my_mux() {
         echo "Now it's done, just call your last command and you'll be good to go"
       fi
     fi
-  else
-    echo "tmuxinator not found :("
-    echo "Install it for a better tmux sessions experience, fallbacking to tmux"
-    tmux attach -d -t $project_name || tmux new -s $project_name
   fi
 }
 alias tt='my_mux'
