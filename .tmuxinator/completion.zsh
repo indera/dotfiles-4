@@ -17,19 +17,7 @@ _tmuxinator() {
   return
 }
 
-_tmuxinator_start() {
-  local projects
-  projects=(${(f)"$(tmuxinator completions start)"})
-
-  if (( CURRENT == 2 )); then
-    _arguments '*:projects:($projects)'
-  fi
-
-  return
-}
-
 compdef _tmuxinator tmuxinator mux t
-compdef _tmuxinator_start tt
 
 # Local Variables:
 # mode: Shell-Script

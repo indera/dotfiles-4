@@ -1,5 +1,5 @@
 name: base
-root: .
+root: ~/Code
 
 # Optional tmux socket
 # socket_name: foo

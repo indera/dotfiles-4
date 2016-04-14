@@ -49,7 +49,7 @@ plugins=(ssh-agent rails git ruby bundler coffee debian gem git-flow sudo tmux v
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin"
+# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -98,7 +98,8 @@ stty -ixon -ixoff
 alias el="exa -l"
 
 # tmux aliases
-if ! type "tmuxinator" > /dev/null; then
+type "tmuxinator" &> /dev/null
+if [ $? -eq 1 ]; then
   alias t='tmuxinator'
 else
   alias t='tmux'
@@ -111,8 +112,8 @@ my_mux() {
 
   type "tmuxinator" &> /dev/null
   if [ $? -eq 1 ]; then
-    echo "tmuxinator not found :("
-    echo "Install it for a better tmux sessions experience, fallbacking to tmux"
+    echo "Command 'tmuxinator' not found :("
+    echo "Install it with 'gem install tmuxinator --version=0.7.0' for a better tmux sessions experience, fallbacking to tmux"
     tmux attach -d -t $project_name || tmux new -s $project_name
   else
     tmuxinator local &> /dev/null
@@ -121,14 +122,33 @@ my_mux() {
       tmuxinator start $project_name &> /dev/null
 
       if [ $? -eq 1 ]; then
-        echo "Could not find file ~/.tmuxinator/$project_name.yml, creating it"
-        tmuxinator new $project_name
-        echo "Now it's done, just call your last command and you'll be good to go"
+        echo "Could not find file ~/.tmuxinator/$project_name.yml"
+        echo -n "Do you want to create it? (N/y)"
+        read yn
+        case $yn in
+          [Yy]* )
+            tmuxinator new $project_name
+            tmuxinator start $project_name
+            break;;
+          * )
+            tmuxinator start default
+        esac
       fi
     fi
   fi
 }
 alias tt='my_mux'
+
+# completion for my_mux
+_my_mux() {
+  local projects
+  projects=(${(f)"$(tmuxinator completions start)"})
+
+  _arguments '*:projects:($projects)'
+}
+
+compdef _my_mux my_mux tt
+
 
 # sorry cowie, you are just pooing my ansibles :/
 export ANSIBLE_NOCOWS=1
@@ -157,7 +177,7 @@ export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
 # to get the binstubs on ./bin
-export PATH="./bin:$PATH"
+export PATH="./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin:$PATH"
 
 # completion for tmuxinator
 source ~/.tmuxinator/completion.zsh
