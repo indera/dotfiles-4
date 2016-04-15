@@ -129,7 +129,7 @@ my_mux() {
           [Yy]* )
             tmuxinator new $project_name
             tmuxinator start $project_name
-            break;;
+            ;;
           * )
             tmuxinator start default
         esac
