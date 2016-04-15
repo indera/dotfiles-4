@@ -116,10 +116,10 @@ my_mux() {
     echo "Install it with 'gem install tmuxinator --version=0.7.0' for a better tmux sessions experience, fallbacking to tmux"
     tmux attach -d -t $project_name || tmux new -s $project_name
   else
-    tmuxinator local &> /dev/null
+    tmuxinator local
 
     if [ $? -eq 1 ]; then
-      tmuxinator start $project_name &> /dev/null
+      tmuxinator start $project_name
 
       if [ $? -eq 1 ]; then
         echo "Could not find file ~/.tmuxinator/$project_name.yml"
@@ -177,7 +177,7 @@ export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
 # to get the binstubs on ./bin
-export PATH="./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin:$PATH"
+export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin"
 
 # completion for tmuxinator
 source ~/.tmuxinator/completion.zsh

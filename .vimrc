@@ -495,6 +495,10 @@ filetype plugin indent on    " required
             \     'command': 'Rake',
             \     'command_action': 'complete',
             \   },
+            \   'Migrate': {
+            \     'keymap': '<Leader>rum',
+            \     'command': 'Rake db:migrate',
+            \   },
             \   'Extract': {
             \     'keymap': '<Leader>rux',
             \     'command': 'Rextract',
