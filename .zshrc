@@ -184,3 +184,11 @@ source ~/.tmuxinator/completion.zsh
 
 # vim as the default editor
 export EDITOR="vim"
+
+# helpful functions
+mkcp() {
+  mkdir -p -- "${@: -1}" && cp -- "$@"
+}
+mkmv() {
+  mkdir -p -- "${@: -1}" && mv -- "$@"
+}
