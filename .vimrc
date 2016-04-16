@@ -190,8 +190,14 @@ filetype plugin indent on    " required
     nmap <silent> ;; :<c-f>k<CR>
 
   " integrations with clipboard
+    function! Paste_clipboard()
+      set paste
+      r !pbpaste
+      set nopaste
+    endfunction
+
     vmap <c-c> :w !pbcopy<CR><CR>
-    imap <c-v> <ESC>k:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    imap <c-v> <ESC>:call Paste_clipboard()<CR>
 
   " trailing whitespaces removing
     autocmd BufWritePre * :StripWhitespace
