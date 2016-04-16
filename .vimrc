@@ -499,6 +499,10 @@ filetype plugin indent on    " required
             \     'keymap': '<Leader>rum',
             \     'command': 'Rake db:migrate',
             \   },
+            \   'Console': {
+            \     'keymap': '<Leader>ruc',
+            \     'command': 'Start -title="rails c" rails c',
+            \   },
             \   'Extract': {
             \     'keymap': '<Leader>rux',
             \     'command': 'Rextract',
@@ -715,7 +719,7 @@ filetype plugin indent on    " required
             \   },
             \   'github window': {
             \     'keymap': '<Leader>gw',
-            \     'command': 'Start github',
+            \     'command': 'Start! github',
             \   },
             \   'Go To Prev Hunk': {
             \     'keymap': '[g',
@@ -785,18 +789,25 @@ filetype plugin indent on    " required
         return system("git remote")
       endfunction!
 
+      function! Heroku_command(command)
+        let env = input("env: ", "", "custom,Complete_remote")
+        let desc = substitute(a:command, '\v\C\s+', '-', '')
+        let desc = substitute(desc, '\v\C\-+', '-', '')
+        exe "Start -title=".env."-".desc." ".env." ".a:command
+      endfunction!
+
       call unite_menus#Define("heroku", "Heroku", "<Leader>h", {
             \   'Logs': {
             \     'keymap': '<Leader>hl',
-            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." logs --tail"',
+            \     'command': 'call Heroku_command("logs --tail")',
             \   },
             \   'Console': {
             \     'keymap': '<Leader>hc',
-            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rails c"',
+            \     'command': 'call Heroku_command("run rails c")',
             \   },
             \   'Migrate': {
             \     'keymap': '<Leader>hm',
-            \     'command': 'exe "Start ".input("env: ", "", "custom,Complete_remote")." run rake db:migrate"',
+            \     'command': 'call Heroku_command("run rake db:migrate")',
             \   },
             \ })
 
