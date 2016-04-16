@@ -154,17 +154,23 @@ filetype plugin indent on    " required
     nmap <c-w>c :tabe<CR>
     nmap <c-w><c-c> :tabe<CR>
 
-    " easier window movements
-    nnoremap <c-j> <c-w><c-j>
-    nnoremap <c-k> <c-w><c-k>
-    nnoremap <c-l> <c-w><c-l>
-    nnoremap <c-h> <c-w><c-h>
-
     " clearer split creation
     nnoremap <c-w>s :new<CR>
     nnoremap <c-w><c-s> :new<CR>
     nnoremap <c-w>v :vnew<CR>
     nnoremap <c-w><c-v> :vnew<CR>
+
+    " <c-w>number to go to tab
+    nnoremap <c-w>1 1gt
+    nnoremap <c-w>2 2gt
+    nnoremap <c-w>3 3gt
+    nnoremap <c-w>4 4gt
+    nnoremap <c-w>5 5gt
+    nnoremap <c-w>6 6gt
+    nnoremap <c-w>7 7gt
+    nnoremap <c-w>8 8gt
+    nnoremap <c-w>9 9gt
+    nnoremap <c-w>0 0gt
 
     " more natural split opening
     set splitbelow
