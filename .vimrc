@@ -513,7 +513,7 @@ filetype plugin indent on    " required
             \   },
             \   'Console': {
             \     'keymap': '<Leader>ruc',
-            \     'command': 'Start -title="rails c" rails c',
+            \     'command': 'Start -title=rails-console rails c',
             \   },
             \   'Extract': {
             \     'keymap': '<Leader>rux',
