@@ -2,9 +2,6 @@
 # screenshot: http://i.imgur.com/aipDQ.png
 
 git_last_commit_time() {
-  # Make sure we're in a git repo
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-
   # Get the times
   now=$(date +%s)
   last_commit=$(git log --pretty=format:'%at' -1)
@@ -45,35 +42,57 @@ git_last_commit_time() {
   colored_time+="%{$reset_color%}"
 
   # Add it to the prompt
-  echo "$colored_time"
+  echo " $colored_time"
 }
 
-MODE_INDICATOR="%{$fg_bold[green]%}NORMAL%{$reset_color%} "
+my_git_prompt_status() {
+  ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}A"
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[magenta]%}M"
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[magenta]%}D"
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}R"
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}U"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[magenta]%}?"
+
+  original_status="$(git_prompt_status)"
+  if [[ -z $original_status ]]; then
+    return
+  fi
+  echo " ${original_status}"
+}
+
+my_git_prompt() {
+  # Make sure we're in a git repo
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+
+  ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}"
+  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+  ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}●%{$reset_color%}"
+  ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+  echo "$(git_prompt_info)$(git_last_commit_time)"
+}
+
+my_vi_mode_prompt_info() {
+  normal_mode="%{$fg_bold[red]%}NORMAL%{$reset_color%}"
+  insert_mode="%{$fg_bold[green]%}INSERT%{$reset_color%}"
+
+  mode="${${KEYMAP/vicmd/$normal_mode}/(main|viins)/$insert_mode}"
+  mode="${mode:-$insert_mode}"
+
+  echo " ${mode}"
+}
 
 local time="%*"
 #
 # colored by last return status
-local return_status_enabled="%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})❯%{$reset_color%}"
-local return_status_disabled="%{$fg_bold[green]%}❯%{$reset_color%}"
+local return_status_enabled=" %(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})❯%{$reset_color%}"
+local return_status_disabled=" %{$fg_bold[green]%}❯%{$reset_color%}"
 local return_status=$return_status_enabled
 
-local current_dir="%{$fg[cyan]%}%c%{$reset_color%}"
+local current_dir=" %{$fg[cyan]%}%c%{$reset_color%}"
 
-PROMPT='${time} ${current_dir} $(git_prompt_info) $(git_prompt_status) $(git_last_commit_time) $(vi_mode_prompt_info)${return_status} '
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=""
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
+PROMPT='${time}${current_dir}$(my_git_prompt)$(my_vi_mode_prompt_info)${return_status} '
 RPROMPT=''
-
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}A"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}M"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[blue]%}D"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[green]%}R"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[blue]%}U"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[blue]%}?"
 
 function accept-line-or-clear-warning () {
 	if [[ -z $BUFFER ]]; then
