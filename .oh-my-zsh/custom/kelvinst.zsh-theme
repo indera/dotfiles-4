@@ -47,11 +47,11 @@ git_last_commit_time() {
 
 my_git_prompt_status() {
   ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}A"
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[magenta]%}M"
-  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[magenta]%}D"
-  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}R"
-  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}U"
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[magenta]%}?"
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}M"
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[yellow]%}D"
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[yellow]%}R"
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}U"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}?"
 
   original_status="$(git_prompt_status)"
   if [[ -z $original_status ]]; then
@@ -66,7 +66,7 @@ my_git_prompt() {
 
   ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}●%{$reset_color%}"
+  ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}●%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 
   echo "$(git_prompt_info)$(git_last_commit_time)"
@@ -82,7 +82,7 @@ my_vi_mode_prompt_info() {
   echo " ${mode}"
 }
 
-local time="%*"
+local time="%{$fg[magenta]%}%*%{$reset_color%}"
 #
 # colored by last return status
 local return_status_enabled=" %(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})❯%{$reset_color%}"
