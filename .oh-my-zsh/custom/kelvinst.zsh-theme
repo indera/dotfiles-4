@@ -80,6 +80,13 @@ my_vi_mode_prompt_info() {
   echo " ${mode}"
 }
 
+ruby_version() {
+  if [[ -z $RVM_CURRENT ]]; then
+    export RVM_CURRENT="$(rvm current)"
+  fi
+  echo " [%{$fg[red]%}${RVM_CURRENT}%{$reset_color%}]"
+}
+
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
 #
 # colored by last return status
@@ -89,9 +96,7 @@ local return_status=$return_status_enabled
 
 local current_dir=" %{$fg[cyan]%}%c%{$reset_color%}"
 
-local ruby_version=" [%{$fg[red]%}$(rvm current)%{$reset_color%}]"
-
-PROMPT='${time}$(my_vi_mode_prompt_info)${ruby_version}$(my_git_prompt)${current_dir}${return_status} '
+PROMPT='${time}$(my_vi_mode_prompt_info)$(ruby_version)$(my_git_prompt)${current_dir}${return_status} '
 RPROMPT=''
 
 function accept-line-or-clear-warning () {
