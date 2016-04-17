@@ -18,8 +18,6 @@ git_last_commit_time() {
     # yellow = < 60min
     # red = > 60min
   if [ "$minutes_since_last_commit" -gt 60 ]; then
-    colored_time="%{$fg[red]%}"
-  elif [ "$minutes_since_last_commit" -gt 30 ]; then
     colored_time="%{$fg[yellow]%}"
   else
     colored_time="%{$fg[green]%}"
@@ -47,11 +45,11 @@ git_last_commit_time() {
 
 my_git_prompt_status() {
   ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}A"
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}M"
-  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[yellow]%}D"
-  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[yellow]%}R"
-  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}U"
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}?"
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}M"
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}D"
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[red]%}R"
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}U"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?"
 
   original_status="$(git_prompt_status)"
   if [[ -z $original_status ]]; then
@@ -64,12 +62,12 @@ my_git_prompt() {
   # Make sure we're in a git repo
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
 
-  ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}"
+  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}●%{$reset_color%}"
+  ZSH_THEME_GIT_PROMPT_DIRTY=""
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-  echo "$(git_prompt_info)$(git_last_commit_time)"
+  echo " [$(git_prompt_info)$(my_git_prompt_status)$(git_last_commit_time)]"
 }
 
 my_vi_mode_prompt_info() {
@@ -91,7 +89,9 @@ local return_status=$return_status_enabled
 
 local current_dir=" %{$fg[cyan]%}%c%{$reset_color%}"
 
-PROMPT='${time}${current_dir}$(my_git_prompt)$(my_vi_mode_prompt_info)${return_status} '
+local ruby_version=" [%{$fg[red]%}$(rvm current)%{$reset_color%}]"
+
+PROMPT='${time}$(my_vi_mode_prompt_info)${ruby_version}$(my_git_prompt)${current_dir}${return_status} '
 RPROMPT=''
 
 function accept-line-or-clear-warning () {
