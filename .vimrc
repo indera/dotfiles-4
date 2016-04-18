@@ -404,6 +404,8 @@ filetype plugin indent on    " required
 
     " unite
       call unite#custom#profile('default', 'context', {
+            \   'ignorecase': 1,
+            \   'start_insert': 1,
             \   'direction': 'botright',
             \ })
 
@@ -424,10 +426,10 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-      nmap <Leader>. :Unite -silent -ignorecase -start-insert source<CR>
-      nmap <Leader>b :Unite -silent -ignorecase -start-insert buffer<CR>
-      nmap <Leader>: :Unite -silent -ignorecase -start-insert command<CR>
-      nmap <Leader>t :Unite -silent -ignorecase -start-insert tab<CR>
+      nmap <Leader>. :Unite -silent source<CR>
+      nmap <Leader>b :Unite -silent buffer<CR>
+      nmap <Leader>: :Unite -silent command<CR>
+      nmap <Leader>t :Unite -silent tab<CR>
 
       " Custom mappings for the unite buffer
       autocmd FileType unite call s:unite_settings()
@@ -437,6 +439,7 @@ filetype plugin indent on    " required
         imap <buffer> <c-j> <Plug>(unite_select_next_line)
         imap <buffer> <c-k> <Plug>(unite_select_previous_line)
         nmap <buffer> <esc> <Plug>(unite_exit)
+        imap <buffer> <esc> <Plug>(unite_exit)
       endfunction
 
     " unite-qf
@@ -481,15 +484,15 @@ filetype plugin indent on    " required
       call unite_menus#Define("rails", "Rails", "<Leader>r", {
             \   'Utilities': {
             \     'keymap': '<Leader>ru',
-            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_utils',
+            \     'command': 'Unite -silent menu:rails_utils',
             \   },
             \   'Go To': {
             \     'keymap': '<Leader>rg',
-            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_goto',
+            \     'command': 'Unite -silent menu:rails_goto',
             \   },
             \   'Tests': {
             \     'keymap': '<Leader>rt',
-            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_tests',
+            \     'command': 'Unite -silent menu:rails_tests',
             \   },
             \ })
 
@@ -500,7 +503,7 @@ filetype plugin indent on    " required
             \   },
             \   'Start Server': {
             \     'keymap': '<Leader>rus',
-            \     'command': 'Rserver',
+            \     'command': 'Rserver!',
             \   },
             \   'Kill Server': {
             \     'keymap': '<Leader>ruk',
