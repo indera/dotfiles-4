@@ -90,6 +90,6 @@ local time="%{$fg[magenta]%}%*%{$reset_color%}"
 
 local current_dir="%{$fg[cyan]%}%c%{$reset_color%}"
 
-PROMPT='${time} $(my_git_prompt) ${current_dir} $(return_status) '
+PROMPT='${time} ${current_dir} $(my_git_prompt) $(return_status) '
 RPROMPT=''
 
