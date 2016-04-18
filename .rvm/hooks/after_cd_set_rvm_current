@@ -1,6 +1,0 @@
-# this exists because of /.oh-my-zsh/custom/kelvinst.zsh-theme
-# it's pretty more quick to check the env var instead of running "rvm current"
-# on every single command type
-
-export RVM_CURRENT=$(rvm current)
-

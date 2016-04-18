@@ -70,9 +70,11 @@ my_git_prompt() {
   echo "[$(git_prompt_info)$(my_git_prompt_status)$(git_last_commit_time)]"
 }
 
-my_vi_mode_prompt_info() {
-  normal_mode="%{$fg_bold[red]%}N%{$reset_color%}"
-  insert_mode="%{$fg_bold[green]%}I%{$reset_color%}"
+my_vi_mode_status() {
+  insert_mode_color="${1:-green}"
+
+  normal_mode="%{$fg[yellow]%}❯%{$reset_color%}"
+  insert_mode="%{$fg[$insert_mode_color]%}❯%{$reset_color%}"
 
   mode="${${KEYMAP/vicmd/$normal_mode}/(main|viins)/$insert_mode}"
   mode="${mode:-$insert_mode}"
@@ -80,32 +82,14 @@ my_vi_mode_prompt_info() {
   echo "${mode}"
 }
 
-ruby_version() {
-  if [[ -z $RVM_CURRENT ]]; then
-    export RVM_CURRENT="$(rvm current)"
-  fi
-  echo "[%{$fg[red]%}${RVM_CURRENT}%{$reset_color%}]"
+return_status() {
+  echo "%(?.$(my_vi_mode_status).$(my_vi_mode_status red))"
 }
 
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
-#
-# colored by last return status
-local return_status_enabled="%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})❯%{$reset_color%}"
-local return_status_disabled="%{$fg_bold[green]%}❯%{$reset_color%}"
-local return_status=$return_status_enabled
 
 local current_dir="%{$fg[cyan]%}%c%{$reset_color%}"
 
-PROMPT='${time} $(ruby_version) $(my_git_prompt) $(my_vi_mode_prompt_info) ${current_dir} ${return_status} '
+PROMPT='${time} $(my_git_prompt) ${current_dir} $(return_status) '
 RPROMPT=''
 
-function accept-line-or-clear-warning () {
-	if [[ -z $BUFFER ]]; then
-		return_status=$return_status_disabled
-	else
-		return_status=$return_status_enabled
-	fi
-	zle accept-line
-}
-zle -N accept-line-or-clear-warning
-bindkey '^M' accept-line-or-clear-warning

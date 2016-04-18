@@ -402,7 +402,7 @@ filetype plugin indent on    " required
       " let g:startify_custom_header =
       "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
-    " vim-unite
+    " unite
       call unite_menus#Define("shortcuts", "Shortcuts", "<Leader>s", {
             \   'Reload .vimrc': {
             \     'keymap': '<Leader>vr',
