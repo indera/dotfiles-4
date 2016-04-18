@@ -42,7 +42,7 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
-  " Plugin 'thoughtbot/vim-rspec'
+  Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
   " Plugin 'tpope/vim-heroku'
@@ -403,6 +403,10 @@ filetype plugin indent on    " required
       "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
     " unite
+      call unite#custom#profile('default', 'context', {
+            \   'direction': 'botright',
+            \ })
+
       call unite_menus#Define("shortcuts", "Shortcuts", "<Leader>s", {
             \   'Reload .vimrc': {
             \     'keymap': '<Leader>vr',
@@ -420,10 +424,20 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-      nmap <c-@> :Unite -ignorecase source<CR>
-      nmap <Leader>b :Unite -ignorecase buffer<CR>
-      nmap <Leader>: :Unite -ignorecase command<CR>
-      nmap <Leader>t :Unite -ignorecase tab<CR>
+      nmap <Leader>. :Unite -silent -ignorecase -start-insert source<CR>
+      nmap <Leader>b :Unite -silent -ignorecase -start-insert buffer<CR>
+      nmap <Leader>: :Unite -silent -ignorecase -start-insert command<CR>
+      nmap <Leader>t :Unite -silent -ignorecase -start-insert tab<CR>
+
+      " Custom mappings for the unite buffer
+      autocmd FileType unite call s:unite_settings()
+      function! s:unite_settings()
+        let b:SuperTabDisabled=1
+
+        imap <buffer> <c-j> <Plug>(unite_select_next_line)
+        imap <buffer> <c-k> <Plug>(unite_select_previous_line)
+        nmap <buffer> <esc> <Plug>(unite_exit)
+      endfunction
 
     " unite-qf
     " ShowMarks
@@ -467,15 +481,15 @@ filetype plugin indent on    " required
       call unite_menus#Define("rails", "Rails", "<Leader>r", {
             \   'Utilities': {
             \     'keymap': '<Leader>ru',
-            \     'command': 'Unite -silent -ignorecase menu:rails_utils',
+            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_utils',
             \   },
             \   'Go To': {
             \     'keymap': '<Leader>rg',
-            \     'command': 'Unite -silent -ignorecase menu:rails_goto',
+            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_goto',
             \   },
             \   'Tests': {
             \     'keymap': '<Leader>rt',
-            \     'command': 'Unite -silent -ignorecase menu:rails_tests',
+            \     'command': 'Unite -silent -ignorecase -start-insert menu:rails_tests',
             \   },
             \ })
 
@@ -746,18 +760,20 @@ filetype plugin indent on    " required
     " dash.vim
     " ag.vim
     " vim-rspec
+      let g:rspec_command = "Dispatch rspec {spec}"
+
       call unite_menus#Define("rails_tests", "Rails Tests", "<Leader>rt", {
             \   'Run Current Spec': {
             \     'keymap': '<Leader>rtt',
-            \     'command': 'Dispatch rspec %',
+            \     'command': 'call RunCurrentSpecFile()',
             \   },
             \   'Run Current Line Spec': {
             \     'keymap': '<Leader>rtl',
-            \     'command': "exe \"Dispatch rspec %:\".line('.').\" -fd\"",
+            \     'command': "call RunNearestSpec()",
             \   },
             \   'Run All Specs': {
             \     'keymap': '<Leader>rta',
-            \     'command': 'Start rspec',
+            \     'command': 'call RunAllSpec()',
             \   },
             \ })
 
