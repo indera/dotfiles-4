@@ -395,7 +395,7 @@ filetype plugin indent on    " required
       set colorcolumn=81
 
       " let g:diminactive_use_syntax = 1
-      let g:diminactive_buftype_blacklist = ['nofile', 'nowrite', 'acwrite']
+      let g:diminactive_buftype_blacklist = ['nofile', 'nowrite', 'acwrite', 'quickfix']
       let g:diminactive_filetype_blacklist = []
 
     " vim-startify
