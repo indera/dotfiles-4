@@ -32,7 +32,7 @@ call vundle#begin()
   Plugin 'scrooloose/syntastic'
 
   " completion
-  " Plugin 'ervandew/supertab'
+  Plugin 'ervandew/supertab'
 
   " code display
   Plugin 'chriskempson/base16-vim'

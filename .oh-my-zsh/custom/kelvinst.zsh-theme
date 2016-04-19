@@ -40,7 +40,7 @@ git_last_commit_time() {
   colored_time+="%{$reset_color%}"
 
   # Add it to the prompt
-  echo " $colored_time"
+  echo "$colored_time"
 }
 
 my_git_prompt_status() {
@@ -55,7 +55,7 @@ my_git_prompt_status() {
   if [[ -z $original_status ]]; then
     return
   fi
-  echo " ${original_status}"
+  echo "${original_status}"
 }
 
 my_git_prompt() {
@@ -64,17 +64,17 @@ my_git_prompt() {
 
   ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_DIRTY=""
+  ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-  echo "[$(git_prompt_info)$(my_git_prompt_status)$(git_last_commit_time)]"
+  echo "[$(git_prompt_info) $(git_last_commit_time)]"
 }
 
 my_vi_mode_status() {
   insert_mode_color="${1:-green}"
 
-  normal_mode="%{$fg[yellow]%}❯%{$reset_color%}"
-  insert_mode="%{$fg[$insert_mode_color]%}❯%{$reset_color%}"
+  normal_mode="%{$fg[yellow]%}#%{$reset_color%}"
+  insert_mode="%{$fg[$insert_mode_color]%}$%{$reset_color%}"
 
   mode="${${KEYMAP/vicmd/$normal_mode}/(main|viins)/$insert_mode}"
   mode="${mode:-$insert_mode}"
