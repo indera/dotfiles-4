@@ -40,7 +40,7 @@ git_last_commit_time() {
   colored_time+="%{$reset_color%}"
 
   # Add it to the prompt
-  echo "$colored_time"
+  echo " $colored_time"
 }
 
 my_git_prompt() {
@@ -52,7 +52,7 @@ my_git_prompt() {
   ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-  echo "[$(git_prompt_info) $(git_last_commit_time)]"
+  echo " [$(git_prompt_info)$(git_last_commit_time)]"
 }
 
 my_vi_mode_status() {
@@ -68,13 +68,12 @@ my_vi_mode_status() {
 }
 
 return_status() {
-  echo "%(?.$(my_vi_mode_status).$(my_vi_mode_status red))"
+  echo " %(?.$(my_vi_mode_status).$(my_vi_mode_status red))"
 }
 
 local time="%{$fg[magenta]%}%*%{$reset_color%}"
+local current_dir=" %{$fg[cyan]%}%c%{$reset_color%}"
 
-local current_dir="%{$fg[cyan]%}%c%{$reset_color%}"
-
-PROMPT='${time} ${current_dir} $(my_git_prompt) $(return_status) '
+PROMPT='${time}${current_dir}$(my_git_prompt)$(return_status) '
 RPROMPT=''
 
