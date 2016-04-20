@@ -821,8 +821,8 @@ filetype plugin indent on    " required
 
       function! Heroku_command(command)
         let env = input("env: ", "", "custom,Complete_remote")
-        let desc = substitute(a:command, '\v\C\s+', '-', '', 'g')
-        let desc = substitute(desc, '\v\C\-+', '-', '', 'g')
+        let desc = substitute(a:command, '\v\C\s+', '-', 'g')
+        let desc = substitute(desc, '\v\C\-+', '-', 'g')
         exe "Start -title=".env."-".desc." ".env." ".a:command
       endfunction!
 
