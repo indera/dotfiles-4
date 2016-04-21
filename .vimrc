@@ -414,9 +414,8 @@ filetype plugin indent on    " required
             \     'description': "Shortcuts",
             \     'keymap': "<Leader>s",
             \     'candidates': {
-            \       'Reload .vimrc': {
-            \         'relative_keymap': 'vr',
-            \         'command': 'so $MYVIMRC',
+            \       'Edit .gitconfig': {
+            \         'command': 'vsplit ~/.gitconfig',
             \       },
             \       'Edit .vimrc': {
             \         'relative_keymap': 've',
@@ -425,8 +424,9 @@ filetype plugin indent on    " required
             \       'Edit .zshrc': {
             \         'command': 'vsplit ~/.zshrc',
             \       },
-            \       'Edit .gitconfig': {
-            \         'command': 'vsplit ~/.gitconfig',
+            \       'Reload .vimrc': {
+            \         'relative_keymap': 'vr',
+            \         'command': 'so $MYVIMRC',
             \       },
             \     }
             \   }
@@ -460,18 +460,6 @@ filetype plugin indent on    " required
             \     'description': "Marks",
             \     'keymap': "<Leader>m",
             \     'candidates': {
-            \       'Toggle Mark Bar': {
-            \         'relative_keymap': 't',
-            \         'command': 'ShowMarksToggle',
-            \       },
-            \       'Place Mark': {
-            \         'relative_keymap': 'm',
-            \         'command': 'ShowMarksPlaceMark',
-            \       },
-            \       'Hide Mark': {
-            \         'relative_keymap': 'h',
-            \         'command': 'ShowMarksClearMark',
-            \       },
             \       'Clear Marks': {
             \         'relative_keymap': 'c',
             \         'command': 'ShowMarksClearAll',
@@ -483,6 +471,18 @@ filetype plugin indent on    " required
             \       'Go To Next Mark': {
             \         'keymap': "]m",
             \         'command': "normal! ]'",
+            \       },
+            \       'Hide Mark': {
+            \         'relative_keymap': 'h',
+            \         'command': 'ShowMarksClearMark',
+            \       },
+            \       'Place Mark': {
+            \         'relative_keymap': 'm',
+            \         'command': 'ShowMarksPlaceMark',
+            \       },
+            \       'Toggle Mark Bar': {
+            \         'relative_keymap': 't',
+            \         'command': 'ShowMarksToggle',
             \       },
             \     },
             \   },
@@ -498,10 +498,6 @@ filetype plugin indent on    " required
             \     'description': "Rails",
             \     'keymap': "<Leader>r",
             \     'candidates': {
-            \       'Utilities': {
-            \         'relative_keymap': 'u',
-            \         'command': 'Unite -silent menu:rails_utils',
-            \       },
             \       'Go To': {
             \         'relative_keymap': 'g',
             \         'command': 'Unite -silent menu:rails_goto',
@@ -510,51 +506,55 @@ filetype plugin indent on    " required
             \         'relative_keymap': 't',
             \         'command': 'Unite -silent menu:rails_tests',
             \       },
+            \       'Utilities': {
+            \         'relative_keymap': 'u',
+            \         'command': 'Unite -silent menu:rails_utils',
+            \       },
             \     },
             \   },
             \   "rails_utils": {
             \     'description': "Rails Utilities",
             \     'keymap': "<Leader>ru",
             \     'candidates': {
-            \       'Preview': {
-            \         'relative_keymap': 'p',
-            \         'command': 'exec "Rpreview " input("path: ")',
-            \       },
-            \       'Start Server': {
-            \         'relative_keymap': 's',
-            \         'command': 'Rserver!',
-            \       },
-            \       'Kill Server': {
-            \         'relative_keymap': 'k',
-            \         'command': '! kill `cat tmp/pids/server.pid`',
-            \       },
-            \       'Generate': {
-            \         'relative_keymap': 'g',
-            \         'command': 'Rgenerate',
-            \         'command_action': 'complete',
+            \       'Console': {
+            \         'relative_keymap': 'c',
+            \         'command': 'Start -title=rails-console rails c',
             \       },
             \       'Destroy': {
             \         'relative_keymap': 'd',
             \         'command': 'Rdestroy',
             \         'command_action': 'complete',
             \       },
-            \       'Rake': {
-            \         'relative_keymap': 'r',
-            \         'command': 'Rake',
+            \       'Extract': {
+            \         'relative_keymap': 'x',
+            \         'command': 'Rextract',
             \         'command_action': 'complete',
+            \       },
+            \       'Generate': {
+            \         'relative_keymap': 'g',
+            \         'command': 'Rgenerate',
+            \         'command_action': 'complete',
+            \       },
+            \       'Kill Server': {
+            \         'relative_keymap': 'k',
+            \         'command': '! kill `cat tmp/pids/server.pid`',
             \       },
             \       'Migrate': {
             \         'relative_keymap': 'm',
             \         'command': 'Rake db:migrate',
             \       },
-            \       'Console': {
-            \         'relative_keymap': 'c',
-            \         'command': 'Start -title=rails-console rails c',
+            \       'Preview': {
+            \         'relative_keymap': 'p',
+            \         'command': 'exec "Rpreview " input("path: ")',
             \       },
-            \       'Extract': {
-            \         'relative_keymap': 'x',
-            \         'command': 'Rextract',
+            \       'Rake': {
+            \         'relative_keymap': 'r',
+            \         'command': 'Rake',
             \         'command_action': 'complete',
+            \       },
+            \       'Start Server': {
+            \         'relative_keymap': 's',
+            \         'command': 'Rserver!',
             \       },
             \     },
             \   },
@@ -565,10 +565,6 @@ filetype plugin indent on    " required
             \       'Alternate': {
             \         'relative_keymap': 'a',
             \         'command': 'A',
-            \       },
-            \       'Relative': {
-            \         'relative_keymap': 'r',
-            \         'command': 'R',
             \       },
             \       'Controller': {
             \         'relative_keymap': 'c',
@@ -616,7 +612,7 @@ filetype plugin indent on    " required
             \         'command_action': 'complete',
             \       },
             \       'Model': {
-            \         'relative_keymap': 'mo',
+            \         'relative_keymap': ['m', 'mo'],
             \         'command': 'Emodel',
             \         'command_action': 'complete',
             \       },
@@ -625,8 +621,12 @@ filetype plugin indent on    " required
             \         'command': 'Emigration',
             \         'command_action': 'complete',
             \       },
+            \       'Relative': {
+            \         'relative_keymap': 'r',
+            \         'command': 'R',
+            \       },
             \       'Schema': {
-            \         'relative_keymap': 'ds',
+            \         'relative_keymap': ['d', 'ds'],
             \         'command': 'Eschema',
             \         'command_action': 'complete',
             \       },
@@ -636,7 +636,7 @@ filetype plugin indent on    " required
             \         'command_action': 'complete',
             \       },
             \       'View': {
-            \         'relative_keymap': 'vw',
+            \         'relative_keymap': 'v',
             \         'command': 'Eview',
             \         'command_action': 'complete',
             \       },
@@ -680,14 +680,6 @@ filetype plugin indent on    " required
             \     'description': "Syntastic",
             \     'keymap': "<Leader>c",
             \     'candidates': {
-            \       'Info': {
-            \         'relative_keymap': 'i',
-            \         'command': 'SyntasticInfo',
-            \       },
-            \       'Toggle': {
-            \         'relative_keymap': 't',
-            \         'command': 'SyntasticToggleMode',
-            \       },
             \       'Check': {
             \         'relative_keymap': 'c',
             \         'command': 'SyntasticCheck',
@@ -696,6 +688,10 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'e',
             \         'command': 'Errors',
             \       },
+            \       'Info': {
+            \         'relative_keymap': 'i',
+            \         'command': 'SyntasticInfo',
+            \       },
             \       'Go To Prev Error': {
             \         'keymap': '[c',
             \         'command': 'lprevious',
@@ -703,6 +699,10 @@ filetype plugin indent on    " required
             \       'Go To Next Error': {
             \         'keymap': ']c',
             \         'command': 'lnext',
+            \       },
+            \       'Toggle': {
+            \         'relative_keymap': 't',
+            \         'command': 'SyntasticToggleMode',
             \       },
             \     },
             \   },
@@ -726,35 +726,40 @@ filetype plugin indent on    " required
             \     'description': "Git",
             \     'keymap': "<Leader>g",
             \     'candidates': {
-            \       'git status': {
-            \         'relative_keymap': 's',
-            \         'command': 'Gstatus',
+            \       'git blame': {
+            \         'relative_keymap': 'b',
+            \         'command': 'Gblame',
             \       },
-            \       'git diff': {
-            \         'relative_keymap': 'd',
-            \         'command': 'Gdiff',
+            \       'git checkout': {
+            \         'relative_keymap': 'o',
+            \         'command': 'Gread',
             \         'command_action': 'complete',
             \       },
             \       'git commit': {
             \         'relative_keymap': 'c',
             \         'command': 'Gcommit',
             \       },
+            \       'git diff': {
+            \         'relative_keymap': 'd',
+            \         'command': 'Gdiff',
+            \         'command_action': 'complete',
+            \       },
             \       'git log': {
             \         'relative_keymap': 'l',
             \         'command': 'exe "silent Glog \| Unite qf"',
             \       },
-            \       'git blame': {
-            \         'relative_keymap': 'b',
-            \         'command': 'Gblame',
+            \       'git mv': {
+            \         'relative_keymap': 'm',
+            \         'command': 'exe "Gmove " input("to: ")',
             \       },
-            \       'git stage': {
-            \         'relative_keymap': 'a',
-            \         'command': 'Gwrite',
+            \       'git pull': {
+            \         'relative_keymap': 'P',
+            \         'command': 'Gpull',
             \         'command_action': 'complete',
             \       },
-            \       'git checkout': {
-            \         'relative_keymap': 'o',
-            \         'command': 'Gread',
+            \       'git push': {
+            \         'relative_keymap': 'p',
+            \         'command': 'Gpush',
             \         'command_action': 'complete',
             \       },
             \       'git rm': {
@@ -762,23 +767,18 @@ filetype plugin indent on    " required
             \         'command': 'Gremove',
             \         'command_action': 'complete',
             \       },
-            \       'git mv': {
-            \         'relative_keymap': 'm',
-            \         'command': 'exe "Gmove " input("to: ")',
-            \       },
-            \       'git push': {
-            \         'relative_keymap': 'p',
-            \         'command': 'Gpush',
-            \         'command_action': 'complete',
-            \       },
-            \       'git pull': {
-            \         'relative_keymap': 'P',
-            \         'command': 'Gpull',
-            \         'command_action': 'complete',
-            \       },
             \       'git ssh': {
             \         'relative_keymap': 'g',
             \         'command': 'Start gitsh',
+            \       },
+            \       'git stage': {
+            \         'relative_keymap': 'a',
+            \         'command': 'Gwrite',
+            \         'command_action': 'complete',
+            \       },
+            \       'git status': {
+            \         'relative_keymap': 's',
+            \         'command': 'Gstatus',
             \       },
             \       'github window': {
             \         'relative_keymap': 'w',
@@ -806,17 +806,17 @@ filetype plugin indent on    " required
             \     'description': "Rails Tests",
             \     'keymap': "<Leader>rt",
             \     'candidates': {
-            \       'Run Current Spec': {
-            \         'relative_keymap': 't',
-            \         'command': 'call RunCurrentSpecFile()',
+            \       'Run All Specs': {
+            \         'relative_keymap': 'a',
+            \         'command': 'call RunAllSpec()',
             \       },
             \       'Run Current Line Spec': {
             \         'relative_keymap': 'l',
             \         'command': "call RunNearestSpec()",
             \       },
-            \       'Run All Specs': {
-            \         'relative_keymap': 'a',
-            \         'command': 'call RunAllSpec()',
+            \       'Run Current Spec': {
+            \         'relative_keymap': 't',
+            \         'command': 'call RunCurrentSpecFile()',
             \       },
             \     },
             \   },
@@ -828,6 +828,10 @@ filetype plugin indent on    " required
             \     'description': "Dispatch",
             \     'keymap': "<Leader>d",
             \     'candidates': {
+            \       'Copen': {
+            \         'relative_keymap': 'c',
+            \         'command': 'Copen',
+            \       },
             \       'Dispatch': {
             \         'relative_keymap': 'd',
             \         'command': 'Dispatch',
@@ -847,10 +851,6 @@ filetype plugin indent on    " required
             \         'relative_keymap': 's',
             \         'command': 'Start',
             \         'command_action': 'complete',
-            \       },
-            \       'Copen': {
-            \         'relative_keymap': 'c',
-            \         'command': 'Copen',
             \       },
             \     },
             \   },
@@ -879,13 +879,13 @@ filetype plugin indent on    " required
             \     'description': "Heroku",
             \     'keymap': "<Leader>h",
             \     'candidates': {
-            \       'Logs': {
-            \         'relative_keymap': 'l',
-            \         'command': 'call Heroku_command("logs --tail")',
-            \       },
             \       'Console': {
             \         'relative_keymap': 'c',
             \         'command': 'call Heroku_command("run rails c")',
+            \       },
+            \       'Logs': {
+            \         'relative_keymap': 'l',
+            \         'command': 'call Heroku_command("logs --tail")',
             \       },
             \       'Migrate': {
             \         'relative_keymap': 'm',
