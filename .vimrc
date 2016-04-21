@@ -497,24 +497,12 @@ filetype plugin indent on    " required
             \   "rails": {
             \     'description': "Rails",
             \     'keymap': "<Leader>r",
-            \     'candidates': {
-            \       'Go To': {
-            \         'relative_keymap': 'g',
-            \         'command': 'Unite -silent menu:rails_goto',
-            \       },
-            \       'Tests': {
-            \         'relative_keymap': 't',
-            \         'command': 'Unite -silent menu:rails_tests',
-            \       },
-            \       'Utilities': {
-            \         'relative_keymap': 'u',
-            \         'command': 'Unite -silent menu:rails_utils',
-            \       },
-            \     },
+            \     'candidates': {},
             \   },
             \   "rails_utils": {
+            \     'parent_menu': 'rails',
             \     'description': "Rails Utilities",
-            \     'keymap': "<Leader>ru",
+            \     'relative_keymap': "u",
             \     'candidates': {
             \       'Console': {
             \         'relative_keymap': 'c',
@@ -559,8 +547,9 @@ filetype plugin indent on    " required
             \     },
             \   },
             \   "rails_goto": {
+            \     'parent_menu': 'rails',
             \     'description': "Rails Go To",
-            \     'keymap': "<Leader>rg",
+            \     'relative_keymap': "g",
             \     'candidates': {
             \       'Alternate': {
             \         'relative_keymap': 'a',
@@ -803,8 +792,9 @@ filetype plugin indent on    " required
 
       call unite_menus#Define({
             \   "rails_tests": {
+            \     'parent_menu': 'rails',
             \     'description': "Rails Tests",
-            \     'keymap': "<Leader>rt",
+            \     'relative_keymap': "t",
             \     'candidates': {
             \       'Run All Specs': {
             \         'relative_keymap': 'a',
