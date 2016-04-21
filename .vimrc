@@ -415,18 +415,18 @@ filetype plugin indent on    " required
             \     'keymap': "<Leader>s",
             \     'candidates': {
             \       'Edit .gitconfig': {
-            \         'command': 'vsplit ~/.gitconfig',
+            \         'action__command': 'vsplit ~/.gitconfig',
             \       },
             \       'Edit .vimrc': {
             \         'relative_keymap': 've',
-            \         'command': 'vsplit $MYVIMRC',
+            \         'action__command': 'vsplit $MYVIMRC',
             \       },
             \       'Edit .zshrc': {
-            \         'command': 'vsplit ~/.zshrc',
+            \         'action__command': 'vsplit ~/.zshrc',
             \       },
             \       'Reload .vimrc': {
             \         'relative_keymap': 'vr',
-            \         'command': 'so $MYVIMRC',
+            \         'action__command': 'so $MYVIMRC',
             \       },
             \     }
             \   }
@@ -462,27 +462,27 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Clear Marks': {
             \         'relative_keymap': 'c',
-            \         'command': 'ShowMarksClearAll',
+            \         'action__command': 'ShowMarksClearAll',
             \       },
             \       'Go To Previous Mark': {
             \         'keymap': "[m",
-            \         'command': "normal! ['",
+            \         'action__command': "normal! ['",
             \       },
             \       'Go To Next Mark': {
             \         'keymap': "]m",
-            \         'command': "normal! ]'",
+            \         'action__command': "normal! ]'",
             \       },
             \       'Hide Mark': {
             \         'relative_keymap': 'h',
-            \         'command': 'ShowMarksClearMark',
+            \         'action__command': 'ShowMarksClearMark',
             \       },
             \       'Place Mark': {
             \         'relative_keymap': 'm',
-            \         'command': 'ShowMarksPlaceMark',
+            \         'action__command': 'ShowMarksPlaceMark',
             \       },
             \       'Toggle Mark Bar': {
             \         'relative_keymap': 't',
-            \         'command': 'ShowMarksToggle',
+            \         'action__command': 'ShowMarksToggle',
             \       },
             \     },
             \   },
@@ -506,43 +506,43 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Console': {
             \         'relative_keymap': 'c',
-            \         'command': 'Start -title=rails-console rails c',
+            \         'action__command': 'Start -title=rails-console rails c',
             \       },
             \       'Destroy': {
             \         'relative_keymap': 'd',
-            \         'command': 'Rdestroy',
-            \         'command_action': 'complete',
+            \         'action__command': 'Rdestroy',
+            \         'kind': 'command_completion',
             \       },
             \       'Extract': {
             \         'relative_keymap': 'x',
-            \         'command': 'Rextract',
-            \         'command_action': 'complete',
+            \         'action__command': 'Rextract',
+            \         'kind': 'command_completion',
             \       },
             \       'Generate': {
             \         'relative_keymap': 'g',
-            \         'command': 'Rgenerate',
-            \         'command_action': 'complete',
+            \         'action__command': 'Rgenerate',
+            \         'kind': 'command_completion',
             \       },
             \       'Kill Server': {
             \         'relative_keymap': 'k',
-            \         'command': '! kill `cat tmp/pids/server.pid`',
+            \         'action__command': '! kill `cat tmp/pids/server.pid`',
             \       },
             \       'Migrate': {
             \         'relative_keymap': 'm',
-            \         'command': 'Rake db:migrate',
+            \         'action__command': 'Rake db:migrate',
             \       },
             \       'Preview': {
             \         'relative_keymap': 'p',
-            \         'command': 'exec "Rpreview " input("path: ")',
+            \         'action__command': 'exec "Rpreview " input("path: ")',
             \       },
             \       'Rake': {
             \         'relative_keymap': 'r',
-            \         'command': 'Rake',
-            \         'command_action': 'complete',
+            \         'action__command': 'Rake',
+            \         'kind': 'command_completion',
             \       },
             \       'Start Server': {
             \         'relative_keymap': 's',
-            \         'command': 'Rserver!',
+            \         'action__command': 'Rserver!',
             \       },
             \     },
             \   },
@@ -553,101 +553,101 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Alternate': {
             \         'relative_keymap': 'a',
-            \         'command': 'A',
+            \         'action__command': 'A',
             \       },
             \       'Controller': {
             \         'relative_keymap': 'c',
-            \         'command': 'Econtroller',
-            \         'command_action': 'complete',
+            \         'action__command': 'Econtroller',
+            \         'kind': 'command_completion',
             \       },
             \       'Environment': {
             \         'relative_keymap': 'e',
-            \         'command': 'Eenvironment',
-            \         'command_action': 'complete',
+            \         'action__command': 'Eenvironment',
+            \         'kind': 'command_completion',
             \       },
             \       'Factories': {
             \         'relative_keymap': 'f',
-            \         'command': 'Efixtures',
-            \         'command_action': 'complete',
+            \         'action__command': 'Efixtures',
+            \         'kind': 'command_completion',
             \       },
             \       'Helper': {
             \         'relative_keymap': 'h',
-            \         'command': 'Ehelper',
-            \         'command_action': 'complete',
+            \         'action__command': 'Ehelper',
+            \         'kind': 'command_completion',
             \       },
             \       'Initializer': {
             \         'relative_keymap': 'i',
-            \         'command': 'Einitializer',
-            \         'command_action': 'complete',
+            \         'action__command': 'Einitializer',
+            \         'kind': 'command_completion',
             \       },
             \       'Javascript': {
             \         'relative_keymap': 'j',
-            \         'command': 'Ejavascript',
-            \         'command_action': 'complete',
+            \         'action__command': 'Ejavascript',
+            \         'kind': 'command_completion',
             \       },
             \       'Layout': {
             \         'relative_keymap': 'lt',
-            \         'command': 'Elayout',
-            \         'command_action': 'complete',
+            \         'action__command': 'Elayout',
+            \         'kind': 'command_completion',
             \       },
             \       'Locale': {
             \         'relative_keymap': 'l',
-            \         'command': 'Elocale',
-            \         'command_action': 'complete',
+            \         'action__command': 'Elocale',
+            \         'kind': 'command_completion',
             \       },
             \       'Mailer': {
             \         'relative_keymap': 'ml',
-            \         'command': 'Emailer',
-            \         'command_action': 'complete',
+            \         'action__command': 'Emailer',
+            \         'kind': 'command_completion',
             \       },
             \       'Model': {
             \         'relative_keymap': ['m', 'mo'],
-            \         'command': 'Emodel',
-            \         'command_action': 'complete',
+            \         'action__command': 'Emodel',
+            \         'kind': 'command_completion',
             \       },
             \       'Migration': {
             \         'relative_keymap': 'dm',
-            \         'command': 'Emigration',
-            \         'command_action': 'complete',
+            \         'action__command': 'Emigration',
+            \         'kind': 'command_completion',
             \       },
             \       'Relative': {
             \         'relative_keymap': 'r',
-            \         'command': 'R',
+            \         'action__command': 'R',
             \       },
             \       'Schema': {
             \         'relative_keymap': ['d', 'ds'],
-            \         'command': 'Eschema',
-            \         'command_action': 'complete',
+            \         'action__command': 'Eschema',
+            \         'kind': 'command_completion',
             \       },
             \       'Stylesheet': {
             \         'relative_keymap': 's',
-            \         'command': 'Estylesheet',
-            \         'command_action': 'complete',
+            \         'action__command': 'Estylesheet',
+            \         'kind': 'command_completion',
             \       },
             \       'View': {
             \         'relative_keymap': 'v',
-            \         'command': 'Eview',
-            \         'command_action': 'complete',
+            \         'action__command': 'Eview',
+            \         'kind': 'command_completion',
             \       },
             \       'Spec': {
             \         'relative_keymap': 'ts',
-            \         'command': 'Efunctionaltest',
-            \         'command_action': 'complete',
+            \         'action__command': 'Efunctionaltest',
+            \         'kind': 'command_completion',
             \       },
             \       'Controller Spec': {
             \         'relative_keymap': 'tc',
-            \         'command': 'Eintegrationtest',
-            \         'command_action': 'complete',
+            \         'action__command': 'Eintegrationtest',
+            \         'kind': 'command_completion',
             \       },
             \       'Integration Spec': {
             \         'relative_keymap': 'ti',
-            \         'command': 'Espec',
-            \         'command_action': 'complete',
+            \         'action__command': 'Espec',
+            \         'kind': 'command_completion',
             \       },
             \       'Unit Spec': {
             \         'relative_keymap': 'tu',
-            \         'command': 'Eunittest',
-            \         'command_action': 'complete',
+            \         'action__command': 'Eunittest',
+            \         'kind': 'command_completion',
             \       },
             \     },
             \   },
@@ -671,27 +671,27 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Check': {
             \         'relative_keymap': 'c',
-            \         'command': 'SyntasticCheck',
+            \         'action__command': 'SyntasticCheck',
             \       },
             \       'Errors': {
             \         'relative_keymap': 'e',
-            \         'command': 'Errors',
+            \         'action__command': 'Errors',
             \       },
             \       'Info': {
             \         'relative_keymap': 'i',
-            \         'command': 'SyntasticInfo',
+            \         'action__command': 'SyntasticInfo',
             \       },
             \       'Go To Prev Error': {
             \         'keymap': '[c',
-            \         'command': 'lprevious',
+            \         'action__command': 'lprevious',
             \       },
             \       'Go To Next Error': {
             \         'keymap': ']c',
-            \         'command': 'lnext',
+            \         'action__command': 'lnext',
             \       },
             \       'Toggle': {
             \         'relative_keymap': 't',
-            \         'command': 'SyntasticToggleMode',
+            \         'action__command': 'SyntasticToggleMode',
             \       },
             \     },
             \   },
@@ -717,69 +717,69 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'git blame': {
             \         'relative_keymap': 'b',
-            \         'command': 'Gblame',
+            \         'action__command': 'Gblame',
             \       },
             \       'git checkout': {
             \         'relative_keymap': 'o',
-            \         'command': 'Gread',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gread',
+            \         'kind': 'command_completion',
             \       },
             \       'git commit': {
             \         'relative_keymap': 'c',
-            \         'command': 'Gcommit',
+            \         'action__command': 'Gcommit',
             \       },
             \       'git diff': {
             \         'relative_keymap': 'd',
-            \         'command': 'Gdiff',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gdiff',
+            \         'kind': 'command_completion',
             \       },
             \       'git log': {
             \         'relative_keymap': 'l',
-            \         'command': 'exe "silent Glog \| Unite qf"',
+            \         'action__command': 'exe "silent Glog \| Unite qf"',
             \       },
             \       'git mv': {
             \         'relative_keymap': 'm',
-            \         'command': 'exe "Gmove " input("to: ")',
+            \         'action__command': 'exe "Gmove " input("to: ")',
             \       },
             \       'git pull': {
             \         'relative_keymap': 'P',
-            \         'command': 'Gpull',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gpull',
+            \         'kind': 'command_completion',
             \       },
             \       'git push': {
             \         'relative_keymap': 'p',
-            \         'command': 'Gpush',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gpush',
+            \         'kind': 'command_completion',
             \       },
             \       'git rm': {
             \         'relative_keymap': 'r',
-            \         'command': 'Gremove',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gremove',
+            \         'kind': 'command_completion',
             \       },
             \       'git ssh': {
             \         'relative_keymap': 'g',
-            \         'command': 'Start gitsh',
+            \         'action__command': 'Start gitsh',
             \       },
             \       'git stage': {
             \         'relative_keymap': 'a',
-            \         'command': 'Gwrite',
-            \         'command_action': 'complete',
+            \         'action__command': 'Gwrite',
+            \         'kind': 'command_completion',
             \       },
             \       'git status': {
             \         'relative_keymap': 's',
-            \         'command': 'Gstatus',
+            \         'action__command': 'Gstatus',
             \       },
             \       'github window': {
             \         'relative_keymap': 'w',
-            \         'command': 'Start! github',
+            \         'action__command': 'Start! github',
             \       },
             \       'Go To Prev Hunk': {
             \         'keymap': '[g',
-            \         'command': 'GitGutterPrevHunk',
+            \         'action__command': 'GitGutterPrevHunk',
             \       },
             \       'Go To Next Hunk': {
             \         'keymap': ']g',
-            \         'command': 'GitGutterNextHunk',
+            \         'action__command': 'GitGutterNextHunk',
             \       },
             \     },
             \   },
@@ -798,15 +798,15 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Run All Specs': {
             \         'relative_keymap': 'a',
-            \         'command': 'call RunAllSpec()',
+            \         'action__command': 'call RunAllSpec()',
             \       },
             \       'Run Current Line Spec': {
             \         'relative_keymap': 'l',
-            \         'command': "call RunNearestSpec()",
+            \         'action__command': "call RunNearestSpec()",
             \       },
             \       'Run Current Spec': {
             \         'relative_keymap': 't',
-            \         'command': 'call RunCurrentSpecFile()',
+            \         'action__command': 'call RunCurrentSpecFile()',
             \       },
             \     },
             \   },
@@ -820,27 +820,27 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Copen': {
             \         'relative_keymap': 'c',
-            \         'command': 'Copen',
+            \         'action__command': 'Copen',
             \       },
             \       'Dispatch': {
             \         'relative_keymap': 'd',
-            \         'command': 'Dispatch',
-            \         'command_action': 'complete',
+            \         'action__command': 'Dispatch',
+            \         'kind': 'command_completion',
             \       },
             \       'Focus': {
             \         'relative_keymap': 'f',
-            \         'command': 'Focus',
-            \         'command_action': 'complete',
+            \         'action__command': 'Focus',
+            \         'kind': 'command_completion',
             \       },
             \       'Make': {
             \         'relative_keymap': 'm',
-            \         'command': 'Make',
-            \         'command_action': 'complete',
+            \         'action__command': 'Make',
+            \         'kind': 'command_completion',
             \       },
             \       'Start': {
             \         'relative_keymap': 's',
-            \         'command': 'Start',
-            \         'command_action': 'complete',
+            \         'action__command': 'Start',
+            \         'kind': 'command_completion',
             \       },
             \     },
             \   },
@@ -871,15 +871,15 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Console': {
             \         'relative_keymap': 'c',
-            \         'command': 'call Heroku_command("run rails c")',
+            \         'action__command': 'call Heroku_command("run rails c")',
             \       },
             \       'Logs': {
             \         'relative_keymap': 'l',
-            \         'command': 'call Heroku_command("logs --tail")',
+            \         'action__command': 'call Heroku_command("logs --tail")',
             \       },
             \       'Migrate': {
             \         'relative_keymap': 'm',
-            \         'command': 'call Heroku_command("run rake db:migrate")',
+            \         'action__command': 'call Heroku_command("run rake db:migrate")',
             \       },
             \     },
             \   },
