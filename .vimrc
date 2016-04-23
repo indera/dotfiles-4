@@ -798,7 +798,7 @@ filetype plugin indent on    " required
             \     'candidates': {
             \       'Run All Specs': {
             \         'relative_keymap': 'a',
-            \         'action__command': 'call RunAllSpec()',
+            \         'action__command': 'call RunAllSpecs()',
             \       },
             \       'Run Current Line Spec': {
             \         'relative_keymap': 'l',
