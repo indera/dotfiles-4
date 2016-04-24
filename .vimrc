@@ -424,6 +424,14 @@ filetype plugin indent on    " required
             \       'Edit .zshrc': {
             \         'action__command': 'vsplit ~/.zshrc',
             \       },
+            \       'Next Buffer': {
+            \         'keymap': ']b',
+            \         'action__command': 'normal! <esc>:bn<cr>',
+            \       },
+            \       'Previous Buffer': {
+            \         'keymap': '[b',
+            \         'action__command': 'normal! <esc>:bn<cr>',
+            \       },
             \       'Reload .vimrc': {
             \         'relative_keymap': 'vr',
             \         'action__command': 'so $MYVIMRC',
@@ -464,21 +472,21 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'c',
             \         'action__command': 'ShowMarksClearAll',
             \       },
-            \       'Go To Previous Mark': {
-            \         'keymap': "[m",
-            \         'action__command': "normal! ['",
-            \       },
-            \       'Go To Next Mark': {
-            \         'keymap': "]m",
-            \         'action__command': "normal! ]'",
-            \       },
             \       'Hide Mark': {
             \         'relative_keymap': 'h',
             \         'action__command': 'ShowMarksClearMark',
             \       },
+            \       'Next Mark': {
+            \         'keymap': "]m",
+            \         'action__command': "normal! ]'",
+            \       },
             \       'Place Mark': {
             \         'relative_keymap': 'm',
             \         'action__command': 'ShowMarksPlaceMark',
+            \       },
+            \       'Previous Mark': {
+            \         'keymap': "[m",
+            \         'action__command': "normal! ['",
             \       },
             \       'Toggle Mark Bar': {
             \         'relative_keymap': 't',
@@ -681,13 +689,13 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'i',
             \         'action__command': 'SyntasticInfo',
             \       },
-            \       'Go To Prev Error': {
-            \         'keymap': '[c',
-            \         'action__command': 'lprevious',
-            \       },
-            \       'Go To Next Error': {
+            \       'Next Error': {
             \         'keymap': ']c',
             \         'action__command': 'lnext',
+            \       },
+            \       'Prev Error': {
+            \         'keymap': '[c',
+            \         'action__command': 'lprevious',
             \       },
             \       'Toggle': {
             \         'relative_keymap': 't',
@@ -773,13 +781,13 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'w',
             \         'action__command': 'Start! github',
             \       },
-            \       'Go To Prev Hunk': {
-            \         'keymap': '[g',
-            \         'action__command': 'GitGutterPrevHunk',
-            \       },
-            \       'Go To Next Hunk': {
+            \       'Next Hunk': {
             \         'keymap': ']g',
             \         'action__command': 'GitGutterNextHunk',
+            \       },
+            \       'Prev Hunk': {
+            \         'keymap': '[g',
+            \         'action__command': 'GitGutterPrevHunk',
             \       },
             \     },
             \   },
