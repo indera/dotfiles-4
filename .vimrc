@@ -220,7 +220,7 @@ filetype plugin indent on    " required
     " ctrlp.vim
       let g:ctrlp_map = '<Leader>f'
       " Use ag because it's lightning fast and respects .gitignore
-      let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+      let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore .git'
       let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
       let g:ctrlp_prompt_mappings = {
             \   'PrtSelectMove("j")':   ['<c-j>'],
@@ -426,11 +426,11 @@ filetype plugin indent on    " required
             \       },
             \       'Next Buffer': {
             \         'keymap': ']b',
-            \         'action__command': 'normal! <esc>:bn<cr>',
+            \         'action__command': 'bn',
             \       },
             \       'Previous Buffer': {
             \         'keymap': '[b',
-            \         'action__command': 'normal! <esc>:bn<cr>',
+            \         'action__command': 'bp',
             \       },
             \       'Reload .vimrc': {
             \         'relative_keymap': 'vr',
