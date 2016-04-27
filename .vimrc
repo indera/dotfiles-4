@@ -53,11 +53,6 @@ call vundle#begin()
   " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
-  " need to be manually compiled, use the unix one because the mac version
-  " isn't working
-  " $ cd ~/.vim/bundle/vimproc.vim
-  " $ make -f make_unix.mak
-  " Plugin 'shougo/vimproc.vim'
 
   " others
   Plugin 'majutsushi/tagbar'
