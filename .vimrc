@@ -54,6 +54,7 @@ call vundle#begin()
   " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
+  Plugin 'tpope/vim-unimpaired'
 
   " others
   Plugin 'majutsushi/tagbar'
@@ -735,7 +736,7 @@ filetype plugin indent on    " required
             \       },
             \       'git commit all': {
             \         'relative_keymap': 'c',
-            \         'action__command': 'Gwrite \| Gcommit',
+            \         'action__command': 'exec "Dispatch git add ." \| Gcommit',
             \       },
             \       'git diff': {
             \         'relative_keymap': 'd',
