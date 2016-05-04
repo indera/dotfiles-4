@@ -33,6 +33,7 @@ call vundle#begin()
 
   " completion
   Plugin 'ervandew/supertab'
+  Plugin 'tpope/vim-endwise'
 
   " code display
   Plugin 'chriskempson/base16-vim'
@@ -702,6 +703,7 @@ filetype plugin indent on    " required
 
   "" completion
     " supertab
+    " vim-endwise
 
   "" code display
     " base16-vim
