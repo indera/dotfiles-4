@@ -730,8 +730,12 @@ filetype plugin indent on    " required
             \         'kind': 'command_completion',
             \       },
             \       'git commit': {
-            \         'relative_keymap': 'c',
+            \         'relative_keymap': 'C',
             \         'action__command': 'Gcommit',
+            \       },
+            \       'git commit all': {
+            \         'relative_keymap': 'c',
+            \         'action__command': 'Gwrite \| Gcommit',
             \       },
             \       'git diff': {
             \         'relative_keymap': 'd',
