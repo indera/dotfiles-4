@@ -56,6 +56,7 @@ call vundle#begin()
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-unimpaired'
+  Plugin 'tpope/vim-abolish'
 
   " others
   Plugin 'majutsushi/tagbar'
@@ -702,6 +703,8 @@ filetype plugin indent on    " required
             \   },
             \ })
 
+    " vim-sensible
+
   "" completion
     " supertab
     " vim-endwise
@@ -728,7 +731,6 @@ filetype plugin indent on    " required
             \       'git checkout': {
             \         'relative_keymap': 'o',
             \         'action__command': 'Gread',
-            \         'kind': 'command_completion',
             \       },
             \       'git commit': {
             \         'relative_keymap': 'C',
@@ -741,7 +743,6 @@ filetype plugin indent on    " required
             \       'git diff': {
             \         'relative_keymap': 'd',
             \         'action__command': 'Gdiff',
-            \         'kind': 'command_completion',
             \       },
             \       'git log': {
             \         'relative_keymap': 'l',
@@ -754,12 +755,10 @@ filetype plugin indent on    " required
             \       'git pull': {
             \         'relative_keymap': 'P',
             \         'action__command': 'Gpull',
-            \         'kind': 'command_completion',
             \       },
             \       'git push': {
             \         'relative_keymap': 'p',
             \         'action__command': 'Gpush',
-            \         'kind': 'command_completion',
             \       },
             \       'git rm': {
             \         'relative_keymap': 'r',
@@ -773,7 +772,6 @@ filetype plugin indent on    " required
             \       'git stage': {
             \         'relative_keymap': 'a',
             \         'action__command': 'Gwrite',
-            \         'kind': 'command_completion',
             \       },
             \       'git status': {
             \         'relative_keymap': 's',
