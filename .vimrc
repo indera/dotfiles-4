@@ -30,6 +30,7 @@ call vundle#begin()
   Plugin 'mattn/emmet-vim'
   Plugin 'mustache/vim-mustache-handlebars'
   Plugin 'scrooloose/syntastic'
+  Plugin 'tpope/vim-sensible'
 
   " completion
   Plugin 'ervandew/supertab'
@@ -82,9 +83,6 @@ filetype plugin indent on    " required
   " autoreload opened files
     set autoread
 
-  " status line
-    set laststatus=2  " Always display the status line
-
   " tab line
     set showtabline=2
 
@@ -98,9 +96,6 @@ filetype plugin indent on    " required
     set nobackup
     set nowritebackup
     set noswapfile
-
-  " esc must close instantlv
-    set timeoutlen=1000 ttimeoutlen=0
 
   " show cursor line
     set cul
@@ -172,9 +167,6 @@ filetype plugin indent on    " required
     " more natural split opening
     set splitbelow
     set splitright
-
-  " backspace everything!
-    set backspace=indent,eol,start
 
   " cycle windows on insert mode
     imap <c-w> <ESC><c-w>
@@ -411,6 +403,10 @@ filetype plugin indent on    " required
             \     'description': "Shortcuts",
             \     'keymap': "<Leader>s",
             \     'candidates': {
+            \       'Clean Plugins': {
+            \         'relative_keymap': 'pc',
+            \         'action__command': 'PluginClean',
+            \       },
             \       'Edit .gitconfig': {
             \         'action__command': 'vsplit ~/.gitconfig',
             \       },
@@ -420,6 +416,10 @@ filetype plugin indent on    " required
             \       },
             \       'Edit .zshrc': {
             \         'action__command': 'vsplit ~/.zshrc',
+            \       },
+            \       'Install Plugins': {
+            \         'relative_keymap': 'pi',
+            \         'action__command': 'PluginInstall',
             \       },
             \       'Next Buffer': {
             \         'keymap': ']b',
