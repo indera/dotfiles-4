@@ -741,8 +741,12 @@ filetype plugin indent on    " required
             \         'action__command': 'exec "Dispatch git add ." \| Gcommit',
             \       },
             \       'git diff': {
-            \         'relative_keymap': 'd',
+            \         'relative_keymap': 'D',
             \         'action__command': 'Gdiff',
+            \       },
+            \       'git diff all': {
+            \         'relative_keymap': 'd',
+            \         'action__command': 'Start git difftool',
             \       },
             \       'git log': {
             \         'relative_keymap': 'l',
