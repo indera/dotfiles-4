@@ -49,7 +49,7 @@ plugins=(ssh-agent git vi-mode)
 
 # User configuration
 
-# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin"
+# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -170,14 +170,14 @@ alias z='fasd_cd -d' # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # interactive directory jump
 
 # Android SDK for rubymotion
-export RUBYMOTION_ANDROID_SDK=/Users/kelvinst/.rubymotion-android/sdk
-export RUBYMOTION_ANDROID_NDK=/Users/kelvinst/.rubymotion-android/ndk
+export RUBYMOTION_ANDROID_SDK=~/.rubymotion-android/sdk
+export RUBYMOTION_ANDROID_NDK=~/.rubymotion-android/ndk
 
 # were needed to rvm work properly with dispatch.vim
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
 # to get the binstubs on ./bin
-export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kelvinst/.rvm/bin"
+export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin"
 
 # completion for tmuxinator
 source ~/.tmuxinator/completion.zsh
