@@ -194,4 +194,4 @@ mkmv() {
 }
 
 # added by travis gem
-[ -f /Users/kelvinst/.travis/travis.sh ] && source /Users/kelvinst/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
