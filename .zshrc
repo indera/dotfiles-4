@@ -123,7 +123,7 @@ my_mux() {
 
       if [ $? -eq 1 ]; then
         echo "Could not find file ~/.tmuxinator/$project_name.yml"
-        echo -n "Do you want to create it? (N/y)"
+        echo -n "Do you want to create it? If not it will use the ~/.tmuxinator/default.yml (N/y)"
         read yn
         case $yn in
           [Yy]* )
