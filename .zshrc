@@ -192,3 +192,6 @@ mkcp() {
 mkmv() {
   mkdir -p -- "${@: -1}" && mv -- "$@"
 }
+
+# added by travis gem
+[ -f /Users/kelvinst/.travis/travis.sh ] && source /Users/kelvinst/.travis/travis.sh
