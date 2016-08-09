@@ -116,6 +116,20 @@ filetype plugin indent on    " required
     "   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape block"
     " endif
 
+  " crop long lines
+    set textwidth=0
+    function! ToggleCropLongLines()
+      if &textwidth == 0
+        set textwidth=80
+        ec "CropLines ON"
+      else
+        set textwidth=0
+        ec "CropLines OFF"
+      endif
+    endfunction
+
+    nmap <Leader>8 :call ToggleCropLongLines()<CR>
+
   " syntax!!
     syntax on
 
