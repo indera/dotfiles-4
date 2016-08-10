@@ -117,7 +117,7 @@ filetype plugin indent on    " required
     " endif
 
   " crop long lines
-    set textwidth=0
+    set textwidth=80
     function! ToggleCropLongLines()
       if &textwidth == 0
         set textwidth=80
@@ -155,6 +155,9 @@ filetype plugin indent on    " required
     cab Q q
     cab E e
     cab E! e!
+
+  " markdown
+    au BufRead,BufNewFile *.md setfiletype markdown
 
   " window manipulation
     " c-w c for create empty tab
