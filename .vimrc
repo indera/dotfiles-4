@@ -157,7 +157,7 @@ filetype plugin indent on    " required
     cab E! e!
 
   " markdown
-    au BufRead,BufNewFile *.md setfiletype markdown
+    au BufRead,BufNewFile *.md set filetype=markdown
 
   " window manipulation
     " c-w c for create empty tab
