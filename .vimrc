@@ -220,6 +220,9 @@ filetype plugin indent on    " required
 
   " changing the vim shell
     set shell=/bin/zsh
+
+  " line break on normal mode
+    nnoremap <NL> i<CR><ESC>l
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
