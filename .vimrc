@@ -680,7 +680,11 @@ filetype plugin indent on    " required
     " emmet-vim
     " vim-mustache-handlebars
     " syntastic
+      let g:syntastic_aggregate_errors = 1
+
       let g:syntastic_auto_loc_list = 1
+      let g:syntastic_loc_list_height = 5
+
       let g:syntastic_check_on_open = 1
       let g:syntastic_check_on_wq = 0
 
@@ -718,6 +722,10 @@ filetype plugin indent on    " required
             \       'Prev Error': {
             \         'keymap': '[c',
             \         'action__command': 'lprevious',
+            \       },
+            \       'Reset': {
+            \         'relative_keymap': 'r',
+            \         'action__command': 'SyntasticReset',
             \       },
             \       'Toggle': {
             \         'relative_keymap': 't',
