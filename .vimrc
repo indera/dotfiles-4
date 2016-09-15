@@ -31,6 +31,8 @@ call vundle#begin()
   Plugin 'mustache/vim-mustache-handlebars'
   Plugin 'scrooloose/syntastic'
   Plugin 'tpope/vim-sensible'
+  Plugin 'avdgaag/vim-phoenix'
+  Plugin 'elixir-lang/vim-elixir'
 
   " completion
   Plugin 'ervandew/supertab'
