@@ -456,6 +456,10 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'vr',
             \         'action__command': 'so $MYVIMRC',
             \       },
+            \       'Toggle wordwrap': {
+            \         'relative_keymap': 'w',
+            \         'action__command': 'set invwrap',
+            \       },
             \     }
             \   }
             \ })
