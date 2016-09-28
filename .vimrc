@@ -938,7 +938,22 @@ filetype plugin indent on    " required
     " YankRing.vim
       let g:yankring_history_file = '.yankring-history'
 
-      nmap <Leader>p :YRShow<CR>
+      call unite_menus#Define({
+            \   "paste": {
+            \     'description': "Clipboard",
+            \     'keymap': "<Leader>p",
+            \     'candidates': {
+            \       'Toggle paste mode': {
+            \         'relative_keymap': 'p',
+            \         'action__command': 'set invpaste',
+            \       },
+            \       'YankRing history': {
+            \         'relative_keymap': 'y',
+            \         'action__command': 'YRShow',
+            \       },
+            \     },
+            \   },
+            \ })
 
     " vim-textobj-user
     " vim-textobj-rubyblock
