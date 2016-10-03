@@ -195,3 +195,6 @@ mkmv() {
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+# docker env vars
+eval "$(docker-machine env)"
