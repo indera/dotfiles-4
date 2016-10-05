@@ -920,8 +920,12 @@ filetype plugin indent on    " required
             \     'keymap': "<Leader>d",
             \     'candidates': {
             \       'Copen': {
-            \         'relative_keymap': 'c',
+            \         'relative_keymap': 'o',
             \         'action__command': 'Copen',
+            \       },
+            \       'Cclose': {
+            \         'relative_keymap': 'c',
+            \         'action__command': 'cclose',
             \       },
             \       'Dispatch': {
             \         'relative_keymap': 'd',
