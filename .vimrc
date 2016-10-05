@@ -745,6 +745,54 @@ filetype plugin indent on    " required
             \ })
 
     " vim-sensible
+    " vim-phoenix
+    " vim-elixir
+      call unite_menus#Define({
+            \   "elixir": {
+            \     'description': "Elixir",
+            \     'keymap': "<Leader>e",
+            \     'candidates': {},
+            \   },
+            \   "elixir_tests": {
+            \     'parent_menu': 'elixir',
+            \     'description': "Elixir Tests",
+            \     'relative_keymap': "t",
+            \     'candidates': {
+            \       'Run All Tests': {
+            \         'relative_keymap': 'a',
+            \         'action__command': 'Dispatch mix test',
+            \       },
+            \       'Run Current Line Test': {
+            \         'relative_keymap': 'l',
+            \         'action__command': 'exec "Dispatch mix test %:" . line(''.'')',
+            \       },
+            \       'Run Current Test': {
+            \         'relative_keymap': 't',
+            \         'action__command': 'Dispatch mix test %',
+            \       },
+            \     },
+            \   },
+            \   "phoenix_utils": {
+            \     'parent_menu': 'elixir',
+            \     'description': "Phoenix Utilities",
+            \     'relative_keymap': "u",
+            \     'candidates': {
+            \       'Console': {
+            \         'relative_keymap': 'c',
+            \         'action__command': 'Start iex -S mix',
+            \       },
+            \       'Migrate': {
+            \         'relative_keymap': 'm',
+            \         'action__command': 'Dispatch mix ecto.migrate',
+            \       },
+            \       'Start Server': {
+            \         'relative_keymap': 's',
+            \         'action__command': 'Start! mix phoenix.server',
+            \       },
+            \     },
+            \   },
+            \ })
+
 
   "" completion
     " supertab
