@@ -192,7 +192,7 @@ filetype plugin indent on    " required
     imap <c-w> <ESC><c-w>
 
   " line numbers
-    set number
+    set nonumber
     nmap <silent> <Leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 
   " no mode status below status bar
