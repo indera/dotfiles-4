@@ -827,7 +827,7 @@ filetype plugin indent on    " required
             \       },
             \       'git commit all': {
             \         'relative_keymap': 'c',
-            \         'action__command': 'exec "Dispatch git add ." \| Gcommit',
+            \         'action__command': 'Start git ac',
             \       },
             \       'git diff': {
             \         'relative_keymap': 'D',
@@ -985,6 +985,10 @@ filetype plugin indent on    " required
             \       'Migrate': {
             \         'relative_keymap': 'm',
             \         'action__command': 'call Heroku_command("run rake db:migrate")',
+            \       },
+            \       'Push': {
+            \         'relative_keymap': 'p',
+            \         'action__command': 'call Heroku_command("push")',
             \       },
             \     },
             \   },
