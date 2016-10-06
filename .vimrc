@@ -821,9 +821,9 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'o',
             \         'action__command': 'Gread',
             \       },
-            \       'git commit': {
+            \       'git commit all amend': {
             \         'relative_keymap': 'C',
-            \         'action__command': 'Gcommit',
+            \         'action__command': 'Start git ac --amend',
             \       },
             \       'git commit all': {
             \         'relative_keymap': 'c',
@@ -853,10 +853,9 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'p',
             \         'action__command': 'Gpush',
             \       },
-            \       'git rm': {
+            \       'git reset': {
             \         'relative_keymap': 'r',
-            \         'action__command': 'Gremove',
-            \         'kind': 'command_completion',
+            \         'action__command': 'Dispatch git reset',
             \       },
             \       'git ssh': {
             \         'relative_keymap': 'g',
