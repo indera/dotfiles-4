@@ -11,12 +11,14 @@ call vundle#begin()
   Plugin 'sjl/gundo.vim'
   " Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
+  Plugin 'daviesjamie/vim-base16-lightline'
   Plugin 'scrooloose/nerdtree'
   " Plugin 'spolu/dwm.vim'
   Plugin 'blueyed/vim-diminactive'
   " Plugin 'mhinz/vim-startify'
   Plugin 'shougo/unite.vim'
   Plugin 'sgur/unite-qf'
+  Plugin 'edkolev/tmuxline.vim'
   " remember to update this if you're changing the colorscheme
   Plugin 'kelvinst/ShowMarks'
   Plugin 'kelvinst/unite-menus'
@@ -109,14 +111,6 @@ filetype plugin indent on    " required
       autocmd WinEnter * set cul
       autocmd WinLeave * set nocul
     augroup END
-
-  " insert mode with ibeam and no cursor line
-    " autocmd InsertEnter,InsertLeave * set cul!
-    " if has("autocmd")
-    "   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape ibeam"
-    "   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape block"
-    "   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/base-16-eighties-dark/cursor_shape block"
-    " endif
 
   " crop long lines
     set textwidth=80
@@ -248,6 +242,7 @@ filetype plugin indent on    " required
 
     " lightline.vim
       let g:lightline = {
+            \ 'colorscheme': 'base16',
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'], ['fugitive', 'filename'], ['ctrlpmark']
@@ -804,6 +799,9 @@ filetype plugin indent on    " required
       let base16colorspace=256  " Access colors present in 256 colorspace
       set background=dark
       " remember to update https://github.com/kelvinst/ShowMarks
+      " remember to change on .zshrc too
+      " remember to run ":Tmuxline lightline"
+      " then run ":TmuxlineSnapshot! .tmux.lightline"
       colorscheme base16-eighties
 
   "" integrations
