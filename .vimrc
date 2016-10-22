@@ -14,7 +14,7 @@ call vundle#begin()
   Plugin 'daviesjamie/vim-base16-lightline'
   Plugin 'scrooloose/nerdtree'
   " Plugin 'spolu/dwm.vim'
-  Plugin 'blueyed/vim-diminactive'
+  " Plugin 'blueyed/vim-diminactive'
   " Plugin 'mhinz/vim-startify'
   Plugin 'shougo/unite.vim'
   Plugin 'sgur/unite-qf'
