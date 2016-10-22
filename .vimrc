@@ -819,7 +819,7 @@ filetype plugin indent on    " required
       " remember to change on .zshrc too
       " remember to run ":Tmuxline lightline"
       " then run ":TmuxlineSnapshot! .tmux.lightline"
-      colorscheme base16-eighties
+      colorscheme base16-harmonic16-dark
 
   "" integrations
     " vim-fugitive
