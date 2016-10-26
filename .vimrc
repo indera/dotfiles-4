@@ -219,6 +219,9 @@ filetype plugin indent on    " required
 
   " line break on normal mode
     nnoremap <NL> i<CR><ESC>l
+
+  " quickfix open in split
+    autocmd! FileType qf nnoremap <buffer> <leader>v <C-w><Enter><C-w>L
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
