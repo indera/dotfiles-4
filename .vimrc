@@ -35,6 +35,7 @@ call vundle#begin()
   Plugin 'tpope/vim-sensible'
   Plugin 'avdgaag/vim-phoenix'
   Plugin 'elixir-lang/vim-elixir'
+  Plugin 'janko-m/vim-test'
 
   " completion
   Plugin 'ervandew/supertab'
@@ -48,7 +49,7 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
-  Plugin 'thoughtbot/vim-rspec'
+  " Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
   " Plugin 'tpope/vim-heroku'
@@ -465,7 +466,6 @@ filetype plugin indent on    " required
       nmap <Leader>. :Unite -silent source<CR>
       nmap <Leader>b :Unite -silent buffer<CR>
       nmap <Leader>: :Unite -silent command<CR>
-      nmap <Leader>t :Unite -silent tab<CR>
 
       " Custom mappings for the unite buffer
       autocmd FileType unite call s:unite_settings()
@@ -751,25 +751,6 @@ filetype plugin indent on    " required
             \     'keymap': "<Leader>e",
             \     'candidates': {},
             \   },
-            \   "elixir_tests": {
-            \     'parent_menu': 'elixir',
-            \     'description': "Elixir Tests",
-            \     'relative_keymap': "t",
-            \     'candidates': {
-            \       'Run All Tests': {
-            \         'relative_keymap': 'a',
-            \         'action__command': 'Dispatch mix test',
-            \       },
-            \       'Run Current Line Test': {
-            \         'relative_keymap': 'l',
-            \         'action__command': 'exec "Dispatch mix test %:" . line(''.'')',
-            \       },
-            \       'Run Current Test': {
-            \         'relative_keymap': 't',
-            \         'action__command': 'Dispatch mix test %',
-            \       },
-            \     },
-            \   },
             \   "phoenix_utils": {
             \     'parent_menu': 'elixir',
             \     'description': "Phoenix Utilities",
@@ -791,6 +772,38 @@ filetype plugin indent on    " required
             \   },
             \ })
 
+    " vim-test
+      let test#strategy = "dispatch"
+      let test#filename_modifier = ':p'
+
+      call unite_menus#Define({
+            \   "tests": {
+            \     'description': "Tests",
+            \     'keymap': "<Leader>t",
+            \     'candidates': {
+            \       'Run All': {
+            \         'relative_keymap': 'a',
+            \         'action__command': 'TestSuite',
+            \       },
+            \       'Run Current Line': {
+            \         'relative_keymap': 't',
+            \         'action__command': 'TestNearest',
+            \       },
+            \       'Run Current File': {
+            \         'relative_keymap': 'f',
+            \         'action__command': 'TestFile',
+            \       },
+            \       'Rerun Last Test': {
+            \         'relative_keymap': 'l',
+            \         'action__command': 'TestLast',
+            \       },
+            \       'Open Last Test': {
+            \         'relative_keymap': 'o',
+            \         'action__command': 'TestVisit',
+            \       },
+            \     },
+            \   },
+            \ })
 
   "" completion
     " supertab
@@ -888,30 +901,6 @@ filetype plugin indent on    " required
 
     " dash.vim
     " ag.vim
-    " vim-rspec
-      let g:rspec_command = "Dispatch rspec {spec}"
-
-      call unite_menus#Define({
-            \   "rails_tests": {
-            \     'parent_menu': 'rails',
-            \     'description': "Rails Tests",
-            \     'relative_keymap': "t",
-            \     'candidates': {
-            \       'Run All Specs': {
-            \         'relative_keymap': 'a',
-            \         'action__command': 'call RunAllSpecs()',
-            \       },
-            \       'Run Current Line Spec': {
-            \         'relative_keymap': 'l',
-            \         'action__command': "call RunNearestSpec()",
-            \       },
-            \       'Run Current Spec': {
-            \         'relative_keymap': 't',
-            \         'action__command': 'call RunCurrentSpecFile()',
-            \       },
-            \     },
-            \   },
-            \ })
 
     " vim-dispatch
       call unite_menus#Define({
