@@ -243,6 +243,7 @@ filetype plugin indent on    " required
             \   'PrtCurRight()':        ['<right>'],
             \   'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', '<c-p>'],
             \ }
+      " let g:ctrlp_root_markers = ['.gitignore']
 
     " lightline.vim
       let g:lightline = {
