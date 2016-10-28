@@ -1029,10 +1029,10 @@ filetype plugin indent on    " required
       " nmap <c-s-b> <Plug>(easymotion-B)
 
       " search movements
-      map f <Plug>(easymotion-f)
-      map F <Plug>(easymotion-F)
-      map t <Plug>(easymotion-t)
-      map T <Plug>(easymotion-T)
+      " map f <Plug>(easymotion-f)
+      " map F <Plug>(easymotion-F)
+      " map t <Plug>(easymotion-t)
+      " map T <Plug>(easymotion-T)
 
       " a better search (forward and backward)
       map s <Plug>(easymotion-s)
