@@ -82,7 +82,9 @@ source $ZSH/oh-my-zsh.sh
 
 ########## My options ##########
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-harmonic16.dark.sh"
+export COLORSCHEME="base16-harmonic16.dark"
+export VIM_COLORSCHEME="base16-harmonic16-dark"
+BASE16_SHELL="$HOME/.config/base16-shell/$COLORSCHEME.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # escape timeout
