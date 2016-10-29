@@ -424,7 +424,7 @@ filetype plugin indent on    " required
       call unite_menus#Define({
             \   "shortcuts": {
             \     'description': "Shortcuts",
-            \     'keymap': "<Leader>s",
+            \     'keymap': "<Leader>;",
             \     'candidates': {
             \       'Clean Plugins': {
             \         'relative_keymap': 'pc',
@@ -709,7 +709,7 @@ filetype plugin indent on    " required
       call unite_menus#Define({
             \   "syntastic": {
             \     'description': "Syntastic",
-            \     'keymap': "<Leader>c",
+            \     'keymap': "<Leader>s",
             \     'candidates': {
             \       'Check': {
             \         'relative_keymap': 'c',
@@ -724,11 +724,11 @@ filetype plugin indent on    " required
             \         'action__command': 'SyntasticInfo',
             \       },
             \       'Next Error': {
-            \         'keymap': ']c',
+            \         'keymap': ']s',
             \         'action__command': 'lnext',
             \       },
             \       'Prev Error': {
-            \         'keymap': '[c',
+            \         'keymap': '[s',
             \         'action__command': 'lprevious',
             \       },
             \       'Reset': {
