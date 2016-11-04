@@ -60,7 +60,7 @@ call vundle#begin()
   " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
-  Plugin 'tpope/vim-unimpaired'
+  Plugin 'tpope/vim-unimpaired' " for searching and replacing patterns easily
   Plugin 'tpope/vim-abolish'
 
   " others
