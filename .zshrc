@@ -198,5 +198,8 @@ mkmv() {
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+# hub aliased as git
+eval "$(hub alias -s)"
+
 # docker env vars
 eval "$(docker-machine env)"
