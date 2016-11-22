@@ -82,6 +82,10 @@ source $ZSH/oh-my-zsh.sh
 
 ########## My options ##########
 # Base16 Shell
+# remember to update https://github.com/kelvinst/ShowMarks
+# remember to change on .zshrc too
+# remember to run ":Tmuxline lightline"
+# then run ":TmuxlineSnapshot! .tmux.lightline"
 export COLORSCHEME="base16-harmonic16.dark"
 export VIM_COLORSCHEME="base16-harmonic16-dark"
 BASE16_SHELL="$HOME/.config/base16-shell/$COLORSCHEME.sh"
@@ -150,7 +154,6 @@ _my_mux() {
 }
 
 compdef _my_mux my_mux tt
-
 
 # sorry cowie, you are just pooing my ansibles :/
 export ANSIBLE_NOCOWS=1

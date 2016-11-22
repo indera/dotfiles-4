@@ -9,17 +9,12 @@ call vundle#begin()
   " interface
   Plugin 'kien/ctrlp.vim'
   Plugin 'sjl/gundo.vim'
-  " Plugin 'junegunn/limelight.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'daviesjamie/vim-base16-lightline'
   Plugin 'scrooloose/nerdtree'
-  " Plugin 'spolu/dwm.vim'
-  " Plugin 'blueyed/vim-diminactive'
-  " Plugin 'mhinz/vim-startify'
   Plugin 'shougo/unite.vim'
   Plugin 'sgur/unite-qf'
   Plugin 'edkolev/tmuxline.vim'
-  " remember to update this if you're changing the colorscheme
   Plugin 'kelvinst/ShowMarks'
   Plugin 'kelvinst/unite-menus'
 
@@ -47,17 +42,13 @@ call vundle#begin()
 
   " integrations
   Plugin 'tpope/vim-fugitive'
-  " Plugin 'rizzatti/dash.vim'
   Plugin 'rking/ag.vim'
-  " Plugin 'thoughtbot/vim-rspec'
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
   " Plugin 'tpope/vim-heroku'
 
   " commands
   Plugin 'YankRing.vim'
-  " Plugin 'kana/vim-textobj-user'
-  " Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-unimpaired'
@@ -70,7 +61,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" vim config
+"" vim basic config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   " leader
@@ -91,12 +82,6 @@ filetype plugin indent on    " required
 
   " tab line
     set showtabline=2
-
-    " function! GuiTabLabel()
-    "   return exists('t:mytablabel') ? t:mytablabel : ''
-    " endfunction
-    " set tabline=%{GuiTabLabel()}
-    " set go+=e
 
   " no annoying backup!!!
     set nobackup
@@ -153,7 +138,7 @@ filetype plugin indent on    " required
     cab E e
     cab E! e!
 
-  " markdown
+  " markdown syntax was not working for md files
     au BufRead,BufNewFile *.md set filetype=markdown
 
   " window manipulation
@@ -223,6 +208,7 @@ filetype plugin indent on    " required
 
   " quickfix open in split
     autocmd! FileType qf nnoremap <buffer> <leader>v <C-w><Enter><C-w>L
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -383,36 +369,9 @@ filetype plugin indent on    " required
       map <Leader>u :GundoToggle<CR>
       let g:gundo_close_on_revert = 1
 
-    " limelight.vim
     " nerdtree
       nmap <Leader>o :NERDTreeToggle<CR>
       let NERDTreeQuitOnOpen = 1
-
-    " dwm.vim
-      " let g:dwm_map_keys = 0
-
-      " nmap <c-w><c-o> <Plug>DWMRotateClockwise
-
-      " nmap <c-w>s <Plug>DWMNew
-      " nmap <c-w><c-s> <Plug>DWMNew
-      " nmap <c-w><Space> <Plug>DWMFocus
-      " nmap <c-w><NUL> <Plug>DWMFocus
-
-      " nmap <c-l> <Plug>DWMGrowMaster
-      " nmap <c-h> <Plug>DWMShrinkMaster
-
-    " vim-diminactive
-      let g:diminactive_use_colorcolumn = 1
-      hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
-      set colorcolumn=81
-
-      " let g:diminactive_use_syntax = 1
-      let g:diminactive_buftype_blacklist = ['nofile', 'nowrite', 'acwrite', 'quickfix']
-      let g:diminactive_filetype_blacklist = []
-
-    " vim-startify
-      " let g:startify_custom_header =
-      "       \ map(split(system('fortune -s | cowsay'), '\n'), '"   ". v:val') + ['','']
 
     " unite
       call unite#custom#profile('default', 'context', {
@@ -815,10 +774,6 @@ filetype plugin indent on    " required
       set t_Co=256
       let base16colorspace=256  " Access colors present in 256 colorspace
       set background=dark
-      " remember to update https://github.com/kelvinst/ShowMarks
-      " remember to change on .zshrc too
-      " remember to run ":Tmuxline lightline"
-      " then run ":TmuxlineSnapshot! .tmux.lightline"
       colorscheme $VIM_COLORSCHEME
 
   "" integrations
@@ -900,7 +855,6 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-    " dash.vim
     " ag.vim
 
     " vim-dispatch
@@ -1005,8 +959,6 @@ filetype plugin indent on    " required
             \   },
             \ })
 
-    " vim-textobj-user
-    " vim-textobj-rubyblock
     " vim-easymotion
       " search
       map  / <Plug>(easymotion-sn)
@@ -1016,24 +968,6 @@ filetype plugin indent on    " required
       map  n <Plug>(easymotion-next)
       map  N <Plug>(easymotion-prev)
 
-      " Disabling this because of Too many conflicts
-      " " movements
-      " nmap <c-l> <Plug>(easymotion-lineforward)
-      " nmap <c-j> <Plug>(easymotion-j)
-      " nmap <c-k> <Plug>(easymotion-k)
-      " nmap <c-h> <Plug>(easymotion-linebackward)
-
-      " nmap <c-w> <Plug>(easymotion-w)
-      " nmap <c-s-w> <Plug>(easymotion-W)
-      " nmap <c-b> <Plug>(easymotion-b)
-      " nmap <c-s-b> <Plug>(easymotion-B)
-
-      " search movements
-      " map f <Plug>(easymotion-f)
-      " map F <Plug>(easymotion-F)
-      " map t <Plug>(easymotion-t)
-      " map T <Plug>(easymotion-T)
-
       " a better search (forward and backward)
       map s <Plug>(easymotion-s)
       map S <Plug>(easymotion-s2)
@@ -1042,7 +976,8 @@ filetype plugin indent on    " required
       let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
     " vim-commentary
-    " vimproc
+    " vim-unimpaired
+    " vim-abolish
 
   " others
     " tagbar
