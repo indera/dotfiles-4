@@ -6,6 +6,8 @@
 	lg = log --all --graph --decorate --oneline --abbrev-commit
 	cm = commit
 	ac = !git add -A && git commit
+	aca = !git add -A && git commit --amend
+	ace = !git add -A && git commit --allow-empty
 	st = status -sb
 	tags = tag -l
 	branches = branch -a
