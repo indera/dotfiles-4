@@ -88,6 +88,10 @@ filetype plugin indent on    " required
     set nowritebackup
     set noswapfile
 
+  " coloring the 81th column
+    hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
+    set colorcolumn=81
+
   " show cursor line
     set cul
 
@@ -380,7 +384,30 @@ filetype plugin indent on    " required
             \   'direction': 'botright',
             \ })
 
-      call unite_menus#Define({
+      nmap <Leader>. :Unite -silent source<CR>
+      nmap <Leader>b :Unite -silent buffer<CR>
+      nmap <Leader>: :Unite -silent command<CR>
+
+      " Custom mappings for the unite buffer
+      autocmd FileType unite call s:unite_settings()
+      function! s:unite_settings()
+        let b:SuperTabDisabled=1
+
+        imap <buffer> <c-j> <Plug>(unite_select_next_line)
+        imap <buffer> <c-k> <Plug>(unite_select_previous_line)
+        nmap <buffer> <esc> <Plug>(unite_exit)
+        imap <buffer> <esc> <Plug>(unite_exit)
+      endfunction
+
+    " unite-qf
+    " ShowMarks
+      let g:showmarks_enable=1
+      let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      let g:showmarks_hlline_lower = 1
+      let g:showmarks_hlline_upper = 1
+
+    " unite-menus
+      call unite_menus#Redefine({
             \   "shortcuts": {
             \     'description': "Shortcuts",
             \     'keymap': "<Leader>;",
@@ -420,32 +447,7 @@ filetype plugin indent on    " required
             \         'action__command': 'set invwrap',
             \       },
             \     }
-            \   }
-            \ })
-
-      nmap <Leader>. :Unite -silent source<CR>
-      nmap <Leader>b :Unite -silent buffer<CR>
-      nmap <Leader>: :Unite -silent command<CR>
-
-      " Custom mappings for the unite buffer
-      autocmd FileType unite call s:unite_settings()
-      function! s:unite_settings()
-        let b:SuperTabDisabled=1
-
-        imap <buffer> <c-j> <Plug>(unite_select_next_line)
-        imap <buffer> <c-k> <Plug>(unite_select_previous_line)
-        nmap <buffer> <esc> <Plug>(unite_exit)
-        imap <buffer> <esc> <Plug>(unite_exit)
-      endfunction
-
-    " unite-qf
-    " ShowMarks
-      let g:showmarks_enable=1
-      let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      let g:showmarks_hlline_lower = 1
-      let g:showmarks_hlline_upper = 1
-
-      call unite_menus#Define({
+            \   },
             \   "marks": {
             \     'description': "Marks",
             \     'keymap': "<Leader>m",
@@ -476,14 +478,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-  "" languages
-    " vim-surround
-    " vim-coffee-script
-    " vim-rails
-      " extract this to a vim plugin that depends of rails-vim
-      call unite_menus#Define({
             \   "rails": {
             \     'description': "Rails",
             \     'keymap': "<Leader>r",
@@ -641,31 +635,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-    " vim-ruby
-    " emmet-vim
-    " vim-mustache-handlebars
-    " syntastic
-      let g:syntastic_aggregate_errors = 1
-
-      let g:syntastic_auto_loc_list = 1
-      let g:syntastic_loc_list_height = 15
-
-      let g:syntastic_check_on_open = 1
-      let g:syntastic_check_on_wq = 0
-
-      let g:syntastic_mode_map = {
-          \   "mode": "passive",
-          \   "active_filetypes": [],
-          \   "passive_filetypes": []
-          \ }
-
-      let g:syntastic_filetype_map = {
-            \   "html.handlebars": "handlebars"
-            \ }
-
-      call unite_menus#Define({
             \   "syntastic": {
             \     'description': "Syntastic",
             \     'keymap': "<Leader>s",
@@ -700,12 +669,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-    " vim-sensible
-    " vim-phoenix
-    " vim-elixir
-      call unite_menus#Define({
             \   "elixir": {
             \     'description': "Elixir",
             \     'keymap': "<Leader>e",
@@ -730,13 +693,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-    " vim-test
-      let test#strategy = "dispatch"
-      let test#filename_modifier = ':p'
-
-      call unite_menus#Define({
             \   "tests": {
             \     'description': "Tests",
             \     'keymap': "<Leader>t",
@@ -763,22 +719,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-  "" completion
-    " supertab
-    " vim-endwise
-
-  "" code display
-    " base16-vim
-      set t_Co=256
-      let base16colorspace=256  " Access colors present in 256 colorspace
-      set background=dark
-      colorscheme $VIM_COLORSCHEME
-
-  "" integrations
-    " vim-fugitive
-      call unite_menus#Define({
             \   "git": {
             \     'description': "Git",
             \     'keymap': "<Leader>g",
@@ -853,12 +793,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-    " ag.vim
-
-    " vim-dispatch
-      call unite_menus#Define({
             \   "dispatch": {
             \     'description': "Dispatch",
             \     'keymap': "<Leader>d",
@@ -893,27 +827,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-    " vim-gitgutter
-      " see vim-fugitive
-
-    " vim-heroku
-      " Install this tools and read the readme
-      " heroku plugins:install https://github.com/tpope/heroku-remote.git
-      " heroku plugins:install https://github.com/tpope/heroku-binstubs.git
-      function! Complete_remote(A,L,P)
-        return system("git remote")
-      endfunction!
-
-      function! Heroku_command(command)
-        let env = input("env: ", "", "custom,Complete_remote")
-        let desc = substitute(a:command, '\v\C\s+', '-', 'g')
-        let desc = substitute(desc, '\v\C\-+', '-', 'g')
-        exe "Start -title=".env."-".desc." ".env." ".a:command
-      endfunction!
-
-      call unite_menus#Define({
             \   "heroku": {
             \     'description': "Heroku",
             \     'keymap': "<Leader>h",
@@ -936,13 +849,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \ })
-
-  "" commands
-    " YankRing.vim
-      let g:yankring_history_file = '.yankring-history'
-
-      call unite_menus#Define({
             \   "paste": {
             \     'description': "Clipboard",
             \     'keymap': "<Leader>p",
@@ -958,6 +864,76 @@ filetype plugin indent on    " required
             \     },
             \   },
             \ })
+
+
+  "" languages
+    " vim-surround
+    " vim-coffee-script
+    " vim-rails
+    " vim-ruby
+    " emmet-vim
+    " vim-mustache-handlebars
+    " syntastic
+      let g:syntastic_aggregate_errors = 1
+
+      let g:syntastic_auto_loc_list = 1
+      let g:syntastic_loc_list_height = 15
+
+      let g:syntastic_check_on_open = 1
+      let g:syntastic_check_on_wq = 0
+
+      let g:syntastic_mode_map = {
+          \   "mode": "passive",
+          \   "active_filetypes": [],
+          \   "passive_filetypes": []
+          \ }
+
+      let g:syntastic_filetype_map = {
+            \   "html.handlebars": "handlebars"
+            \ }
+
+    " vim-sensible
+    " vim-phoenix
+    " vim-elixir
+    " vim-test
+      let test#strategy = "dispatch"
+      let test#filename_modifier = ':p'
+
+  "" completion
+    " supertab
+    " vim-endwise
+
+  "" code display
+    " base16-vim
+      set t_Co=256
+      let base16colorspace=256  " Access colors present in 256 colorspace
+      set background=dark
+      colorscheme $VIM_COLORSCHEME
+
+  "" integrations
+    " vim-fugitive
+    " ag.vim
+    " vim-dispatch
+    " vim-gitgutter
+      " see vim-fugitive
+    " vim-heroku
+      " Install this tools and read the readme
+      " heroku plugins:install https://github.com/tpope/heroku-remote.git
+      " heroku plugins:install https://github.com/tpope/heroku-binstubs.git
+      function! Complete_remote(A,L,P)
+        return system("git remote")
+      endfunction!
+
+      function! Heroku_command(command)
+        let env = input("env: ", "", "custom,Complete_remote")
+        let desc = substitute(a:command, '\v\C\s+', '-', 'g')
+        let desc = substitute(desc, '\v\C\-+', '-', 'g')
+        exe "Start -title=".env."-".desc." ".env." ".a:command
+      endfunction!
+
+  "" commands
+    " YankRing.vim
+      let g:yankring_history_file = '.yankring-history'
 
     " vim-easymotion
       " search
