@@ -54,9 +54,6 @@ call vundle#begin()
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-abolish' " for searching and replacing patterns easily
 
-  " others
-  Plugin 'majutsushi/tagbar'
-
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -636,11 +633,7 @@ filetype plugin indent on    " required
             \       },
             \       'git log': {
             \         'relative_keymap': 'l',
-            \         'action__command': 'exe "silent Glog \| Unite qf"',
-            \       },
-            \       'git mv': {
-            \         'relative_keymap': 'm',
-            \         'action__command': 'exe "Gmove " input("to: ")',
+            \         'action__command': 'Start git lg',
             \       },
             \       'git pull': {
             \         'relative_keymap': 'P',
@@ -802,7 +795,6 @@ filetype plugin indent on    " required
     " ag.vim
     " vim-dispatch
     " vim-gitgutter
-      " see vim-fugitive
     " vim-heroku
       " Install this tools and read the readme
       " heroku plugins:install https://github.com/tpope/heroku-remote.git
@@ -842,6 +834,3 @@ filetype plugin indent on    " required
     " vim-unimpaired
     " vim-abolish
 
-  " others
-    " tagbar
-      nmap <Leader>mb :TagbarToggle<CR>
