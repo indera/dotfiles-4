@@ -772,6 +772,8 @@ filetype plugin indent on    " required
             \   "html.handlebars": "handlebars"
             \ }
 
+      let g:syntastic_enable_elixir_checker = 1
+
     " vim-sensible
     " vim-phoenix
     " vim-elixir
