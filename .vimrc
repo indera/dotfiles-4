@@ -416,6 +416,14 @@ filetype plugin indent on    " required
             \         'relative_keymap': 'pc',
             \         'action__command': 'PluginClean',
             \       },
+            \       'Update Plugins': {
+            \         'relative_keymap': 'pu',
+            \         'action__command': 'PluginUpdate',
+            \       },
+            \       'Install Plugins': {
+            \         'relative_keymap': 'pi',
+            \         'action__command': 'PluginInstall',
+            \       },
             \       'Edit .gitconfig': {
             \         'action__command': 'vsplit ~/.gitconfig',
             \       },
@@ -425,10 +433,6 @@ filetype plugin indent on    " required
             \       },
             \       'Edit .zshrc': {
             \         'action__command': 'vsplit ~/.zshrc',
-            \       },
-            \       'Install Plugins': {
-            \         'relative_keymap': 'pi',
-            \         'action__command': 'PluginInstall',
             \       },
             \       'Next Buffer': {
             \         'keymap': ']b',
@@ -481,12 +485,6 @@ filetype plugin indent on    " required
             \   "rails": {
             \     'description': "Rails",
             \     'keymap': "<Leader>r",
-            \     'candidates': {},
-            \   },
-            \   "rails_utils": {
-            \     'parent_menu': 'rails',
-            \     'description': "Rails Utilities",
-            \     'relative_keymap': "u",
             \     'candidates': {
             \       'Console': {
             \         'relative_keymap': 'c',
@@ -530,111 +528,6 @@ filetype plugin indent on    " required
             \       },
             \     },
             \   },
-            \   "rails_goto": {
-            \     'parent_menu': 'rails',
-            \     'description': "Rails Go To",
-            \     'relative_keymap': "g",
-            \     'candidates': {
-            \       'Alternate': {
-            \         'relative_keymap': 'a',
-            \         'action__command': 'A',
-            \       },
-            \       'Controller': {
-            \         'relative_keymap': 'c',
-            \         'action__command': 'Econtroller',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Environment': {
-            \         'relative_keymap': 'e',
-            \         'action__command': 'Eenvironment',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Factories': {
-            \         'relative_keymap': 'f',
-            \         'action__command': 'Efixtures',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Helper': {
-            \         'relative_keymap': 'h',
-            \         'action__command': 'Ehelper',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Initializer': {
-            \         'relative_keymap': 'i',
-            \         'action__command': 'Einitializer',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Javascript': {
-            \         'relative_keymap': 'j',
-            \         'action__command': 'Ejavascript',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Layout': {
-            \         'relative_keymap': 'lt',
-            \         'action__command': 'Elayout',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Locale': {
-            \         'relative_keymap': 'l',
-            \         'action__command': 'Elocale',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Mailer': {
-            \         'relative_keymap': 'ml',
-            \         'action__command': 'Emailer',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Model': {
-            \         'relative_keymap': ['m', 'mo'],
-            \         'action__command': 'Emodel',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Migration': {
-            \         'relative_keymap': 'dm',
-            \         'action__command': 'Emigration',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Relative': {
-            \         'relative_keymap': 'r',
-            \         'action__command': 'R',
-            \       },
-            \       'Schema': {
-            \         'relative_keymap': ['d', 'ds'],
-            \         'action__command': 'Eschema',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Stylesheet': {
-            \         'relative_keymap': 's',
-            \         'action__command': 'Estylesheet',
-            \         'kind': 'command_completion',
-            \       },
-            \       'View': {
-            \         'relative_keymap': 'v',
-            \         'action__command': 'Eview',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Spec': {
-            \         'relative_keymap': 'ts',
-            \         'action__command': 'Efunctionaltest',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Controller Spec': {
-            \         'relative_keymap': 'tc',
-            \         'action__command': 'Eintegrationtest',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Integration Spec': {
-            \         'relative_keymap': 'ti',
-            \         'action__command': 'Espec',
-            \         'kind': 'command_completion',
-            \       },
-            \       'Unit Spec': {
-            \         'relative_keymap': 'tu',
-            \         'action__command': 'Eunittest',
-            \         'kind': 'command_completion',
-            \       },
-            \     },
-            \   },
             \   "syntastic": {
             \     'description': "Syntastic",
             \     'keymap': "<Leader>s",
@@ -672,12 +565,6 @@ filetype plugin indent on    " required
             \   "elixir": {
             \     'description': "Elixir",
             \     'keymap': "<Leader>e",
-            \     'candidates': {},
-            \   },
-            \   "phoenix_utils": {
-            \     'parent_menu': 'elixir',
-            \     'description': "Phoenix Utilities",
-            \     'relative_keymap': "u",
             \     'candidates': {
             \       'Console': {
             \         'relative_keymap': 'c',
