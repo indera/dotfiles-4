@@ -46,6 +46,7 @@ call vundle#begin()
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
   " Plugin 'tpope/vim-heroku'
+  Plugin 'christoomey/vim-tmux-navigator'
 
   " commands
   Plugin 'YankRing.vim'
