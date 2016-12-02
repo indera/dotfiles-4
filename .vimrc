@@ -1,6 +1,7 @@
 " Vundle
 filetype off                  " required
 
+set rtp+=~/.vim/bundle/vimproc.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   " it's needed
@@ -215,7 +216,7 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "" interface
     " ctrlp.vim
-      let g:ctrlp_map = '<Leader>f'
+      let g:ctrlp_map = '<Leader>F'
       " Use ag because it's lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore .git'
       let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
@@ -381,9 +382,14 @@ filetype plugin indent on    " required
             \   'direction': 'botright',
             \ })
 
+      nmap <Leader>f :Unite -silent file_rec/async<CR>
       nmap <Leader>. :Unite -silent source<CR>
       nmap <Leader>b :Unite -silent buffer<CR>
       nmap <Leader>: :Unite -silent command<CR>
+
+      let g:unite_source_grep_command = 'ag'
+      let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+      let g:unite_source_grep_recursive_opt = ''
 
       " Custom mappings for the unite buffer
       autocmd FileType unite call s:unite_settings()
