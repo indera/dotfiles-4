@@ -1,7 +1,6 @@
 " Vundle
 filetype off                  " required
 
-set rtp+=~/.vim/bundle/vimproc.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   " it's needed
@@ -54,6 +53,7 @@ call vundle#begin()
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-abolish' " for searching and replacing patterns easily
+  Plugin 'Shougo/vimproc.vim' ", { 'do': 'make' }
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,17 +102,6 @@ filetype plugin indent on    " required
 
   " crop long lines
     set textwidth=80
-    function! ToggleCropLongLines()
-      if &textwidth == 0
-        set textwidth=80
-        ec "CropLines ON"
-      else
-        set textwidth=0
-        ec "CropLines OFF"
-      endif
-    endfunction
-
-    nmap <Leader>8 :call ToggleCropLongLines()<CR>
 
   " syntax!!
     syntax on
@@ -216,7 +205,7 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "" interface
     " ctrlp.vim
-      let g:ctrlp_map = '<Leader>F'
+      let g:ctrlp_map = '<Leader>f'
       " Use ag because it's lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g "" --ignore .git'
       let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
@@ -366,7 +355,7 @@ filetype plugin indent on    " required
       let g:unite_force_overwrite_statusline = 0
       let g:vimfiler_force_overwrite_statusline = 0
       let g:vimshell_force_overwrite_statusline = 0
-    " numbers.vim
+
     " gundo.vim
       map <Leader>u :GundoToggle<CR>
       let g:gundo_close_on_revert = 1
@@ -382,14 +371,33 @@ filetype plugin indent on    " required
             \   'direction': 'botright',
             \ })
 
-      nmap <Leader>f :Unite -silent file_rec/async<CR>
+      nmap <Leader>F :Unite -silent file_rec/async<CR>
       nmap <Leader>. :Unite -silent source<CR>
-      nmap <Leader>b :Unite -silent buffer<CR>
       nmap <Leader>: :Unite -silent command<CR>
 
+      let g:unite_source_rec_async_command = ['ag', '--nocolor', '--nogroup', '--hidden', '-g', '""']
       let g:unite_source_grep_command = 'ag'
       let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
       let g:unite_source_grep_recursive_opt = ''
+
+      " ignore stuff when using the following filters
+      " call unite#custom_source(
+      "       \ 'file_rec,file_rec/async,file_mru,file,buffer,grep',
+      "       \ 'ignore_pattern', join([
+      "       \   '\.git/',
+      "       \   'git5/.*/review/',
+      "       \   'google/obj/',
+      "       \   'tmp/',
+      "       \   '.sass-cache',
+      "       \   'node_modules/',
+      "       \   'bower_components/',
+      "       \   'dist/',
+      "       \   '.git5_specs/',
+      "       \   '.pyc',
+      "       \   'deps/',
+      "       \   '_build/',
+      "       \   'cover/',
+      "       \ ], '\|'))
 
       " Custom mappings for the unite buffer
       autocmd FileType unite call s:unite_settings()
@@ -398,8 +406,8 @@ filetype plugin indent on    " required
 
         imap <buffer> <c-j> <Plug>(unite_select_next_line)
         imap <buffer> <c-k> <Plug>(unite_select_previous_line)
+        imap <buffer> <c-a> <Plug>(unite_choose_action)
         nmap <buffer> <esc> <Plug>(unite_exit)
-        imap <buffer> <esc> <Plug>(unite_exit)
       endfunction
 
     " unite-qf
@@ -409,8 +417,37 @@ filetype plugin indent on    " required
       let g:showmarks_hlline_lower = 1
       let g:showmarks_hlline_upper = 1
 
+    " unite-menus functions
+      function! ToggleCropLongLines()
+        if &textwidth == 0
+          set textwidth=80
+          ec "CropLines ON"
+        else
+          set textwidth=0
+          ec "CropLines OFF"
+        endif
+      endfunction
+
     " unite-menus
       call unite_menus#Redefine({
+            \   "buffers": {
+            \     'description': "Shortcuts",
+            \     'keymap': "<Leader>b",
+            \     'candidates': {
+            \       'Next Buffer': {
+            \         'keymap': ']b',
+            \         'action__command': 'bn',
+            \       },
+            \       'Previous Buffer': {
+            \         'keymap': '[b',
+            \         'action__command': 'bp',
+            \       },
+            \       'List Buffers': {
+            \         'relative_keymap': 'b',
+            \         'action__command': 'Unite -silent buffer',
+            \       },
+            \     },
+            \   },
             \   "shortcuts": {
             \     'description': "Shortcuts",
             \     'keymap': "<Leader>;",
@@ -437,14 +474,6 @@ filetype plugin indent on    " required
             \       'Edit .zshrc': {
             \         'action__command': 'vsplit ~/.zshrc',
             \       },
-            \       'Next Buffer': {
-            \         'keymap': ']b',
-            \         'action__command': 'bn',
-            \       },
-            \       'Previous Buffer': {
-            \         'keymap': '[b',
-            \         'action__command': 'bp',
-            \       },
             \       'Reload .vimrc': {
             \         'relative_keymap': 'vr',
             \         'action__command': 'so $MYVIMRC',
@@ -452,6 +481,10 @@ filetype plugin indent on    " required
             \       'Toggle wordwrap': {
             \         'relative_keymap': 'w',
             \         'action__command': 'set invwrap',
+            \       },
+            \       'Toggle crop lines at 80': {
+            \         'relative_keymap': '8',
+            \         'action__command': 'call ToggleCropLongLines()',
             \       },
             \     }
             \   },
