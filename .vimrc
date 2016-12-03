@@ -144,6 +144,10 @@ filetype plugin indent on    " required
     nnoremap <c-w>v :vnew<CR>
     nnoremap <c-w><c-v> :vnew<CR>
 
+    " navigate tabs with c-w c-h/l
+    nnoremap <c-w><c-l> gt
+    nnoremap <c-w><c-h> gT
+
     " <c-w>number to go to tab
     nnoremap <c-w>1 1gt
     nnoremap <c-w>2 2gt
