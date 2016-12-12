@@ -16,7 +16,6 @@
   dt = difftool
   bump = !git ac -m \"Bumping the version file\"
   push-release = !git checkout production && git push && git checkout master && git push && git push --tags
-  delete-merged = !git checkout master && git branch -d $(git branch --merged)
 [push]
 	default = simple
 [filter "media"]
