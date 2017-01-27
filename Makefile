@@ -7,7 +7,7 @@ install:
 	ln .gitconfig ~
 	ln .tmux.conf ~
 	ln .tmux.lightline ~
-	ln .vimrc ~
+	ln .vimrc-new ~/.vimrc
 	ln .zshrc ~
 
 clean:
