@@ -16,14 +16,8 @@ call vundle#begin()
 
   " languages
   Plugin 'tpope/vim-surround'
-  Plugin 'pangloss/vim-javascript'
-  Plugin 'kchmck/vim-coffee-script'
-  Plugin 'tpope/vim-rails'
-  Plugin 'vim-ruby/vim-ruby'
   Plugin 'mattn/emmet-vim'
-  Plugin 'mustache/vim-mustache-handlebars'
-  Plugin 'avdgaag/vim-phoenix'
-  Plugin 'elixir-lang/vim-elixir'
+  Plugin 'sheerun/vim-polyglot'
 
   " completion
   Plugin 'ervandew/supertab'
