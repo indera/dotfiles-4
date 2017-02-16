@@ -312,8 +312,8 @@ filetype plugin indent on    " required
   "" commands
     " YankRing.vim
       let g:yankring_history_file = '.yankring-history'
-      let g:yankring_replace_n_pkey = '<m-p>'
-      let g:yankring_replace_n_nkey = '<m-n>'
+      " let g:yankring_replace_n_pkey = '<m-p>'
+      " let g:yankring_replace_n_nkey = '<m-n>'
 
       map <Leader>p :YRShow<CR>
 
