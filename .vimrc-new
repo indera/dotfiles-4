@@ -279,6 +279,7 @@ filetype plugin indent on    " required
 
     " nerdtree
       nmap <Leader>o :NERDTreeToggle<CR>
+      nmap <Leader>g :NERDTreeFind<CR>
       let NERDTreeQuitOnOpen = 1
 
   "" languages
