@@ -20,7 +20,6 @@ call vundle#begin()
   Plugin 'sheerun/vim-polyglot'
 
   " completion
-  Plugin 'ervandew/supertab'
   Plugin 'tpope/vim-endwise'
 
   " code display
@@ -35,7 +34,6 @@ call vundle#begin()
   Plugin 'christoomey/vim-tmux-navigator'
 
   " commands
-  Plugin 'YankRing.vim'
   Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-unimpaired' " for delimiters changing
@@ -294,7 +292,6 @@ filetype plugin indent on    " required
     " vim-elixir
 
   "" completion
-    " supertab
     " vim-endwise
 
   "" code display
@@ -311,13 +308,6 @@ filetype plugin indent on    " required
     " vim-gitgutter
 
   "" commands
-    " YankRing.vim
-      let g:yankring_history_file = '.yankring-history'
-      " let g:yankring_replace_n_pkey = '<m-p>'
-      " let g:yankring_replace_n_nkey = '<m-n>'
-
-      map <Leader>p :YRShow<CR>
-
     " vim-easymotion
       " search
       map  / <Plug>(easymotion-sn)
