@@ -217,6 +217,7 @@ filetype plugin indent on    " required
       let NERDTreeQuitOnOpen = 1
       let NERDTreeShowHidden = 1
       let NERDTreeShowLineNumbers = 1
+      let NERDTreeShowLineNumbers = 0
 
   "" languages
     " emmet-vim
