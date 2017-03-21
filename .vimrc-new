@@ -213,19 +213,15 @@ filetype plugin indent on    " required
 
     " nerdtree
       nmap <Leader>o :NERDTreeToggle<CR>
-      nmap <Leader>g :NERDTreeFind<CR>
+      nmap <Leader>f :NERDTreeFind<CR>
       let NERDTreeQuitOnOpen = 1
+      let NERDTreeShowHidden = 1
+      let NERDTreeShowLineNumbers = 1
 
   "" languages
-    " vim-surround
-    " vim-coffee-script
-    " vim-rails
-    " vim-ruby
     " emmet-vim
-    " vim-mustache-handlebars
-    " vim-sensible
-    " vim-phoenix
-    " vim-elixir
+    " vim-surround
+    " vim-polyglot
 
   "" completion
     " vim-endwise
@@ -241,6 +237,10 @@ filetype plugin indent on    " required
     " vim-fugitive
     " ag.vim
     " vim-dispatch
+      nmap <Leader>dd :Dispatch
+      nmap <Leader>ds :Start
+      nmap <Leader>df :FocusDispatch
+
     " vim-gitgutter
 
   "" commands
