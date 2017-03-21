@@ -6,34 +6,22 @@ call vundle#begin()
   " it's needed
   Plugin 'gmarik/Vundle.vim'
 
-  " interface
   Plugin 'scrooloose/nerdtree'
   Plugin 'sjl/gundo.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'daviesjamie/vim-base16-lightline'
   Plugin 'edkolev/tmuxline.vim'
-
-  " languages
   Plugin 'tpope/vim-surround'
   Plugin 'mattn/emmet-vim'
   Plugin 'sheerun/vim-polyglot'
-
-  " completion
   Plugin 'tpope/vim-endwise'
-
-  " code display
   Plugin 'chriskempson/base16-vim'
   Plugin 'ntpeters/vim-better-whitespace'
-
-  " integrations
   Plugin 'tpope/vim-fugitive'
   Plugin 'rking/ag.vim'
   Plugin 'tpope/vim-dispatch'
   Plugin 'airblade/vim-gitgutter'
   Plugin 'christoomey/vim-tmux-navigator'
-
-  " commands
-  Plugin 'Lokaltog/vim-easymotion'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-unimpaired' " for delimiters changing
   Plugin 'tpope/vim-abolish' " for searching and replacing patterns easily
@@ -44,224 +32,155 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" vim basic config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " leader
-    let mapleader = ","
+  let mapleader = ","
+  set ignorecase
+  set autoindent
+  set smartindent
+  set smarttab
+  set shiftwidth=2
+  set softtabstop=2
+  set tabstop=2
+  set expandtab
+  set nowrap
+  set laststatus=2
+  set showtabline=2
+  set nobackup
+  set nowritebackup
+  set noswapfile
+  set colorcolumn=81
+  set cul
+  set splitbelow
+  set splitright
+  set noshowmode
+  set shell=/bin/zsh
 
-  " ignore case for completion on commands
-    set ignorecase
+  hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
+  syntax on
 
-  " indentation
-    set autoindent
-    set smartindent
-    set smarttab
-    set shiftwidth=2
-    set softtabstop=2
-    set tabstop=2
-    set expandtab
-    set nowrap
+  map <up> <nop>
+  map <down> <nop>
+  map <left> <nop>
+  map <right> <nop>
+  imap <up> <nop>
+  imap <down> <nop>
+  imap <left> <nop>
+  imap <right> <nop>
 
-  " always show status and tab line
-    set laststatus=2
-    set showtabline=2
+  cab W! w!
+  cab W w
+  cab Wa wa
+  cab Wq wq
+  cab wQ wq
+  cab WQ wq
+  cab Q! q!
+  cab Q q
+  cab E e
+  cab E! e!
 
-  " no annoying backup!!!
-    set nobackup
-    set nowritebackup
-    set noswapfile
-
-  " coloring the 81th column
-    hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
-    set colorcolumn=81
-
-  " show cursor line
-    set cul
-
-  " enable/disable cursor line when enter/leave windows
-    augroup BgHighlight
-      autocmd!
-      autocmd WinEnter * set cul
-      autocmd WinLeave * set nocul
-    augroup END
-
-  " syntax!!
-    syntax on
-
-  " remove this horrible arrow keys :)
-  " thanks @jeank
-    map <up> <nop>
-    map <down> <nop>
-    map <left> <nop>
-    map <right> <nop>
-    imap <up> <nop>
-    imap <down> <nop>
-    imap <left> <nop>
-    imap <right> <nop>
-
-  " I always say :Q! intead of :q!
-    cab W! w!
-    cab W w
-    cab Wa wa
-    cab Wq wq
-    cab wQ wq
-    cab WQ wq
-    cab Q! q!
-    cab Q q
-    cab E e
-    cab E! e!
-
-  " more natural split opening
-    set splitbelow
-    set splitright
-
-  " no mode status below status bar
-    set noshowmode
-
-  " repeat last command
-    nmap <silent> ;; :<c-f>k<CR>
-
-  " trailing whitespaces removing
-    autocmd BufWritePre * :StripWhitespace
-
-  " changing the vim shell
-    set shell=/bin/zsh
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  autocmd BufWritePre * :StripWhitespace
+  augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
+  augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "" interface
-    " lightline.vim
-      let g:lightline = {
-            \ 'colorscheme': 'base16',
-            \ 'active': {
-            \   'left': [
-            \     ['mode', 'paste'], ['fugitive', 'filename']
-            \   ], 'right': [
-            \     ['lineinfo'], ['percent'],
-            \     ['fileformat', 'fileencoding', 'filetype']
-            \   ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
-            \   'filename': 'LightLineFilename',
-            \   'fileformat': 'LightLineFileformat',
-            \   'filetype': 'LightLineFiletype',
-            \   'fileencoding': 'LightLineFileencoding',
-            \   'mode': 'LightLineMode',
-            \ },
-            \ 'subseparator': { 'left': '|', 'right': '|' }
-            \ }
+  " lightline.vim
+    let g:lightline = {
+          \   'colorscheme': 'base16',
+          \   'active': {
+          \     'left': [
+          \       ['mode', 'paste'], ['fugitive', 'filename']
+          \     ],
+          \     'right': [
+          \       ['lineinfo'], ['percent'],
+          \       ['fileformat', 'fileencoding', 'filetype']
+          \     ]
+          \   },
+          \   'component_function': {
+          \     'fugitive': 'LightLineFugitive',
+          \     'filename': 'LightLineFilename',
+          \     'fileformat': 'LightLineFileformat',
+          \     'filetype': 'LightLineFiletype',
+          \     'fileencoding': 'LightLineFileencoding',
+          \     'mode': 'LightLineMode',
+          \   },
+          \   'subseparator': { 'left': '|', 'right': '|' }
+          \ }
 
-      function! LightLineModified()
-        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-      endfunction
+    function! LightLineModified()
+      return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
 
-      function! LightLineReadonly()
-        return &ft !~? 'help' && &readonly ? 'RO' : ''
-      endfunction
+    function! LightLineReadonly()
+      return &ft !~? 'help' && &readonly ? 'RO' : ''
+    endfunction
 
-      function! LightLineFilename()
-        let fname = expand('%:t')
-        return fname =~ '__Gundo\|NERD_tree\|YankRing' ? '' :
-              \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-              \ &ft == 'vimshell' ? vimshell#get_status_string() :
-              \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-              \ ('' != fname ? fname : '[No Name]') .
-              \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-      endfunction
+    function! LightLineFilename()
+      let fname = expand('%:t')
+      return fname =~ '__Gundo\|NERD_tree\|YankRing' ? '' :
+            \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+            \ ('' != fname ? fname : '[No Name]') .
+            \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+    endfunction
 
-      function! LightLineFugitive()
-        try
-          if expand('%:t') !~? 'Gundo\|NERD\|YankRing' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-            let mark = ''  " edit here for cool mark
-            let _ = fugitive#head()
-            return strlen(_) ? mark._ : ''
-          endif
-        catch
-        endtry
-        return ''
-      endfunction
+    function! LightLineFugitive()
+      try
+        if expand('%:t') !~? 'Gundo\|NERD\|YankRing' && exists('*fugitive#head')
+          let mark = ''  " edit here for cool mark
+          let _ = fugitive#head()
+          return strlen(_) ? mark._ : ''
+        endif
+      catch
+      endtry
+      return ''
+    endfunction
 
-      function! LightLineFileformat()
-        return winwidth(0) > 70 ? &fileformat : ''
-      endfunction
+    function! LightLineFileformat()
+      return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
 
-      function! LightLineFiletype()
-        return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-      endfunction
+    function! LightLineFiletype()
+      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    endfunction
 
-      function! LightLineFileencoding()
-        return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-      endfunction
+    function! LightLineFileencoding()
+      return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    endfunction
 
-      function! LightLineMode()
-        let fname = expand('%:t')
-        return fname == '__Gundo__' ? 'Gundo' :
-              \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-              \ fname =~ 'NERD_tree' ? 'NERDTree' :
-              \ fname =~ 'YankRing' ? 'YankRing' :
-              \ &ft == 'vimfiler' ? 'VimFiler' :
-              \ &ft == 'vimshell' ? 'VimShell' :
-              \ winwidth(0) > 60 ? lightline#mode() : ''
-      endfunction
+    function! LightLineMode()
+      let fname = expand('%:t')
+      return fname == '__Gundo__' ? 'Gundo' :
+            \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+            \ fname =~ 'NERD_tree' ? 'NERDTree' :
+            \ fname =~ 'YankRing' ? 'YankRing' :
+            \ winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
 
-      let g:vimfiler_force_overwrite_statusline = 0
-      let g:vimshell_force_overwrite_statusline = 0
+  " gundo.vim
+    map <Leader>u :GundoToggle<CR>
+    let g:gundo_close_on_revert = 1
 
-    " gundo.vim
-      map <Leader>u :GundoToggle<CR>
-      let g:gundo_close_on_revert = 1
+  " nerdtree
+    nmap <Leader>o :NERDTreeToggle<CR>
+    nmap <Leader>f :NERDTreeFind<CR>
+    let NERDTreeQuitOnOpen = 1
+    let NERDTreeShowHidden = 1
+    let NERDTreeShowLineNumbers = 1
+    let NERDTreeShowLineNumbers = 0
 
-    " nerdtree
-      nmap <Leader>o :NERDTreeToggle<CR>
-      nmap <Leader>f :NERDTreeFind<CR>
-      let NERDTreeQuitOnOpen = 1
-      let NERDTreeShowHidden = 1
-      let NERDTreeShowLineNumbers = 1
-      let NERDTreeShowLineNumbers = 0
+  " base16-vim
+    set t_Co=256
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    set background=dark
+    colorscheme $VIM_COLORSCHEME
 
-  "" languages
-    " emmet-vim
-    " vim-surround
-    " vim-polyglot
-
-  "" completion
-    " vim-endwise
-
-  "" code display
-    " base16-vim
-      set t_Co=256
-      let base16colorspace=256  " Access colors present in 256 colorspace
-      set background=dark
-      colorscheme $VIM_COLORSCHEME
-
-  "" integrations
-    " vim-fugitive
-    " ag.vim
-    " vim-dispatch
-      nmap <Leader>dd :Dispatch
-      nmap <Leader>ds :Start
-      nmap <Leader>df :FocusDispatch
-
-    " vim-gitgutter
-
-  "" commands
-    " vim-easymotion
-      " search
-      map  / <Plug>(easymotion-sn)
-      omap / <Plug>(easymotion-tn)
-      map  ? <Plug>(easymotion-sn)
-      omap ? <Plug>(easymotion-tn)
-      map  n <Plug>(easymotion-next)
-      map  N <Plug>(easymotion-prev)
-
-      " a better search (forward and backward)
-      map s <Plug>(easymotion-s)
-      map S <Plug>(easymotion-s2)
-
-      let g:EasyMotion_smartcase = 1 " v works for V, but V doesn't for v
-      let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-
-    " vim-commentary
-    " vim-unimpaired
-    " vim-abolish
+  " vim-dispatch
+    nmap <Leader>dd :Dispatch
+    nmap <Leader>ds :Start
+    nmap <Leader>df :FocusDispatch
 
