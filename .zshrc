@@ -269,3 +269,4 @@ eval "$(hub alias -s)"
 
 # docker env vars
 eval "$(docker-machine env)"
+export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"

@@ -33,28 +33,31 @@ filetype plugin indent on    " required
 "" vim basic config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let mapleader = ","
-  set ignorecase
+
   set autoindent
-  set smartindent
-  set smarttab
-  set shiftwidth=2
-  set softtabstop=2
-  set tabstop=2
-  set expandtab
-  set nowrap
-  set laststatus=2
-  set showtabline=2
-  set nobackup
-  set nowritebackup
-  set noswapfile
   set colorcolumn=81
   set cul
+  set expandtab
+  set hlsearch
+  set ignorecase
+  set laststatus=2
+  set nobackup
+  set noshowmode
+  set noswapfile
+  set nowrap
+  set nowritebackup
+  set shell=/bin/zsh
+  set shiftwidth=2
+  set showtabline=2
+  set smartindent
+  set smarttab
+  set softtabstop=2
   set splitbelow
   set splitright
-  set noshowmode
-  set shell=/bin/zsh
+  set tabstop=2
 
   hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
+
   syntax on
 
   map <up> <nop>
