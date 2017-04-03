@@ -11,7 +11,7 @@ call vundle#begin()
   Plugin 'itchyny/lightline.vim'
   Plugin 'daviesjamie/vim-base16-lightline'
   Plugin 'edkolev/tmuxline.vim'
-  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-surround' " for delimiters changing
   Plugin 'mattn/emmet-vim'
   Plugin 'sheerun/vim-polyglot'
   Plugin 'tpope/vim-endwise'
@@ -20,10 +20,9 @@ call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   Plugin 'rking/ag.vim'
   Plugin 'tpope/vim-dispatch'
-  Plugin 'airblade/vim-gitgutter'
   Plugin 'christoomey/vim-tmux-navigator'
   Plugin 'tpope/vim-commentary'
-  Plugin 'tpope/vim-unimpaired' " for delimiters changing
+  Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-abolish' " for searching and replacing patterns easily
 
 call vundle#end()            " required
