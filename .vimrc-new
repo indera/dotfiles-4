@@ -14,7 +14,6 @@ call vundle#begin()
   Plugin 'tpope/vim-surround' " for delimiters changing
   Plugin 'mattn/emmet-vim'
   Plugin 'sheerun/vim-polyglot'
-  Plugin 'slashmili/alchemist.vim'
   Plugin 'tpope/vim-endwise'
   Plugin 'chriskempson/base16-vim'
   Plugin 'ntpeters/vim-better-whitespace'
