@@ -244,8 +244,8 @@ export RUBYMOTION_ANDROID_NDK=~/.rubymotion-android/ndk
 # were needed to rvm work properly with dispatch.vim
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
-# to get the binstubs on ./bin
-export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin"
+# to get the binstubs on ./bin and a lot of other places
+export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin:/usr/local/opt/elasticsearch@2.4/bin"
 
 # completion for tmuxinator
 source ~/.tmuxinator/completion.zsh
@@ -269,4 +269,9 @@ eval "$(hub alias -s)"
 
 # docker env vars
 eval "$(docker-machine env)"
-export PATH="/usr/local/opt/elasticsearch@2.4/bin:$PATH"
+
+# zsh vi mode persistence
+accept-line() { prev_mode=$KEYMAP; zle .accept-line }
+zle-line-init() { zle -K ${prev_mode:-viins} }
+zle -N accept-line
+zle -N zle-line-init
