@@ -8,7 +8,7 @@ call vundle#begin()
 
   Plugin 'chriskempson/base16-vim'
   Plugin 'christoomey/vim-tmux-navigator'
-  Plugin 'daviesjamie/vim-base16-lightline'
+  Plugin 'kelvinst/vim-base16-lightline'
   Plugin 'edkolev/tmuxline.vim'
   Plugin 'itchyny/lightline.vim'
   Plugin 'kien/ctrlp.vim'
@@ -56,8 +56,6 @@ filetype plugin indent on    " required
   set splitright
   set tabstop=2
 
-  hi ColorColumn term=bold ctermfg=8 ctermbg=18 guibg=18
-
   syntax on
 
   map <up> <nop>
@@ -81,7 +79,6 @@ filetype plugin indent on    " required
   cab E! e!
 
   autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
   autocmd BufWritePre * :StripWhitespace
   augroup BgHighlight
     autocmd!
@@ -95,103 +92,8 @@ filetype plugin indent on    " required
   " lightline.vim
     let g:lightline = {
           \   'colorscheme': 'base16',
-          \   'active': {
-          \     'left': [
-          \       ['mode', 'paste'], ['fugitive', 'filename'], ['ctrlpmark']
-          \     ],
-          \     'right': [
-          \       ['lineinfo'], ['percent'],
-          \       ['fileformat', 'fileencoding', 'filetype']
-          \     ]
-          \   },
-          \   'component_function': {
-          \     'fugitive': 'LightLineFugitive',
-          \     'filename': 'LightLineFilename',
-          \     'fileformat': 'LightLineFileformat',
-          \     'filetype': 'LightLineFiletype',
-          \     'fileencoding': 'LightLineFileencoding',
-          \     'mode': 'LightLineMode',
-            \   'ctrlpmark': 'CtrlPMark',
-          \   },
           \   'subseparator': { 'left': '|', 'right': '|' }
           \ }
-
-    function! LightLineModified()
-      return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
-
-    function! LightLineReadonly()
-      return &ft !~? 'help' && &readonly ? 'RO' : ''
-    endfunction
-
-    function! LightLineFilename()
-      let fname = expand('%:t')
-      return fname == 'ControlP' ? g:lightline.ctrlp_item :
-            \ fname =~ '__Gundo\|NERD_tree\|YankRing' ? '' :
-            \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-            \ ('' != fname ? fname : '[No Name]') .
-            \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-    endfunction
-
-    function! LightLineFugitive()
-      try
-        if expand('%:t') !~? 'Gundo\|NERD\|YankRing' && exists('*fugitive#head')
-          let mark = ''  " edit here for cool mark
-          let _ = fugitive#head()
-          return strlen(_) ? mark._ : ''
-        endif
-      catch
-      endtry
-      return ''
-    endfunction
-
-    function! LightLineFileformat()
-      return winwidth(0) > 70 ? &fileformat : ''
-    endfunction
-
-    function! LightLineFiletype()
-      return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-    endfunction
-
-    function! LightLineFileencoding()
-      return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-
-    function! LightLineMode()
-      let fname = expand('%:t')
-      return fname == '__Gundo__' ? 'Gundo' :
-            \ fname == 'ControlP' ? 'CtrlP' :
-            \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-            \ fname =~ 'NERD_tree' ? 'NERDTree' :
-            \ fname =~ 'YankRing' ? 'YankRing' :
-            \ winwidth(0) > 60 ? lightline#mode() : ''
-    endfunction
-
-    function! CtrlPMark()
-      if expand('%:t') =~ 'ControlP'
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_next, g:lightline.ctrlp_prev], 0)
-      else
-        return ''
-      endif
-    endfunction
-
-    let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-    function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-      let g:lightline.ctrlp_regex = a:regex
-      let g:lightline.ctrlp_prev = a:prev
-      let g:lightline.ctrlp_item = a:item
-      let g:lightline.ctrlp_next = a:next
-      return lightline#statusline(0)
-    endfunction
-
-    function! CtrlPStatusFunc_2(str)
-      return lightline#statusline(0)
-    endfunction
 
   " gundo.vim
     map <Leader>u :GundoToggle<CR>
@@ -235,4 +137,3 @@ filetype plugin indent on    " required
           \   'PrtCurRight()':        ['<right>'],
           \   'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', '<c-p>'],
           \ }
-    " let g:ctrlp_root_markers = ['.gitignore']
