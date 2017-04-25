@@ -78,7 +78,6 @@ filetype plugin indent on    " required
   cab E e
   cab E! e!
 
-  autocmd StdinReadPre * let s:std_in=1
   autocmd BufWritePre * :StripWhitespace
   augroup BgHighlight
     autocmd!

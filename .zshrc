@@ -275,3 +275,9 @@ accept-line() { prev_mode=$KEYMAP; zle .accept-line }
 zle-line-init() { zle -K ${prev_mode:-viins} }
 zle -N accept-line
 zle -N zle-line-init
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kelvinst/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/kelvinst/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc'; fi
