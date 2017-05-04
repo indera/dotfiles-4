@@ -245,7 +245,7 @@ export RUBYMOTION_ANDROID_NDK=~/.rubymotion-android/ndk
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
 
 # to get the binstubs on ./bin and a lot of other places
-export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin:/usr/local/opt/elasticsearch@2.4/bin"
+export PATH="$PATH:./bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/.rvm/bin:/usr/local/opt/elasticsearch@2.4/bin:/usr/local/go/bin"
 
 # completion for tmuxinator
 source ~/.tmuxinator/completion.zsh
@@ -281,3 +281,5 @@ if [ -f '/Users/kelvinst/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/k
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc'; fi
+
+export GOPATH="/usr/local/go"
