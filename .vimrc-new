@@ -55,6 +55,10 @@ filetype plugin indent on    " required
   set t_Co=256
   set tabstop=2
 
+  if has("mouse")
+    set mouse=a
+  endif
+
   syntax on
 
   map <up> <nop>
