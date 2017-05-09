@@ -52,7 +52,7 @@ filetype plugin indent on    " required
   set softtabstop=2
   set splitbelow
   set splitright
-  set t_Co=256
+  set t_Co=16
   set tabstop=2
 
   " if has("mouse")
@@ -101,8 +101,6 @@ filetype plugin indent on    " required
     let NERDTreeQuitOnOpen = 1
     let NERDTreeShowHidden = 1
     let NERDTreeShowLineNumbers = 0
-
-  " base16-vim
 
   " vim-dispatch
     nmap <Leader>dd :Dispatch

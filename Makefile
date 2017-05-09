@@ -7,7 +7,6 @@ install:
 	ln .ctags ~
 	ln .gitconfig ~
 	ln .tmux.conf ~
-	ln .tmux.lightline ~
 	ln .vimrc-new ~/.vimrc
 	ln .zshrc ~
 
