@@ -111,3 +111,5 @@ if [ -f '/Users/kelvinst/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/k
 if [ -f '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/kelvinst/google-cloud-sdk/completion.zsh.inc'; fi
 
 export GOPATH="~/.go"
+export ANDROID_HOME="/User/kelvinst/Library/Android/sdk/"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
