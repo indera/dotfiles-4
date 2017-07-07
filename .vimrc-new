@@ -68,27 +68,30 @@ filetype plugin indent on    " required
     autocmd WinLeave * set nocul
   augroup END
 
+  " some useless key bindings
+  nmap Q <nop>
+
   " some useful key bindings
-  nmap <silent> <c-n> :<c-u>call append(line("."),   repeat([""], v:count1))<cr>
-  nmap <silent> <c-p> :<c-u>call append(line(".")-1, repeat([""], v:count1))<cr>
-  nmap <silent> <c-N> i<cr><c-o>:stopinsert<cr>
+  nmap <silent> <leader>o :<c-u>call append(line("."),   repeat([""], v:count1))<cr>
+  nmap <silent> <leader>O :<c-u>call append(line(".")-1, repeat([""], v:count1))<cr>
+  nmap <silent> <c-n> i<cr><c-o>:stopinsert<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " gundo.vim
-    map <Leader>u :GundoToggle<CR>
+    map <leader>u :GundoToggle<CR>
     let g:gundo_close_on_revert = 1
 
   " nerdtree
-    nmap <Leader>n :NERDTreeToggle<CR>
-    nmap <Leader>f :NERDTreeFind<CR>
+    nmap <leader>n :NERDTreeToggle<CR>
+    nmap <leader>f :NERDTreeFind<CR>
     let NERDTreeQuitOnOpen = 1
     let NERDTreeShowHidden = 1
     let NERDTreeShowLineNumbers = 0
 
   " ctrlp
-    let g:ctrlp_map = '<Leader>t'
+    let g:ctrlp_map = '<leader>t'
     " Use ag because it's lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden'.
           \  ' --ignore .git '.
