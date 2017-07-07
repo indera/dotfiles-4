@@ -68,6 +68,11 @@ filetype plugin indent on    " required
     autocmd WinLeave * set nocul
   augroup END
 
+  " some useful key bindings
+  nmap <silent> <c-n> :<c-u>call append(line("."),   repeat([""], v:count1))<cr>
+  nmap <silent> <c-p> :<c-u>call append(line(".")-1, repeat([""], v:count1))<cr>
+  nmap <silent> <c-N> i<cr><c-o>:stopinsert<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -76,7 +81,7 @@ filetype plugin indent on    " required
     let g:gundo_close_on_revert = 1
 
   " nerdtree
-    nmap <Leader>o :NERDTreeToggle<CR>
+    nmap <Leader>n :NERDTreeToggle<CR>
     nmap <Leader>f :NERDTreeFind<CR>
     let NERDTreeQuitOnOpen = 1
     let NERDTreeShowHidden = 1
