@@ -33,12 +33,12 @@ filetype plugin indent on    " required
   set cul
   set expandtab
   set hlsearch
+  set ignorecase
   set laststatus=2
   set nowrap
   set shell=/bin/zsh
   set shiftwidth=2
   set showtabline=2
-  set smartcase
   set smartindent
   set smarttab
   set softtabstop=2
