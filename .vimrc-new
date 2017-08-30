@@ -35,7 +35,10 @@ filetype plugin indent on    " required
   set hlsearch
   set ignorecase
   set laststatus=2
+  set nobackup
+  set noswapfile
   set nowrap
+  set nowritebackup
   set shell=/bin/zsh
   set shiftwidth=2
   set showtabline=2
