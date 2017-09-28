@@ -93,7 +93,7 @@ filetype plugin indent on    " required
     map <leader>dd :Dispatch<space>
     map <leader>ds :Start<space>
 
-  " gundo.vim
+  " gundo
     map <leader>u :GundoToggle<cr>
     let g:gundo_close_on_revert = 1
 
@@ -109,12 +109,16 @@ filetype plugin indent on    " required
     let g:ctrlp_map = '<leader>t'
     " Use ag because it's lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden'.
-          \  ' --ignore .git '.
+          \  ' --ignore .git'.
           \  ' --ignore _build'.
           \  ' --ignore node_modules'.
           \  ' -g ""'
     let g:ctrlp_use_caching = 0 " ag is fast enough so cache isn't needed
 
-  " YankRing.vim
+  " YankRing
     nmap <leader>y :YRShow<cr>
     let g:yankring_history_file = '.yankring-history'
+
+  " tmux-navigator
+    let g:tmux_navigator_disable_when_zoomed = 1
+
