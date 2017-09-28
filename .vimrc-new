@@ -85,6 +85,7 @@ filetype plugin indent on    " required
   nmap <leader>p :set paste!<cr>
   nmap <leader>ln :set nu!<cr>
   nmap <leader>lr :set rnu!<cr>
+  nmap <leader>wt :tabe<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" plugins config
@@ -99,8 +100,7 @@ filetype plugin indent on    " required
 
   " nerdtree
     nmap <leader>n :NERDTreeToggle<cr>
-    nmap <leader>nn :NERDTreeToggle<cr>
-    nmap <leader>nf :NERDTreeFind<cr>
+    nmap <leader>f :NERDTreeFind<cr>
     let NERDTreeQuitOnOpen = 1
     let NERDTreeShowHidden = 1
     let NERDTreeShowLineNumbers = 0
