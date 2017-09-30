@@ -9,6 +9,7 @@ install:
 	ln .tmux.conf ~
 	ln .vimrc-new ~/.vimrc
 	ln .zshrc ~
+	ln .spacemacs ~
 
 clean:
 	rm -rf ~/.ctags
@@ -17,4 +18,5 @@ clean:
 	rm -rf ~/.tmux.lightline
 	rm -rf ~/.vimrc
 	rm -rf ~/.zshrc
+	rm -rf ~/.spacemacs
 
